@@ -1,0 +1,15 @@
+.path {
+  margin-bottom: 32px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-main);
+}
+
+@media screen and (min-width: 768px) {
+  .path {
+    margin-bottom: 40px;
+  }
+}

@@ -1,0 +1,18 @@
+.text {
+  margin-bottom: 32px;
+}
+
+@media screen and (min-width: 768px) {
+  .text {
+    margin-bottom: 40px;
+    width: 443px;
+  }
+
+  .text.categories {
+    width: 531px;
+  }
+
+  .text.recipes {
+    width: 540px;
+  }
+}

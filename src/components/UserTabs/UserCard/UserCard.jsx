@@ -1,11 +1,5 @@
-import Title from 'components/Shared/Title/Title';
-
 const UserCard = () => {
-  return (
-    <div>
-      UserCard<Title>UserName</Title>
-    </div>
-  );
+  return <div>UserCard</div>;
 };
 
 export default UserCard;

@@ -1,5 +1,7 @@
+import css from './PathInfo.module.css';
+
 const PathInfo = () => {
-  return <div>PathInfo</div>;
+  return <div className={css.path}>PathInfo</div>;
 };
 
 export default PathInfo;

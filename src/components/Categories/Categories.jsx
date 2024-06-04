@@ -6,7 +6,7 @@ const Categories = () => {
   return (
     <>
       <MainTitle>Categories</MainTitle>
-      <Subtitle>
+      <Subtitle section="categories">
         Discover a limitless world of culinary possibilities and enjoy exquisite
         recipes that combine taste, style and the warm atmosphere of the
         kitchen.
