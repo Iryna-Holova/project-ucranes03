@@ -5,7 +5,7 @@ import UserBar from './UserBar/UserBar';
 
 const Header = () => {
   return (
-    <header>
+    <header className="container">
       <Logo />
       <Nav />
       <AuthBar />
