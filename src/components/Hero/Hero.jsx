@@ -1,3 +1,5 @@
+import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
+
 const Hero = () => {
   return (
     <div>
@@ -6,6 +8,14 @@ const Hero = () => {
         Amazing recipes for beginners in the world of cooking, enveloping you in
         the aromas and tastes of various cuisines.
       </p>
+      <ButtonLink
+        type="button"
+        color="white"
+        size="normal"
+        onClick={console.log}
+      >
+        Add recipe
+      </ButtonLink>
     </div>
   );
 };
