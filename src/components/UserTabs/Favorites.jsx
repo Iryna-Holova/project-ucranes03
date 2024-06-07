@@ -3,11 +3,11 @@ import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
 
 const Favorites = () => {
   return (
-    <>
+    <div>
       <h3 className="visually-hidden">Favorite recipes</h3>
       <ListItems />
       <RecipePreview />
-    </>
+    </div>
   );
 };
 
