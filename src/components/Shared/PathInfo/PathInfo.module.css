@@ -1,15 +1,14 @@
 .path {
-  margin-bottom: 32px;
+  display: flex;
+  column-gap: 8px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  color: var(--color-main);
+  color: var(--color-main-40);
 }
 
-@media screen and (min-width: 768px) {
-  .path {
-    margin-bottom: 40px;
-  }
+.current {
+  color: var(--color-main);
 }
