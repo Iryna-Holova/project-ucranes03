@@ -1,5 +1,5 @@
 const CategoryList = () => {
-  return <div>CategoryList</div>;
+  return <ul>CategoryList</ul>;
 };
 
 export default CategoryList;

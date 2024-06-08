@@ -12,3 +12,15 @@
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+.section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+@media screen and (min-width: 768px) {
+  .section {
+    row-gap: 40px;
+  }
+}

@@ -3,12 +3,11 @@ import MainTitle from 'components/Shared/MainTitle/MainTitle';
 import Subtitle from 'components/Shared/Subtitle/Subtitle';
 import AddRecipeForm from 'components/AddRecipeForm/AddRecipeForm';
 import PageContainer from 'components/Shared/PageContainer/PageContainer';
-import SectionContainer from 'components/Shared/SectionContainer/SectionContainer';
 
 const AddRecipePage = () => {
   return (
-    <PageContainer>
-      <SectionContainer>
+    <PageContainer tag="section">
+      <div className="section">
         <PathInfo current="Add recipe" />
         <div>
           <MainTitle>Add recipe</MainTitle>
@@ -17,7 +16,7 @@ const AddRecipePage = () => {
             gastronomic masterpieces with us.
           </Subtitle>
         </div>
-      </SectionContainer>
+      </div>
       <AddRecipeForm />
     </PageContainer>
   );

@@ -2,10 +2,10 @@ import RecipeList from 'components/RecipeList/RecipeList';
 
 const PopularRecipes = () => {
   return (
-    <div>
-      Popular recipes
+    <section className="section">
+      <h2>Popular recipes</h2>
       <RecipeList />
-    </div>
+    </section>
   );
 };
 

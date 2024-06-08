@@ -2,9 +2,9 @@ import RecipeCard from './RecipeCard/RecipeCard';
 
 const RecipeList = () => {
   return (
-    <div>
+    <ul>
       <RecipeCard />
-    </div>
+    </ul>
   );
 };
 

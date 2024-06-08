@@ -7,12 +7,11 @@ import Loader from 'components/Shared/Loader/Loader';
 import MainTitle from 'components/Shared/MainTitle/MainTitle';
 import Subtitle from 'components/Shared/Subtitle/Subtitle';
 import PageContainer from 'components/Shared/PageContainer/PageContainer';
-import SectionContainer from 'components/Shared/SectionContainer/SectionContainer';
 
 const UserPage = () => {
   return (
-    <PageContainer>
-      <SectionContainer>
+    <PageContainer tag="section">
+      <div className="section">
         <PathInfo current="Profile" />
         <div>
           <MainTitle>Profile</MainTitle>
@@ -22,13 +21,13 @@ const UserPage = () => {
           </Subtitle>
         </div>
         <UserInfo />
-      </SectionContainer>
-      <SectionContainer>
+      </div>
+      <div className="section">
         <TabsList />
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
-      </SectionContainer>
+      </div>
     </PageContainer>
   );
 };
