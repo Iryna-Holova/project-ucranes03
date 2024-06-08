@@ -2,7 +2,7 @@ import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 
 const Hero = () => {
   return (
-    <div>
+    <section>
       <h1>Improve Your Culinary Talents</h1>
       <p>
         Amazing recipes for beginners in the world of cooking, enveloping you in
@@ -16,7 +16,7 @@ const Hero = () => {
       >
         Add recipe
       </ButtonLink>
-    </div>
+    </section>
   );
 };
 

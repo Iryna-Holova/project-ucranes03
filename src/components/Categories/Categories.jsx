@@ -1,11 +1,10 @@
 import MainTitle from 'components/Shared/MainTitle/MainTitle';
 import Subtitle from 'components/Shared/Subtitle/Subtitle';
 import CategoryList from './CategoryList/CategoryList';
-import SectionContainer from 'components/Shared/SectionContainer/SectionContainer';
 
 const Categories = () => {
   return (
-    <SectionContainer>
+    <section className="section">
       <div>
         <MainTitle>Categories</MainTitle>
         <Subtitle section="categories">
@@ -15,7 +14,7 @@ const Categories = () => {
         </Subtitle>
       </div>
       <CategoryList />
-    </SectionContainer>
+    </section>
   );
 };
 
