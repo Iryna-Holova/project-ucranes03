@@ -1,8 +1,11 @@
 import css from './RecipeCard.module.css';
 import icons from '../../../images/icons.svg';
+import { useNavigate } from 'react-router-dom';
 
 const RecipeCard = ({ recipe }) => {
   const { _id, title, owner, description, thumb, favorite } = recipe;
+
+  const navigate = useNavigate();
 
   // ===================for test==========
   const mobile = window.matchMedia('(max-width: 767px)').matches;
@@ -34,6 +37,7 @@ const RecipeCard = ({ recipe }) => {
     console.log(
       `open SignInModal or redirect to owner page with id: ${owner._id}`
     );
+    navigate(`/user/${owner._id}/recipes`);
   };
 
   const handleHeartIconClick = () => {
@@ -42,6 +46,7 @@ const RecipeCard = ({ recipe }) => {
 
   const handleArrowIconClick = () => {
     console.log(`redirect to recipe page with id: ${_id}`);
+    navigate(`/recipe/${_id}`);
   };
 
   return (
