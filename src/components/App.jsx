@@ -19,7 +19,7 @@ const App = () => {
       <Route path="/" element={<SharedLayout />}>
         <Route path="" element={<HomePage />}>
           <Route index element={<Categories />} />
-          <Route path="category/:category" element={<Recipes />} />
+          <Route path="recipes" element={<Recipes />} />
         </Route>
         <Route path="recipe/:id" element={<RecipePage />} />
         <Route path="recipe/add" element={<AddRecipePage />} />
