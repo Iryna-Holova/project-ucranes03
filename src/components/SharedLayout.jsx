@@ -5,9 +5,12 @@ import Footer from './Footer/Footer';
 import Loader from './Shared/Loader/Loader';
 import Modal from './Modal/Modal';
 import AuthModal from './AuthModal/AuthModal';
+import LogOutModal from './LogOutModal/LogOutModal';
 
 const SharedLayout = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showLogOutModal, setShowLogOutModal] = useState(false);
+
   return (
     <>
       <Header />
@@ -17,12 +20,20 @@ const SharedLayout = () => {
         </Suspense>
       </main>
       <Footer />
-      <button onClick={() => setShowModal(true)} style={{ color: 'red' }}>
+      <button onClick={() => setShowAuthModal(true)} style={{ color: 'red' }}>
         SIGN UP
       </button>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+      {showAuthModal && (
+        <Modal onClose={() => setShowAuthModal(false)}>
           <AuthModal />
+        </Modal>
+      )}
+      <button onClick={() => setShowLogOutModal(true)} style={{ color: 'red' }}>
+        LOG OUT
+      </button>
+      {showLogOutModal && (
+        <Modal onClose={() => setShowLogOutModal(false)}>
+          <LogOutModal onClose={() => setShowLogOutModal(false)} />
         </Modal>
       )}
     </>
