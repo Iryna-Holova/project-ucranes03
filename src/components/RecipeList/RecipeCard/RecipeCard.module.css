@@ -36,6 +36,11 @@
     line-height: 1.43;
     letter-spacing: -0.02em;
     color: var(--color-main-80);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .owner_info {

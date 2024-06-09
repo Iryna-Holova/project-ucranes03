@@ -8,23 +8,6 @@ const RecipeCard = ({ recipe }) => {
   const navigate = useNavigate();
 
   // ===================for test==========
-  const mobile = window.matchMedia('(max-width: 767px)').matches;
-  const tablet = window.matchMedia('(min-width: 768px)').matches;
-  const desktop = window.matchMedia('(min-width: 1440px)').matches;
-
-  const truncateString = text => {
-    if (desktop && text.length >= 77) {
-      return text.slice(0, 77) + '...';
-    }
-    if (tablet && text.length >= 85) {
-      return text.slice(0, 85) + '...';
-    }
-    if (mobile && text.length >= 100) {
-      return text.slice(0, 100) + '...';
-    }
-    return text;
-  };
-
   const userId = '666439f8cdaa50319cc78607';
   const isLoggedIn = true;
 
@@ -53,7 +36,7 @@ const RecipeCard = ({ recipe }) => {
       </div>
       <div className={css.card_details}>
         <h2 className={css.title}>{title}</h2>
-        <p className={css.description}>{truncateString(description)}</p>
+        <p className={css.description}>{description}</p>
         <div className={css.owner_info}>
           <button className={css.owner_btn} onClick={handleOwnerBtnClick}>
             <img className={css.avatar} src={owner.avatar} alt={owner.name} />
