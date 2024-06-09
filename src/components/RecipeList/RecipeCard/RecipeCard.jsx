@@ -30,8 +30,8 @@ const RecipeCard = ({ recipe }) => {
 
   const heartIconStyles =
     favorite && favorite.includes(userId)
-      ? `${css.heartIcon} ${css.favoriteHeart}`
-      : `${css.heartIcon}`;
+      ? `${css.heart_icon} ${css.favorite_heart}`
+      : `${css.heart_icon}`;
   // ===================================
 
   const handleOwnerBtnClick = () => {
@@ -47,26 +47,26 @@ const RecipeCard = ({ recipe }) => {
   };
 
   return (
-    <li className={css.recipeCard}>
+    <li className={css.recipe_card}>
       <div className={css.thumb}>
         <img src={thumb} alt={title} />
       </div>
-      <div className={css.cardDetails}>
+      <div className={css.card_details}>
         <h2 className={css.title}>{title}</h2>
         <p className={css.description}>{truncateString(description)}</p>
-        <div className={css.ownerInfo}>
-          <button className={css.ownerBtn} onClick={handleOwnerBtnClick}>
+        <div className={css.owner_info}>
+          <button className={css.owner_btn} onClick={handleOwnerBtnClick}>
             <img className={css.avatar} src={owner.avatar} alt={owner.name} />
             {owner.name}
           </button>
-          <div className={css.iconsWrapper}>
+          <div className={css.icons_wrapper}>
             <button className={heartIconStyles} onClick={handleHeartIconClick}>
               <svg className={css.icon}>
                 <use href={`${icons}#icon-heart`} />
               </svg>
             </button>
             <button
-              className={css.arrowIcon}
+              className={css.arrow_icon}
               onClick={() => navigate(`/recipe/${_id}`)}
             >
               <svg className={css.icon}>

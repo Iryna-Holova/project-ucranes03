@@ -1,4 +1,4 @@
-.recipeList {
+.recipe_list {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (min-width:768px) {
-    .recipeList {
+    .recipe_list {
         row-gap: 40px;
         column-gap: 20px;
     }
