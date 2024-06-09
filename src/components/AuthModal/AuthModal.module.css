@@ -1,0 +1,127 @@
+.title {
+  margin-bottom: 32px;
+  color: var(--color-main);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.form {
+  margin-bottom: 16px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  row-gap: 14px;
+  margin-bottom: 32px;
+}
+
+.input_field {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 30px;
+  border: 1px solid var(--color-main-12);
+  outline: none;
+  color: var(--color-main-80);
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  transition: border-color var(--transition);
+}
+
+.input:autofill {
+  -webkit-box-shadow: inset 0 0 0 50px #fff;
+  -webkit-text-fill-color: var(--color-main-80);
+}
+
+.input:hover,
+.input:focus,
+.input:not(:placeholder-shown) {
+  border-color: var(--color-main);
+}
+
+.input::placeholder {
+  opacity: 1;
+  color: var(--color-main-60);
+}
+
+.error {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-error);
+  font-size: 12px;
+}
+
+.error ~ .input {
+  border-color: var(--color-error);
+}
+
+.input_button {
+  position: absolute;
+  padding: 15px 14px;
+  right: 0;
+}
+
+.input_button > svg {
+  transition: transform var(--transition);
+}
+
+.input_button:hover > svg {
+  transform: scale(1.1);
+}
+
+.text {
+  color: var(--color-main-60);
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+}
+
+.switch_button {
+  color: var(--color-main);
+  letter-spacing: inherit;
+  text-decoration: underline transparent;
+  transition: text-decoration-color var(--transition);
+}
+
+.switch_button:hover {
+  text-decoration-color: var(--color-main);
+}
+
+@media screen and (min-width: 768px) {
+  .form {
+    margin-bottom: 20px;
+  }
+
+  .inputs {
+    margin-bottom: 40px;
+  }
+
+  .input {
+    padding: 16px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .input_button {
+    padding: 18px 17px;
+  }
+
+  .input_button > svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+}
