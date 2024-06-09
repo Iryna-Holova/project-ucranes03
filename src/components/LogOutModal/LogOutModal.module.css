@@ -1,0 +1,43 @@
+.title {
+  margin-bottom: 16px;
+  color: var(--color-main);
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.text {
+  margin-bottom: 32px;
+  color: var(--color-main-80);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    margin-bottom: 20px;
+    font-size: 32px;
+    line-height: 1.25;
+  }
+
+  .text {
+    margin-bottom: 40px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .buttons {
+    row-gap: 20px;
+  }
+}
