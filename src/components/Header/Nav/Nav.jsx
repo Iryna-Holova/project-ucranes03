@@ -8,7 +8,7 @@ const Nav = () => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="category/desserts">Recipes</NavLink>
+          <NavLink to="recipes">Recipes</NavLink>
         </li>
         <li>
           <NavLink to="recipe/:id">Recipe</NavLink>
