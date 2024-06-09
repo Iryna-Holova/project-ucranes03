@@ -2,9 +2,7 @@ import MainTitle from 'components/Shared/MainTitle/MainTitle';
 import Subtitle from 'components/Shared/Subtitle/Subtitle';
 import RecipeFilters from './RecipeFilters/RecipeFilters';
 import RecipeList from 'components/RecipeList/RecipeList';
-// ==========================for test
-import { testRecipes } from 'components/PopularRecipes/PopularRecipes';
-// =================================
+import { testRecipes } from 'temp/recipeData';
 
 const Recipes = () => {
   return (

@@ -27,7 +27,7 @@
     line-height: 1.33;
     letter-spacing: -0.02em;
     text-transform: uppercase;
-    color: var(--color-black);
+    color: var(--color-main);
     flex-grow: 1;
 }
 
@@ -51,7 +51,7 @@
     font-size: 14px;
     line-height: 1.43;
     letter-spacing: -0.02em;
-    color: var(--color-black-90);
+    color: var(--color-main-90);
 }
 
 .avatar {
@@ -83,8 +83,8 @@
 }
 
 .favorite_heart {
-    background-color: var(--color-black);
-    color: var(--color-white);
+    background-color: var(--color-main);
+    color: var(--color-secondary);
     border: none;
 }
 
