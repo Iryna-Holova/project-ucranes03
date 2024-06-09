@@ -26,6 +26,7 @@ const RecipeCard = ({ recipe }) => {
   };
 
   const userId = '666439f8cdaa50319cc78607';
+  const isLoggedIn = true;
 
   const heartIconStyles =
     favorite && favorite.includes(userId)
@@ -34,19 +35,15 @@ const RecipeCard = ({ recipe }) => {
   // ===================================
 
   const handleOwnerBtnClick = () => {
-    console.log(
-      `open SignInModal or redirect to owner page with id: ${owner._id}`
-    );
-    navigate(`/user/${owner._id}/recipes`);
+    if (isLoggedIn) {
+      navigate(`/user/${owner._id}/recipes`);
+    } else {
+      console.log('open SignInModal');
+    }
   };
 
   const handleHeartIconClick = () => {
     console.log('add/remove to favorite logic will be here');
-  };
-
-  const handleArrowIconClick = () => {
-    console.log(`redirect to recipe page with id: ${_id}`);
-    navigate(`/recipe/${_id}`);
   };
 
   return (
@@ -68,7 +65,10 @@ const RecipeCard = ({ recipe }) => {
                 <use href={`${icons}#icon-heart`} />
               </svg>
             </button>
-            <button className={css.arrowIcon} onClick={handleArrowIconClick}>
+            <button
+              className={css.arrowIcon}
+              onClick={() => navigate(`/recipe/${_id}`)}
+            >
               <svg className={css.icon}>
                 <use href={`${icons}#icon-arrow-up-right`} />
               </svg>
