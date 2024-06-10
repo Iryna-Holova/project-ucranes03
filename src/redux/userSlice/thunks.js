@@ -1,5 +1,3 @@
-// create a thunk function to get user
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { getCurrent, register } from "../../services/api";

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { EMAIL_REGEXP, MIN_PASSWORD } from 'constants/validation';
+import { registerUser } from '../../redux/userSlice/thunks';
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import icons from '../../images/icons.svg';
 import css from './AuthModal.module.css';
@@ -33,8 +35,11 @@ const SignUpForm = ({ toggleForm }) => {
   });
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const dispatch = useDispatch();
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    dispatch(registerUser(data));
+  };
 
   const name = watch('name');
   const email = watch('email');
