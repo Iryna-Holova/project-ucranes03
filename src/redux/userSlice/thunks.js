@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { getCurrent, register, login, logout } from "../../services/api";
+import { setToken, clearToken } from "../../services/api";
 
 export const fetchCurrentUser = createAsyncThunk(
     "user/fetchCurrentUser",
@@ -9,7 +10,7 @@ export const fetchCurrentUser = createAsyncThunk(
             const user = await getCurrent();
             return user;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error);
         }
     }
 );
@@ -18,10 +19,11 @@ export const registerUser = createAsyncThunk(
     "user/registerUser",
     async (credentials, { rejectWithValue }) => {
         try {
-            const user = await register(credentials);
-            return user;
+            const resp = await register(credentials);
+            setToken(resp.token);
+            return resp;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error);
         }
     }
 );
@@ -31,10 +33,11 @@ export const loginUser = createAsyncThunk(
     "user/login",
     async (credentials, { rejectWithValue }) => {
         try {
-            const user = await login(credentials);
-            return user;
+            const resp = await login(credentials);
+            setToken(resp.token);
+            return resp;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error);
         }
     }
 );
@@ -44,9 +47,10 @@ export const logoutUser = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await logout();
+            clearToken();
             return response;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error);
         }
     }
 );

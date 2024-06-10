@@ -1,6 +1,12 @@
 import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+
+import { persistor, store } from './redux/root';
+import { PersistGate } from 'redux-persist/integration/react';
 import SharedLayout from './SharedLayout';
+import { fetchCurrentUser } from 'redux/userSlice/thunks';
+import { selectToken } from 'redux/userSlice/selectors';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Categories = lazy(() => import('./Categories/Categories'));
@@ -14,25 +20,35 @@ const Followers = lazy(() => import('./UserTabs/Followers'));
 const Following = lazy(() => import('./UserTabs/Following'));
 
 const App = () => {
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+
+  if (token) {
+    dispatch(fetchCurrentUser())
+  }
   return (
-    <Routes>
-      <Route path="/" element={<SharedLayout />}>
-        <Route path="" element={<HomePage />}>
-          <Route index element={<Categories />} />
-          <Route path="recipes" element={<Recipes />} />
-        </Route>
-        <Route path="recipe/:id" element={<RecipePage />} />
-        <Route path="recipe/add" element={<AddRecipePage />} />
-        <Route path="user/:id" element={<UserPage />}>
-          <Route index element={<Navigate to="recipes" replace />} />
-          <Route path="recipes" element={<UserRecipes />} />
-          <Route path="favorites" element={<Favorites />} />
-          <Route path="followers" element={<Followers />} />
-          <Route path="following" element={<Following />} />
-        </Route>
-      </Route>
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route path="" element={<HomePage />}>
+              <Route index element={<Categories />} />
+              <Route path="recipes" element={<Recipes />} />
+            </Route>
+            <Route path="recipe/:id" element={<RecipePage />} />
+            <Route path="recipe/add" element={<AddRecipePage />} />
+            <Route path="user/:id" element={<UserPage />}>
+              <Route index element={<Navigate to="recipes" replace />} />
+              <Route path="recipes" element={<UserRecipes />} />
+              <Route path="favorites" element={<Favorites />} />
+              <Route path="followers" element={<Followers />} />
+              <Route path="following" element={<Following />} />
+            </Route>
+          </Route>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </PersistGate>
+    </Provider>
   );
 };
 
