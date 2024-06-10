@@ -1,4 +1,4 @@
-export const ingredients = [
+export const ingredientsData = [
   {
     _id: {
       $oid: '640c2dd963a319ea671e3665',

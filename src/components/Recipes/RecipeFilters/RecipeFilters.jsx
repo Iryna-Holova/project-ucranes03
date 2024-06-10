@@ -1,58 +1,59 @@
-import axios from "axios";
 import SelectFilter from "components/Shared/SelectFilter/SelectFilter";
-import { useEffect, useState } from "react";
-import { ingredients, areas } from "temp/ingredients";
-const RecipeFilters = () => {
-  const [areas, setAreas] = useState((areas) => areas.map(area => ({ value: area._id.$oid, label: area.name }) );
-  useEffect(() => {
-    const fetchIngredients = async () => {
-      try {
-        const response = await axios.get('');
-        console.log(response)
-        setAreas(response.data);
-      } catch (error) {
-        console.error('Error fetching the ingredients:', error);
-      }
-    };
+import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { areasData } from "temp/areas";
+import { ingredientsData } from "temp/ingredients";
 
-    fetchIngredients();
-  }, [])
+const RecipeFilters = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const areas = useMemo(() => 
+    areasData.map(area => ({ value: area._id.$oid, label: area.name })), 
+    []
+  );
+
+  const ingredients = useMemo(() => 
+    ingredientsData.map(ingredient => ({ value: ingredient._id.$oid, label: ingredient.name })), 
+    []
+  );
+
   const [selectedOptions, setSelectedOptions] = useState({
     ingredients: null,
     areas: null,
   });
 
   const handleChange = (option, { name }) => {
-    setSelectedOptions((prevOptions) => ({
+    setSearchParams(prevParams => {
+      const newParams = new URLSearchParams(prevParams);
+      if (option) {
+        newParams.set(name, option.value);
+      } else {
+        newParams.delete(name);
+      }
+      return newParams;
+    });
+
+    setSelectedOptions(prevOptions => ({
       ...prevOptions,
       [name]: option,
     }));
   };
-  const options1 = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-  ]
-  const options2 = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-]
+
   return (
     <div>
       <h1>Custom Select Component</h1>
       <SelectFilter
         name="ingredients"
-        options={options1}
+        options={ingredients}
         onChange={handleChange}
         value={selectedOptions.ingredients}
         placeholder="ingredients"
       />
       <SelectFilter
-        name="category"
-        options={options2}
+        name="areas"
+        options={areas}
         onChange={handleChange}
-        value={selectedOptions.category}
+        value={selectedOptions.areas}
         placeholder="areas"
       />
     </div>
