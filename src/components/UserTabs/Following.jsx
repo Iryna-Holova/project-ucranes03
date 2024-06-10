@@ -6,6 +6,7 @@ const Following = () => {
     <div>
       <h3 className="visually-hidden">Following</h3>
       <ListItems users = {users.results} tabType ="following"/>
+      {/* remove tabType */}
     </div>
   );
 };
