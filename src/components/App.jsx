@@ -1,7 +1,6 @@
 import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
 import { persistor, store } from '../redux/root';
 import { PersistGate } from 'redux-persist/integration/react';
 import SharedLayout from './SharedLayout';
