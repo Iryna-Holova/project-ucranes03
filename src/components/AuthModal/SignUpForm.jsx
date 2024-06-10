@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { EMAIL_REGEXP, MIN_PASSWORD } from 'constants/validation';
@@ -8,6 +8,7 @@ import { registerUser } from '../../redux/userSlice/thunks';
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import icons from '../../images/icons.svg';
 import css from './AuthModal.module.css';
+import { selectIsLoading } from '../../redux/userSlice/selectors';
 
 const schema = yup
   .object({
@@ -36,6 +37,8 @@ const SignUpForm = ({ toggleForm }) => {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const dispatch = useDispatch();
+
+  const isLoading = useSelector(selectIsLoading)
 
   const onSubmit = data => {
     dispatch(registerUser(data));
@@ -103,8 +106,8 @@ const SignUpForm = ({ toggleForm }) => {
             </button>
           </div>
         </div>
-        <ButtonLink disabled={!isFormFilled} type="submit">
-          Create
+        <ButtonLink disabled={!isFormFilled && !isLoading} type="submit">
+          {isLoading ? 'Loading...' : 'Create'}
         </ButtonLink>
       </form>
       <p className={css.text}>
