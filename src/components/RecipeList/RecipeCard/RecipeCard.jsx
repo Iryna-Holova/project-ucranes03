@@ -1,15 +1,20 @@
 import css from './RecipeCard.module.css';
 import icons from '../../../images/icons.svg';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const RecipeCard = ({ recipe }) => {
   const { _id, title, owner, description, thumb, favorite } = recipe;
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   // ===================for test==========
   const userId = '666439f8cdaa50319cc78607';
   const isLoggedIn = true;
+
+  const cardStyles = location.pathname.includes('recipes')
+    ? `${css.recipe_card} ${css.all_recipes}`
+    : `${css.recipe_card} ${css.popular_recipes}`;
 
   const heartIconStyles =
     favorite && favorite.includes(userId)
@@ -30,7 +35,7 @@ const RecipeCard = ({ recipe }) => {
   };
 
   return (
-    <li className={css.recipe_card}>
+    <li className={cardStyles}>
       <div className={css.thumb}>
         <img src={thumb} alt={title} />
       </div>

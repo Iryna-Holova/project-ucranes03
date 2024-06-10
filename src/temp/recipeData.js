@@ -241,3 +241,150 @@ export const testPopular = [
       'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776201/recipes-init/qmxepodwqbzg5iocmca4',
   },
 ];
+
+export const favoriteRecipes = [
+  {
+    _id: '6462a8f74c3d0ddd28897fbc',
+    title: 'Irish stew',
+    description:
+      'A traditional Irish dish made with lamb, potatoes, carrots, onions, and herbs, cooked in a broth or gravy.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776524/recipes-init/mw1hsekpfynuegdjfmqy',
+  },
+  {
+    _id: '6462a8f74c3d0ddd28897fcd',
+    title: 'Battenberg Cake',
+    description:
+      'A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776495/recipes-init/bnkshxqqpg5r6ls0qriu',
+  },
+  {
+    _id: '6462a8f74c3d0ddd2889803f',
+    title: 'Moroccan Carrot Soup',
+    description:
+      'A hearty soup made with carrots, onions, garlic, and a blend of Moroccan spices like cumin, cinnamon, and ginger. Served hot with a dollop of yogurt and a sprinkle of cilantro for a touch of freshness.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776281/recipes-init/rrjsmp8fkexl3lnofwvv',
+  },
+  {
+    _id: '6462a8f74c3d0ddd2889802b',
+    title: 'English Breakfast',
+    description:
+      'A hearty breakfast meal consisting of eggs, bacon, sausage, baked beans, grilled tomato, and toast. It is a popular breakfast in the United Kingdom.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776323/recipes-init/h6bjembwon7lciz2z5ks',
+  },
+  {
+    _id: '6462a8f74c3d0ddd2889803c',
+    title: 'Tuna and Egg Briks',
+    description:
+      'A crispy Tunisian pastry filled with tuna, egg, onion, and parsley, spiced with cumin and harissa.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776286/recipes-init/cueszjsxelkjhgy2aiee',
+  },
+  {
+    _id: '6462a8f74c3d0ddd2889800c',
+    title: 'Lancashire hotpot',
+    description:
+      'A hearty casserole with tender lamb and vegetables, topped with sliced potatoes.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776384/recipes-init/tcr6m59hqasmfdwsy6mz',
+  },
+  {
+    _id: '6462a8f74c3d0ddd2889804b',
+    title: 'Chinon Apple Tarts',
+    description:
+      'A delicious French pastry with caramelized apples and a flaky pastry crust.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776257/recipes-init/cv2rt5uiz8d9mklgffi7',
+  },
+  {
+    _id: '6462a8f74c3d0ddd28898051',
+    title: 'Seafood fideuà',
+    description: 'Spanish-style noodle dish with seafood',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776246/recipes-init/hu3powluyxs9pgyvjq3u',
+  },
+  {
+    _id: '6462a8f74c3d0ddd28898036',
+    title: 'Cashew Ghoriba Biscuits',
+    description:
+      'A traditional Moroccan cookie made with ground cashews, sugar, and spices, and dusted with powdered sugar.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776297/recipes-init/npnw5wki9xczszvgrg6w',
+  },
+];
+
+export const myRecipes = [
+  {
+    _id: '6462a8f74c3d0ddd2889803f',
+    title: 'Moroccan Carrot Soup',
+    description:
+      'A hearty soup made with carrots, onions, garlic, and a blend of Moroccan spices like cumin, cinnamon, and ginger. Served hot with a dollop of yogurt and a sprinkle of cilantro for a touch of freshness.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776281/recipes-init/rrjsmp8fkexl3lnofwvv',
+  },
+  {
+    _id: '6462a8f74c3d0ddd2889801a',
+    title: 'Massaman Beef curry',
+    description: 'Thai curry with beef, potatoes, and peanuts',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776355/recipes-init/ovizh2hje5jzkpxwvako',
+  },
+  {
+    _id: '6462a8f74c3d0ddd2889805a',
+    title: 'Gołąbki (cabbage roll)',
+    description:
+      'A classic Polish dish, Gołąbki are cabbage rolls filled with a mixture of ground meat, rice, and onions, and then baked or steamed and served with tomato sauce.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776228/recipes-init/omgmhvb8amd99byfajgu',
+  },
+  {
+    _id: '6462a8f74c3d0ddd28898008',
+    title: 'Braised Beef Chilli',
+    description:
+      'A spicy chili made with braised beef, beans, and other ingredients. Perfect for game day or a cozy night in.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776392/recipes-init/e0p6rmhznati9mzc9sig',
+  },
+  {
+    _id: '6462a8f74c3d0ddd28897ffe',
+    title: 'Dal fry',
+    description: 'A popular Indian dish made with lentils, spices, and herbs.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776410/recipes-init/qyxloituzcmq5xjwagxw',
+  },
+  {
+    _id: '6462a8f74c3d0ddd28898055',
+    title: 'Eccles Cakes',
+    description:
+      'A sweet pastry filled with currants, spices, and brown sugar, named after the town of Eccles in Greater Manchester.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776239/recipes-init/gsnrfsqdkt4qd50rzhki',
+  },
+  {
+    _id: '6462a8f74c3d0ddd28898075',
+    title: 'Tunisian Lamb Soup',
+    description:
+      'A warming soup made with tender lamb, root vegetables, chickpeas, and a blend of aromatic spices.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776175/recipes-init/ymk55j3e2jhwg5mvcbei',
+  },
+  {
+    _id: '6462a8f74c3d0ddd28897ff7',
+    title: 'Key Lime Pie',
+    description:
+      'A tart and refreshing pie made with fresh lime juice, perfect for summer.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776422/recipes-init/vvey7uptsb9bu40nc7ua',
+  },
+  {
+    _id: '6462a8f74c3d0ddd28897fee',
+    title: 'Lamb and Potato pie',
+    description:
+      'A delicious lamb pie with tender chunks of meat and chunks of potatoes.',
+    thumb:
+      'https://res.cloudinary.com/dhap6yrcb/image/upload/f_auto/v1717776437/recipes-init/mjgxktzklc8hxhyj5q1z',
+  },
+];
