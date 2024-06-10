@@ -41,7 +41,7 @@ const RecipeFilters = () => {
 
   return (
     <div>
-      <h1>Custom Select Component</h1>
+      
       <SelectFilter
         name="ingredients"
         options={ingredients}
