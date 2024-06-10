@@ -1,4 +1,4 @@
-export const areas = [
+export const areasData = [
   {
     _id: {
       $oid: '6462a6f04c3d0ddd28897fa5',
