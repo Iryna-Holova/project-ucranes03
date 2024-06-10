@@ -4,7 +4,7 @@ const ListItems = ({ users, tabType }) => {
   return (
     <ul>
       {users.map((user) => (
-        <li key={user.id}><UserCard user={user} tabType = {tabType} /></li>
+        <UserCard key={user.id} user={user} tabType = {tabType} />
       ))}
     </ul>
   );

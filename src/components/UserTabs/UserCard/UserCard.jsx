@@ -1,8 +1,9 @@
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
+import sprite from '../../../images/icons.svg';
 
 const UserCard = ({ tabType, user: { name, avatar_preview, recipes } }) => {
   return (
-    <div>
+    <li>
       <div>
         <img src={avatar_preview} alt={name + "'s photo"} />
         <div>
@@ -37,7 +38,10 @@ const UserCard = ({ tabType, user: { name, avatar_preview, recipes } }) => {
           </li>
         ))}
       </ul>
-    </div>
+      <svg width="18" height="18">
+        <use href={sprite + '#icon-arrow-up-right'}></use>
+      </svg>
+    </li>
   );
 };
 
