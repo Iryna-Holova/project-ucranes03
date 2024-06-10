@@ -1,6 +1,6 @@
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 
-const UserCard = ({ tabType, name, avatar_preview, recipes }) => {
+const UserCard = ({ tabType, user: { name, avatar_preview, recipes } }) => {
   return (
     <div>
       <div>
@@ -30,7 +30,13 @@ const UserCard = ({ tabType, name, avatar_preview, recipes }) => {
           )}
         </div>
       </div>
-      <ul>{recipes.map(recipy => <li key={recipy.id}><img src={recipy.preview} alt="" /></li>)}</ul>
+      <ul>
+        {recipes.map(recipe => (
+          <li key={recipe.id}>
+            <img src={recipe.preview} alt="recipe" />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
