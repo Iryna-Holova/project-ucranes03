@@ -22,6 +22,7 @@ const CategoryList = () => {
           </div>
         </li>
       ))}
+      <li className={css.all_categories}><button className={css.all_categories_button} type='button'>All categories</button></li>
     </ul>
   );
 };
