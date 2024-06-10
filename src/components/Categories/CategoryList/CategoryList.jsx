@@ -12,12 +12,10 @@ const CategoryList = () => {
           <Link className={css.category_link} to={`recipes/?category=${category.name}`}>
               {category.name}
           </Link>
-          <Link className={css.category_arrow} to={`recipes/?category=${category.name}`}>
-            {/* <a className={css.category_arrow} href=""> */}
+          <Link className={css.category_arrow} to={`recipes/?category=${category.name}`}>            
               <svg width="18" height="18">
                 <use href={sprite + '#icon-arrow-up-right'}></use>
-              </svg>
-            {/* </a> */}
+              </svg>            
             </Link>
           </div>
         </li>
