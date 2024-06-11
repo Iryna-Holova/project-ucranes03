@@ -22,8 +22,12 @@ const RecipePage = () => {
   return (
     <PageContainer page="recipe">
       <section className="section">
-        <PathInfo current={recipe.title} />
-        <RecipeInfo recipe={recipe} />
+        {recipe && (
+          <>
+            <PathInfo current={recipe.title} />
+            <RecipeInfo recipe={recipe} />
+          </>
+        )}
       </section>
       <PopularRecipes />
     </PageContainer>

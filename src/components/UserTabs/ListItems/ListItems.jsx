@@ -1,11 +1,11 @@
 import UserCard from '../UserCard/UserCard';
 
-const ListItems = ({ users, tabType }) => {  
+const ListItems = ({ users, tabType }) => {
   return (
     <ul>
-      {users.map((user) => (
+      {/* {users.map((user) => (
         <UserCard key={user.id} user={user} tabType = {tabType} />
-      ))}
+      ))} */}
     </ul>
   );
 };
