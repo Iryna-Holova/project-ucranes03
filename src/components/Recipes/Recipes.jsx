@@ -16,7 +16,7 @@ const Recipes = () => {
         </Subtitle>
       </div>
       <div>
-        <RecipeFilters />
+        {/* <RecipeFilters /> */}
         <RecipeList recipes={testRecipes} />
       </div>
     </section>
