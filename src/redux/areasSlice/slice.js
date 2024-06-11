@@ -4,7 +4,7 @@ import { fetchAreas } from './thunks';
 export const areasSlice = createSlice({
   name: 'areas',
   initialState: {
-    areas: [],
+    items: [],
     error: null,
     isLoading: false,
   },

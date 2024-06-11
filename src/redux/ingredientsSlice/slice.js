@@ -4,8 +4,7 @@ import { fetchIngredients } from './thunks';
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState: {
-    ingredients: [],
-
+    items: [],
     isLoading: false,
     error: null,
   },
@@ -26,4 +25,5 @@ export const ingredientsSlice = createSlice({
   },
 });
 
+export const { setFilter } = ingredientsSlice.actions;
 export const ingredientsReducer = ingredientsSlice.reducer;

@@ -4,7 +4,7 @@ import { fetchCategories } from './thunks';
 export const categoriesSlice = createSlice({
   name: 'categories',
   initialState: {
-    categories: [],
+    items: [],
     isLoading: false,
     error: null,
   },
