@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {userReducer} from './userSlice/slice';
+import { userReducer } from './userSlice/slice';
 import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
@@ -11,6 +11,9 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
+import { areasReducer } from './areasSlice/slice';
+import { categoriesReducer } from './categoriesSlice/slice';
+import { ingredientsReducer } from './ingredientsSlice/slice';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +26,9 @@ const persistedReducer = persistReducer(persistConfig, userReducer);
 export const store = configureStore({
   reducer: {
     user: persistedReducer,
+    areas: areasReducer,
+    categories: categoriesReducer,
+    ingredients: ingredientsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
