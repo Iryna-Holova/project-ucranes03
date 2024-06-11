@@ -1,4 +1,4 @@
-import UserCard from '../UserCard/UserCard';
+// import UserCard from '../UserCard/UserCard';
 
 const ListItems = ({ users, tabType }) => {
   return (
