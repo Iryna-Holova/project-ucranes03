@@ -8,8 +8,10 @@
   height: 250px;
   border-radius: 20px;
   position: relative;
-  background: rgba(5, 5, 5, 0.18) url('../../../temp/cat-img.jpg') no-repeat
-    center / cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .category_item:nth-child(n + 9) {
@@ -47,7 +49,7 @@
   padding: 0 12px;
   border: 1px solid var(--color-white-40);
   border-radius: 30px;
-  background: var(--color-white-30);
+  background-color: var(--color-white-30);
   display: flex;
   align-items: center;
   font-weight: 700;
@@ -55,6 +57,7 @@
   line-height: 150%;
   letter-spacing: -0.02em;
   color: var(--color-white);
+  transition: background-color var(--transition);
 }
 
 .category_arrow {
@@ -65,7 +68,16 @@
   height: 40px;
   border: 1px solid var(--color-white-30);
   border-radius: 30px;
-  stroke: var(--color-secondary);
+  color: var(--color-white);
+  transition: border-color var(--transition);
+}
+
+.category_link:hover {
+  background-color: var(--color-white-20);
+}
+
+.category_arrow:hover {
+  border-color: var(--color-white-40);
 }
 
 @media screen and (min-width: 768px) {
@@ -80,7 +92,7 @@
     border-radius: 30px;
   }
 
-  .all_categories {    
+  .all_categories {
     width: calc((100% - 20px) / 2);
     height: 369px;
     border-radius: 30px;
@@ -90,7 +102,7 @@
     display: block;
   }
 
-  .category_item:nth-child(5n + 3) {    
+  .category_item:nth-child(5n + 3) {
     width: 100%;
   }
   .category_link_container {
@@ -99,21 +111,20 @@
   }
 }
 
-
 @media screen and (min-width: 1440px) {
   .category_item:nth-child(n) {
     width: calc((100% / 4) + 5px);
   }
-  .category_item:nth-child(3) {    
+  .category_item:nth-child(3) {
     width: calc((100% - 100px) / 2);
   }
-  .category_item:nth-child(4) {    
+  .category_item:nth-child(4) {
     width: calc((100% - 100px) / 2);
   }
-  .category_item:nth-child(8) {    
+  .category_item:nth-child(8) {
     width: calc((100% - 100px) / 2);
   }
-  .category_item:nth-child(10) {    
+  .category_item:nth-child(10) {
     width: calc((100% - 100px) / 2);
   }
   .all_categories {
