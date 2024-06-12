@@ -12,11 +12,12 @@ export const categoriesSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchCategories.pending, state => {
+        state.error = null;
         state.isLoading = true;
       })
-      .addCase(fetchCategories.fulfilled, (state, action) => {
+      .addCase(fetchCategories.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.categories = action.payload.data;
+        state.items = payload;
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.isLoading = false;
