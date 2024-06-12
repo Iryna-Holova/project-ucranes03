@@ -34,7 +34,7 @@ const RecipePreview = ({ recipes }) => {
                 <img src={thumb} alt={title} />
               </div>
               <div>
-                <h2 className={css.title}>{title}</h2>
+                <h4 className={css.title}>{title}</h4>
                 <p className={css.description}>{description}</p>
               </div>
             </div>

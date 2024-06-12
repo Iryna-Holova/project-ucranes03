@@ -40,7 +40,7 @@ const RecipeCard = ({ recipe }) => {
         <img src={thumb} alt={title} />
       </div>
       <div className={css.card_details}>
-        <h2 className={css.title}>{title}</h2>
+        <h4 className={css.title}>{title}</h4>
         <p className={css.description}>{description}</p>
         <div className={css.owner_info}>
           <button className={css.owner_btn} onClick={handleOwnerBtnClick}>
