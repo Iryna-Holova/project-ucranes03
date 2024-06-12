@@ -5,7 +5,7 @@ import { removeFavorite, addFavorite } from '../../../services/recipes';
 import { useState } from 'react';
 import Image from '../../../components/Shared/Image/Image';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../../redux/userSlice/selectors';
+import { selectUser } from 'store/userSlice/selectors';
 
 const RecipeCard = ({ recipe, update }) => {
   const { _id, title, owner, description, thumb, favorite } = recipe;
