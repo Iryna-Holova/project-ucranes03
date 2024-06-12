@@ -12,6 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--color-main-10);
 }
 
 .card_details {
@@ -29,6 +30,9 @@
     text-transform: uppercase;
     color: var(--color-main);
     flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .description {
@@ -136,7 +140,11 @@
 }
 
 @media screen and (min-width:1440px) {
-    .recipe_card {
+    .all_recipes {
+        width: calc((100% - 40px) / 3);
+    }
+
+    .popular_recipes {
         width: calc((100% - 60px) / 4);
     }
 }

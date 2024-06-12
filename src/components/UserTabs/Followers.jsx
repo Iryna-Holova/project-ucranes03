@@ -1,12 +1,12 @@
 import ListItems from 'components/UserTabs/ListItems/ListItems';
-import UserCard from 'components/UserTabs/UserCard/UserCard';
+import users from '../../temp/users.json';
 
-const Followers = () => {
+const Followers = () => {  
   return (
     <div>
-      <h3 className="visually-hidden">Followers</h3>
-      <ListItems />
-      <UserCard />
+      <h3 className="visually-hidden">Followers</h3>      
+      <ListItems users = {users.results} tabType ="followers"/>
+      {/* remove tabType */}
     </div>
   );
 };

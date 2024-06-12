@@ -1,6 +1,9 @@
 import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import SharedLayout from './SharedLayout';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrentUser } from '../redux/userSlice/thunks';
+import { selectToken } from '../redux/userSlice/selectors';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Categories = lazy(() => import('./Categories/Categories'));
@@ -14,6 +17,13 @@ const Followers = lazy(() => import('./UserTabs/Followers'));
 const Following = lazy(() => import('./UserTabs/Following'));
 
 const App = () => {
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+
+  if (token) {
+    dispatch(fetchCurrentUser())
+  }
+
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
