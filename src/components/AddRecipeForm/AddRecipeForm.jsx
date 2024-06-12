@@ -4,12 +4,10 @@ import css from './AddRecipeForm.module.css';
 import { Controller, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import Select from 'react-select';
+import {useSelector} from "react-redux";
+import {selectCategories, selectCategoriesOptions} from "../../redux/categoriesSlice/selectors.js"
 
-const categories = [
-  { value: 'dessert', label: 'Dessert' },
-  { value: 'main', label: 'Main Course' },
-  { value: 'appetizer', label: 'Appetizer' },
-];
+
 
 const ingredients = [
   { value: 'sugar', label: 'Sugar' },
@@ -56,6 +54,11 @@ const AddRecipeForm = () => {
   const [cookingTime, setCookingTime] = useState(0);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [countLength, setCountLength] = useState(0);
+  const categories = useSelector(selectCategories);
+//   const ingredient = useSelector(selectIngredients);
+// console.log(ingredient)
+console.log(categories)
+  
   const {
     register,
     handleSubmit,
