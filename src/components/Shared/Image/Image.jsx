@@ -30,7 +30,7 @@ const Image = ({
     setIsError(true);
   };
 
-  if (!isError || !publicId) {
+  if (isError || !publicId) {
     return (
       <img
         src={defaultImage}
