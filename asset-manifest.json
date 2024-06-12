@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/project-ucranes03/static/css/main.9a7781fb.css",
-    "main.js": "/project-ucranes03/static/js/main.95992298.js",
+    "main.js": "/project-ucranes03/static/js/main.3d827f9a.js",
     "static/css/519.ff07d191.chunk.css": "/project-ucranes03/static/css/519.ff07d191.chunk.css",
     "static/js/519.1bd47297.chunk.js": "/project-ucranes03/static/js/519.1bd47297.chunk.js",
     "static/css/821.532cd6db.chunk.css": "/project-ucranes03/static/css/821.532cd6db.chunk.css",
-    "static/js/821.93c01177.chunk.js": "/project-ucranes03/static/js/821.93c01177.chunk.js",
+    "static/js/821.24ceda2f.chunk.js": "/project-ucranes03/static/js/821.24ceda2f.chunk.js",
     "static/css/857.a8ade9b7.chunk.css": "/project-ucranes03/static/css/857.a8ade9b7.chunk.css",
     "static/js/857.65ce6bd1.chunk.js": "/project-ucranes03/static/js/857.65ce6bd1.chunk.js",
     "static/css/572.7854d897.chunk.css": "/project-ucranes03/static/css/572.7854d897.chunk.css",
@@ -36,11 +36,11 @@
     "index.html": "/project-ucranes03/index.html",
     "static/media/placeholder-image.svg": "/project-ucranes03/static/media/placeholder-image.47615446a99f198bfa3c72de94c54a99.svg",
     "main.9a7781fb.css.map": "/project-ucranes03/static/css/main.9a7781fb.css.map",
-    "main.95992298.js.map": "/project-ucranes03/static/js/main.95992298.js.map",
+    "main.3d827f9a.js.map": "/project-ucranes03/static/js/main.3d827f9a.js.map",
     "519.ff07d191.chunk.css.map": "/project-ucranes03/static/css/519.ff07d191.chunk.css.map",
     "519.1bd47297.chunk.js.map": "/project-ucranes03/static/js/519.1bd47297.chunk.js.map",
     "821.532cd6db.chunk.css.map": "/project-ucranes03/static/css/821.532cd6db.chunk.css.map",
-    "821.93c01177.chunk.js.map": "/project-ucranes03/static/js/821.93c01177.chunk.js.map",
+    "821.24ceda2f.chunk.js.map": "/project-ucranes03/static/js/821.24ceda2f.chunk.js.map",
     "857.a8ade9b7.chunk.css.map": "/project-ucranes03/static/css/857.a8ade9b7.chunk.css.map",
     "857.65ce6bd1.chunk.js.map": "/project-ucranes03/static/js/857.65ce6bd1.chunk.js.map",
     "572.7854d897.chunk.css.map": "/project-ucranes03/static/css/572.7854d897.chunk.css.map",
@@ -61,6 +61,6 @@
   },
   "entrypoints": [
     "static/css/main.9a7781fb.css",
-    "static/js/main.95992298.js"
+    "static/js/main.3d827f9a.js"
   ]
 }
