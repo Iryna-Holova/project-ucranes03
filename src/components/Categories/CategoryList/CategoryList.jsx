@@ -48,13 +48,13 @@ const CategoryList = () => {
           <div className={css.category_link_container}>
             <Link
               className={css.category_link}
-              to={`recipes/?category=${name}`}
+              to={`recipes?category=${id}`}
             >
               {name}
             </Link>
             <Link
               className={css.category_arrow}
-              to={`recipes/?category=${name}`}
+              to={`recipes?category=${id}`}
             >
               <svg width="18" height="18">
                 <use href={sprite + '#icon-arrow-up-right'}></use>
