@@ -2,7 +2,7 @@ import css from './RecipePreview.module.css';
 import icons from '../../../images/icons.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { removeFavorite, removeOwnRecipe } from '../../../services/recipes';
-import Image from '../../../components/Shared/Image/Image';
+// import Image from '../../../components/Shared/Image/Image';
 
 const RecipePreview = ({ recipes, update }) => {
   const navigate = useNavigate();
@@ -51,7 +51,8 @@ const RecipePreview = ({ recipes, update }) => {
           <li key={_id} className={css.preview_item}>
             <div className={css.info_wrapper}>
               <div className={css.thumb}>
-                <Image publicId={thumb} alt={title} />
+                {/* <Image publicId={thumb} alt={title} /> */}
+                <img src={thumb} alt={title} />
               </div>
               <div>
                 <h4 className={css.title}>{title}</h4>
