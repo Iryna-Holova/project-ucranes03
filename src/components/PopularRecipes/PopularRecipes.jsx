@@ -1,22 +1,28 @@
 import RecipeList from 'components/RecipeList/RecipeList';
 import css from './PopularRecipes.module.css';
-import { selectPopularRecipes } from '../../redux/recipesSlice/selectors';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPopular } from '../../redux/recipesSlice/thunks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getPopularRecipes } from '../../services/recipes';
 
 const PopularRecipes = () => {
-  const popularRecipes = useSelector(selectPopularRecipes);
-  const dispatch = useDispatch();
+  const [popularRecipes, setPopularRecipes] = useState([]);
+
+  const fetchRecipes = async () => {
+    try {
+      const { data } = await getPopularRecipes();
+      setPopularRecipes(data);
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
 
   useEffect(() => {
-    dispatch(fetchPopular());
-  }, [dispatch]);
+    fetchRecipes();
+  }, []);
 
   return (
     <section className="section">
       <h2 className={css.title}>Popular recipes</h2>
-      <RecipeList recipes={popularRecipes} />
+      <RecipeList recipes={popularRecipes} update={fetchRecipes} />
     </section>
   );
 };

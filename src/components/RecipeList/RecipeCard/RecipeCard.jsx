@@ -1,26 +1,28 @@
 import css from './RecipeCard.module.css';
 import icons from '../../../images/icons.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { removeFavorite, addFavorite } from '../../../services/recipes';
+import { useState } from 'react';
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, update }) => {
   const { _id, title, owner, description, thumb, favorite } = recipe;
 
   const navigate = useNavigate();
   const location = useLocation();
 
   // ===================for test==========
-  const userId = '666439f8cdaa50319cc78607';
+  const userId = '66694566427b7b2ea34acd36';
   const isLoggedIn = true;
+  const [isFavorite, setIsFavorite] = useState(favorite.includes(userId));
+  // ===================================
 
   const cardStyles = location.pathname.includes('recipes')
     ? `${css.recipe_card} ${css.all_recipes}`
     : `${css.recipe_card} ${css.popular_recipes}`;
 
-  const heartIconStyles =
-    favorite && favorite.includes(userId)
-      ? `${css.heart_icon} ${css.favorite_heart}`
-      : `${css.heart_icon}`;
-  // ===================================
+  const heartIconStyles = isFavorite
+    ? `${css.heart_icon} ${css.favorite_heart}`
+    : `${css.heart_icon}`;
 
   const handleOwnerBtnClick = () => {
     if (isLoggedIn) {
@@ -30,8 +32,19 @@ const RecipeCard = ({ recipe }) => {
     }
   };
 
-  const handleHeartIconClick = () => {
-    console.log('add/remove to favorite logic will be here');
+  const handleHeartIconClick = async () => {
+    try {
+      if (isFavorite) {
+        setIsFavorite(false);
+        await removeFavorite(_id);
+      } else {
+        setIsFavorite(true);
+        await addFavorite(_id);
+      }
+      update();
+    } catch (error) {
+      throw Error(error.message);
+    }
   };
 
   return (

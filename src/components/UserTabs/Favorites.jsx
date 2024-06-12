@@ -1,23 +1,29 @@
 import ListItems from 'components/UserTabs/ListItems/ListItems';
 import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectFavoriteRecipes } from '../../redux/recipesSlice/selectors';
-import { useEffect } from 'react';
-import { fetchFavorite } from '../../redux/recipesSlice/thunks';
+import { useEffect, useState } from 'react';
+import { getFavoriteRecipes } from '../../services/recipes';
 
 const Favorites = () => {
-  const favoriteRecipes = useSelector(selectFavoriteRecipes);
-  const dispatch = useDispatch();
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+
+  const fetchRecipes = async () => {
+    try {
+      const { data } = await getFavoriteRecipes();
+      setFavoriteRecipes(data);
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
 
   useEffect(() => {
-    dispatch(fetchFavorite());
-  }, [dispatch]);
+    fetchRecipes();
+  }, []);
 
   return (
     <div>
       <h3 className="visually-hidden">Favorite recipes</h3>
       <ListItems />
-      <RecipePreview recipes={favoriteRecipes} />
+      <RecipePreview recipes={favoriteRecipes} update={fetchRecipes} />
     </div>
   );
 };
