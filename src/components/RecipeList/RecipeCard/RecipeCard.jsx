@@ -3,6 +3,7 @@ import icons from '../../../images/icons.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { removeFavorite, addFavorite } from '../../../services/recipes';
 import { useState } from 'react';
+import Image from '../../../components/Shared/Image/Image';
 
 const RecipeCard = ({ recipe, update }) => {
   const { _id, title, owner, description, thumb, favorite } = recipe;
@@ -50,7 +51,7 @@ const RecipeCard = ({ recipe, update }) => {
   return (
     <li className={cardStyles}>
       <div className={css.thumb}>
-        <img src={thumb} alt={title} />
+        <Image publicId={thumb} alt={title} />
       </div>
       <div className={css.card_details}>
         <h4 className={css.title}>{title}</h4>
