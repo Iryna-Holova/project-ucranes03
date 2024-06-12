@@ -42,7 +42,7 @@ const RecipeCard = ({ recipe, update }) => {
         setIsFavorite(true);
         await addFavorite(_id);
       }
-      update();
+      if (update) update();
     } catch (error) {
       throw Error(error.message);
     }

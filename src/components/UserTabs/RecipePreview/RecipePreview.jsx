@@ -20,7 +20,7 @@ const RecipePreview = ({ recipes, update }) => {
   const handleFavoriteRemove = async id => {
     try {
       await removeFavorite(id);
-      update();
+      if (update) update();
     } catch (error) {
       throw Error(error.message);
     }
@@ -29,7 +29,7 @@ const RecipePreview = ({ recipes, update }) => {
   const handleOwnRemove = async id => {
     try {
       await removeOwnRecipe(id);
-      update();
+      if (update) update();
     } catch (error) {
       throw Error(error.message);
     }
