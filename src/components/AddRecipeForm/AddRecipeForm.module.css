@@ -1,0 +1,224 @@
+.titleForm {
+    color:  #050505;
+font-size: 40px;
+font-weight: 800;
+line-height: 44px;
+letter-spacing: -0.8px;
+text-transform: uppercase;
+margin-bottom: 20px;
+}
+.textForm {
+color:  rgba(5, 5, 5, 0.80);
+font-weight: 500;
+line-height: 24px;
+letter-spacing: -0.32px;
+max-width: 443px;
+margin-bottom: 40px;
+}
+.inputFile {
+   display: none;
+}
+.iconCamera {
+    width: 50px;
+height: 50px;
+flex-shrink: 0;
+fill: var(--color-main-30, rgba(5, 5, 5, 0.30));
+}
+.boxForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.boxFile {
+    display: flex;
+width: 343px;
+height: 318px;
+justify-content: center;
+align-items: center;
+flex-shrink: 0;
+border-radius: 30px;
+border: 1px dashed var(--color-main-20, rgba(5, 5, 5, 0.20));
+margin-bottom: 32px;
+}
+.photoFile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+}
+.boxTimeCategories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.boxInputName {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+.inputQuantity {
+    border: none;
+    margin-top: 20px;
+    border-bottom: 1px solid var(--color-main-12, rgba(5, 5, 5, 0.12));
+    width: 100%;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    color: var(--color-main-60, rgba(5, 5, 5, 0.60));
+font-size: 14px;
+font-weight: 500;
+line-height: 1.4;
+letter-spacing: -0.02em;
+}
+.inputQuantity:focus {
+    color: var(--color-main, #050505);
+    outline: none; 
+    border: none; 
+    border-bottom: 1px solid var(--color-main, #050505);
+}
+.listIngredients {
+    margin-top: 32px;
+}
+.inputName {
+color:  rgba(5, 5, 5, 0.60);
+font-size: 18px;
+font-weight: 800;
+line-height: 1.33;
+letter-spacing: -0.02em;
+text-transform: uppercase;
+border: none;
+display: inline;
+float: right;
+}
+.inputName:focus {
+    color: var(--color-main, #050505);
+    outline: none; 
+    border: none; 
+}
+.inputDescription {
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid var(--color-main-12, rgba(5, 5, 5, 0.12));
+    padding-bottom: 16px;
+    
+}
+.boxSelectCat {
+    margin-bottom: 20px;
+}
+.inputDescription:focus {
+    color: var(--color-main, #050505);
+    outline: none; 
+    border: none; 
+    border-bottom: 1px solid var(--color-main, #050505);
+}
+.lineUnderInput {
+    width: 100%;
+    height: 1px;
+    background-color: #050505;
+}
+.textLength {
+    position: absolute;
+    right: 0;
+    top: 30%;
+    transform: translateY(-50%);
+    color: #999;
+}
+.boxDescription {
+    position: relative;
+
+    
+}
+.titleDescription {
+    color: #050505;
+font-size: 20px;
+font-weight: 800;
+line-height: 24px;
+letter-spacing: -0.4px;
+text-transform: uppercase;
+}
+.boxTimeBtn {
+    display: flex;
+    gap:16px;
+    align-items: center;
+    margin-top: 8px;
+}
+.counterTime {
+color: var(--color-main-60, rgba(5, 5, 5, 0.60));
+font-size: 14px;
+font-weight: 500;
+line-height: 1.4;
+letter-spacing: -0.02em;
+}
+.boxNameCateIngr {
+    display: flex;
+    flex-direction: column;
+}
+
+.boxBtnDelPub {
+    display: flex;
+    gap:8px;
+}
+.BtnTime {
+    display: flex;
+padding: 16px;
+justify-content: center;
+align-items: center;
+gap: 109px;
+border-radius: 30px;
+border: 1px solid var(--color-main-12, rgba(5, 5, 5, 0.12));
+}
+.BtnTime:focus {
+    background: var(--color-main, #050505);
+}
+.BtnTime:focus .iconTime {
+    fill: #fff;
+    
+}
+.iconTime {
+    width: 16px;
+height: 16px;
+}
+.inputPreparation {
+    margin-top: 32px;
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid var(--color-main-12, rgba(5, 5, 5, 0.12));
+    min-height: 36px;
+    color: var(--color-main-60, rgba(5, 5, 5, 0.60));
+font-size: 14px;
+font-weight: 500;
+line-height: 1.4;
+letter-spacing: -0.02em;
+margin-bottom: 32px;
+}
+.inputPreparation:focus {
+    color: var(--color-main, #050505);
+    outline: none; 
+    border: none; 
+    border-bottom: 1px solid var(--color-main, #050505);
+}
+.btnDelete {
+    width: 20px;
+height: 20px;
+}
+.deleteBtn {
+    display: flex;
+    padding: 14px;
+justify-content: center;
+align-items: center;
+gap: 8px;
+border-radius: 30px;
+border: 1px solid var(--color-main-12, rgba(5, 5, 5, 0.12));
+}
+.deleteBtn:focus {
+    background: var(--color-main, #050505);
+}
+.deleteBtn:focus .btnDelete {
+    fill: #fff;
+}
+.errorMessage {
+    color: red;
+    font-size: 12px;
+}
