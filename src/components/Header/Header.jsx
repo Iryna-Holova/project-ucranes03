@@ -17,12 +17,12 @@ const Header = () => {
         <div className={isBlackTheme ? css.header_black : css.header_white}>
           <Logo />
           {isUser ? (
-            <AuthBar />
-          ) : (
             <>
               <Nav />
               <UserBar />
             </>
+          ) : (
+            <AuthBar />
           )}
         </div>
       </div>

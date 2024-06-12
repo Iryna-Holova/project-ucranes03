@@ -8,6 +8,7 @@ import { useState } from "react";
 
 const UserBar = () => {
   const [isUserMenu, setIsUserMenu] = useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [showLogOutModal, setShowLogOutModal] = useState(false);
 
   const isBlackTheme = useLocation().pathname !== "/";
@@ -23,24 +24,27 @@ const UserBar = () => {
           />
         </div>
         <div className={css.userbar_dropdown_wrap}>
-          <p className={css.userbar_dropdown_name}>VICTORIA</p>
+          <p className={css.userbar_dropdown_name}>VICTORIAwdfwf3tw3efefeffgefc</p>
           <button
-            className={css.userbar_dropdown_chevron}
-            onClick={() => setIsUserMenu((prev) => !prev)}
+            className={isOpenMenu ? css.userbar_chevron_up : css.userbar_chevron_down}
+            onClick={() => {
+              setIsUserMenu((prev) => !prev)
+              setIsOpenMenu((prev) => !prev)
+            }}
           >
             <svg className={css.userbar_icon_chevron}>
               <use
-                href={`${icons}#icon-chevron-${isUserMenu ? "up" : "down"}`}
+                href={`${icons}#icon-chevron-down`}
               />
             </svg>
           </button>
         </div>
-        {isUserMenu && (
-          <div className={css.userbar_dropdown_menu}>
+
+          <div className={isUserMenu ? css.userbar_dropdown_menu : css.userbar_dropdown_menu_none}>
             <ul className={css.userbar_dropdown_menu_list}>
               <li className={isBlackTheme ? css.color_black : css.color_white}>
-                <Link to="/" onClick={() => setIsUserMenu(false)}>
-                  PROFILE{" "}
+                <Link to="user/current" onClick={() => setIsUserMenu(false)}>
+                  profile
                 </Link>
               </li>
               <li className={css.userbar_dropdown_menu_item}>
@@ -51,13 +55,9 @@ const UserBar = () => {
                     setIsUserMenu(false);
                   }}
                 >
-                  LOG OUT
+                 log out
                   <svg
-                    className={
-                      isBlackTheme
-                        ? css.userbar_logout_icon_black
-                        : css.userbar_logout_icon_white
-                    }
+                    className={css.userbar_logout_icon}
                   >
                     <use href={`${icons}#icon-arrow-up-right`} />
                   </svg>
@@ -65,7 +65,7 @@ const UserBar = () => {
               </li>
             </ul>
           </div>
-        )}
+        
       </div>
       {showLogOutModal && (
         <Modal onClose={() => setShowLogOutModal(false)}>

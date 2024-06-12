@@ -41,14 +41,27 @@
     text-transform: uppercase;
 }
 
-.userbar_dropdown_chevron {
+.userbar_chevron_down {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: var(--transition);
+    color: var(--color-white);
+}
+
+.userbar_chevron_down:hover, .userbar_chevron_up:hover {
+   color: var(--color-white-80);
+}
+
+.userbar_chevron_up {
+    color: var(--color-white);
+    transform: rotate(180deg);
+    transition: var(--transition);
+    height: 18px;
 }
 
 .userbar_icon_chevron {
-    fill: var(--color-white);
+    color: inherit;
     width: 18px;
     height: 18px;
 }
@@ -61,6 +74,19 @@
     width: 148px;
     padding: 15px;
     border: 1px solid var(--color-main-20);
+    transition: all var(--transition);
+    transform: scale(1);
+}
+
+.userbar_dropdown_menu_none {
+    transform: scale(0);
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    bottom: 30px;
+    right: 14px;
+    transition: all var(--transition);
+    
 }
 
 .userbar_dropdown_menu_list {
@@ -88,26 +114,24 @@
     display: flex;
     column-gap: 2px;
     height: 18px;
+    text-transform: uppercase;
 }
 
-.ccolor_white {
+.color_white {
     color: var(--color-white);
     display: flex;
     column-gap: 2px;
     height: 18px;
+    text-transform: uppercase;
 }
 
-.userbar_logout_icon_black {
-    fill: var(--color-main);
-    stroke: var(--color-main);
+.userbar_logout_icon {
+    color: inherit;
     width: 18px;
     height: 18px;
     display: flex;
 }
 
-.userbar_logout_icon_white {
-    fill: var(--color-white);
-    stroke: var(--color-white);
-    width: 18px;
-    height: 18px;
+.color_black:hover, .color_white:hover {
+    opacity: 60%;
 }
