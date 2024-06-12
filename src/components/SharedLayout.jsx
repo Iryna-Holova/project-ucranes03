@@ -10,7 +10,6 @@ import LogOutModal from './LogOutModal/LogOutModal';
 const SharedLayout = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showLogOutModal, setShowLogOutModal] = useState(false);
-
   return (
     <>
       <Header />
