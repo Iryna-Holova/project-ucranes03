@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, fetchCurrentUser, loginUser, logoutUser } from './thunks';
+import {
+  registerUser,
+  fetchCurrentUser,
+  loginUser,
+  logoutUser,
+} from './thunks';
 
 export const userSlice = createSlice({
   name: 'user',
@@ -37,8 +42,8 @@ export const userSlice = createSlice({
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        // state.user = action.payload.user;
+        // state.token = action.payload.token;
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.isLoading = false;

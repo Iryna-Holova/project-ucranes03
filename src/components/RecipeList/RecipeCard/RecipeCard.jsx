@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { removeFavorite, addFavorite } from '../../../services/recipes';
 import { useState } from 'react';
 import Image from '../../../components/Shared/Image/Image';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../../redux/userSlice/selectors';
 
 const RecipeCard = ({ recipe, update }) => {
   const { _id, title, owner, description, thumb, favorite } = recipe;
@@ -12,7 +14,8 @@ const RecipeCard = ({ recipe, update }) => {
   const location = useLocation();
 
   // ===================for test==========
-  const userId = '66694566427b7b2ea34acd36';
+  const user = useSelector(selectUser);
+  const userId = user ? user.id : '66694566427b7b2ea34acd36';
   const isLoggedIn = true;
   const [isFavorite, setIsFavorite] = useState(favorite.includes(userId));
   // ===================================
