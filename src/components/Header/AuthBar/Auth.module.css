@@ -1,0 +1,37 @@
+.authbar_wrap {
+    width: 208px;
+    height: 46px;
+    background-color: var(--color-white);
+    background-color: var(--color-main-10);
+    border-radius: 30px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.015rem;
+    text-transform: uppercase;
+}
+
+.authbar_signin {
+    width: 104px;  
+    height: 46px;
+    color: var(---color-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.authbar_signup {
+    width: 104px;
+    height: 46px;
+    color: var(--color-white);
+    border-radius: 30px;
+    border: 1px solid var(--color-gray);
+    background-color: var(--color-main-90);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

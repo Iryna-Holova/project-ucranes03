@@ -1,8 +1,9 @@
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
+import css from './Hero.module.css';
 
 const Hero = () => {
   return (
-    <section>
+    <section className={css.hero_wrap}>
       <h1>Improve Your Culinary Talents</h1>
       <p>
         Amazing recipes for beginners in the world of cooking, enveloping you in

@@ -1,0 +1,111 @@
+.userbar_wrap {
+    min-width: 148px;
+    height: 50px;
+    background-color: var(--color-main);
+    border-radius: 30px;
+    display: flex;
+    column-gap: 6px;
+    padding-right: 14px;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.userbar_avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    flex-shrink: 0;
+}
+
+.userbar_avatar_img {
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+}
+
+.userbar_dropdown_wrap {
+    display: flex;
+    column-gap: 4px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userbar_dropdown_name {
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.015rem;
+    text-transform: uppercase;
+}
+
+.userbar_dropdown_chevron {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userbar_icon_chevron {
+    fill: var(--color-white);
+    width: 18px;
+    height: 18px;
+}
+
+.userbar_dropdown_menu {
+    position: absolute;
+    right: 14px;
+    bottom: -86px;
+    border-radius: 15px;
+    width: 148px;
+    padding: 15px;
+    border: 1px solid var(--color-main-20);
+}
+
+.userbar_dropdown_menu_list {
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.015rem;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+}
+
+.userbar_dropdown_menu_item {
+    color: inherit;
+}
+
+.userbar_logout_wrap {
+    display: flex;
+    column-gap: 2px;
+}
+
+.userbar_logout_arrow {
+height: 18px;
+}
+
+.color_black {
+    color: var(--color-main);
+}
+
+.color_white {
+    color: var(--color-white);
+}
+
+.userbar_logout_icon_black {
+    fill: var(--color-main);
+    stroke: var(--color-main);
+    width: 18px;
+    height: 18px;
+}
+
+.userbar_logout_icon_white {
+    fill: var(--color-white);
+    stroke: var(--color-white);
+    width: 18px;
+    height: 18px;
+}
