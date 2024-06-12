@@ -1,5 +1,5 @@
 import SelectFilter from "components/Shared/SelectFilter/SelectFilter";
-import { useMemo, useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { areasData } from "temp/areas";
 import { ingredientsData } from "temp/ingredients";
@@ -7,20 +7,11 @@ import { ingredientsData } from "temp/ingredients";
 const RecipeFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const areas = useMemo(() => 
-    areasData.map(area => ({ value: area._id.$oid, label: area.name })), 
-    []
-  );
+  const areas = areasData.map(area => ({ value: area._id, label: area.name }));
+  const ingredients = ingredientsData.map(ingredient => ({ value: ingredient._id, label: ingredient.name }));
 
-  const ingredients = useMemo(() => 
-    ingredientsData.map(ingredient => ({ value: ingredient._id.$oid, label: ingredient.name })), 
-    []
-  );
-
-  const [selectedOptions, setSelectedOptions] = useState({
-    ingredients: null,
-    areas: null,
-  });
+  const [ingredSelectionOption, setIngredSelectionOption] = useState(searchParams.get("ingredient"));
+  const [areasSelectionOption, setAreasSelectionOption] = useState(searchParams.get("area"));
 
   const handleChange = (option, { name }) => {
     setSearchParams(prevParams => {
@@ -33,27 +24,26 @@ const RecipeFilters = () => {
       return newParams;
     });
 
-    setSelectedOptions(prevOptions => ({
-      ...prevOptions,
-      [name]: option,
-    }));
+    if (name === "ingredient") {
+      setIngredSelectionOption(option);
+    } else if (name === "area") {
+      setAreasSelectionOption(option);
+    }
   };
-
   return (
     <div>
-      
       <SelectFilter
-        name="ingredients"
+        name="ingredient"
         options={ingredients}
         onChange={handleChange}
-        value={selectedOptions.ingredients}
+        value={ingredSelectionOption}
         placeholder="ingredients"
       />
       <SelectFilter
-        name="areas"
+        name="area"
         options={areas}
         onChange={handleChange}
-        value={selectedOptions.areas}
+        value={areasSelectionOption}
         placeholder="areas"
       />
     </div>

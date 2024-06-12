@@ -1,20 +1,13 @@
-import { useState } from 'react';
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
 
-const AuthModal = () => {
-  const [isSignUp, setIsSignUp] = useState(true);
-
-  const handleToggleForm = () => {
-    setIsSignUp(isSignUp => !isSignUp);
-  };
-
+const AuthModal = ({ isSignUp, onToggleMode }) => {
   return (
     <>
       {isSignUp ? (
-        <SignUpForm toggleForm={handleToggleForm} />
+        <SignUpForm onToggleMode={onToggleMode} />
       ) : (
-        <SignInForm toggleForm={handleToggleForm} />
+        <SignInForm onToggleMode={onToggleMode} />
       )}
     </>
   );

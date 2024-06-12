@@ -2,8 +2,12 @@ import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import SharedLayout from './SharedLayout';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUser } from '../redux/userSlice/thunks';
-import { selectToken } from '../redux/userSlice/selectors';
+import { fetchCurrentUser } from 'store/userSlice/thunks';
+import { selectToken } from 'store/userSlice/selectors';
+import { fetchIngredients } from "store/ingredientsSlice/thunks";
+import { fetchAreas } from "store/areasSlice/thunks";
+import { fetchCategories } from 'store/categoriesSlice/thunks';
+
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Categories = lazy(() => import('./Categories/Categories'));
@@ -23,6 +27,12 @@ const App = () => {
   if (token) {
     dispatch(fetchCurrentUser())
   }
+  
+  dispatch(fetchIngredients());
+  dispatch(fetchAreas());
+  dispatch(fetchCategories());
+
+
 
   return (
     <Routes>

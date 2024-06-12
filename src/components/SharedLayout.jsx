@@ -6,9 +6,18 @@ import Loader from './Shared/Loader/Loader';
 import Modal from './Modal/Modal';
 import AuthModal from './AuthModal/AuthModal';
 import LogOutModal from './LogOutModal/LogOutModal';
+import { useAuthModal } from '../hooks/use-auth-modal';
 
 const SharedLayout = () => {
-  const [showAuthModal, setShowAuthModal] = useState(false);
+  const {
+    onAuthOpen,
+    onAuthClose,
+    onOpenSignIn,
+    onOpenSignUp,
+    onToggleMode,
+    isAuthOpen,
+    isSignUp,
+  } = useAuthModal();
   const [showLogOutModal, setShowLogOutModal] = useState(false);
   return (
     <>
@@ -19,12 +28,18 @@ const SharedLayout = () => {
         </Suspense>
       </main>
       <Footer />
-      <button onClick={() => setShowAuthModal(true)} style={{ color: 'red' }}>
+      <button onClick={onAuthOpen} style={{ color: 'red' }}>
+        AUTH
+      </button>
+      <button onClick={onOpenSignUp} style={{ color: 'red' }}>
         SIGN UP
       </button>
-      {showAuthModal && (
-        <Modal onClose={() => setShowAuthModal(false)}>
-          <AuthModal />
+      <button onClick={onOpenSignIn} style={{ color: 'red' }}>
+        SIGN IN
+      </button>
+      {isAuthOpen && (
+        <Modal onClose={onAuthClose}>
+          <AuthModal isSignUp={isSignUp} onToggleMode={onToggleMode} />
         </Modal>
       )}
       <button onClick={() => setShowLogOutModal(true)} style={{ color: 'red' }}>
