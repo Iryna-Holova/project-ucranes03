@@ -79,21 +79,22 @@
     color: inherit;
 }
 
-.userbar_logout_wrap {
-    display: flex;
-    column-gap: 2px;
-}
-
 .userbar_logout_arrow {
-height: 18px;
+    height: 18px;
 }
 
 .color_black {
     color: var(--color-main);
+    display: flex;
+    column-gap: 2px;
+    height: 18px;
 }
 
-.color_white {
+.ccolor_white {
     color: var(--color-white);
+    display: flex;
+    column-gap: 2px;
+    height: 18px;
 }
 
 .userbar_logout_icon_black {
@@ -101,6 +102,7 @@ height: 18px;
     stroke: var(--color-main);
     width: 18px;
     height: 18px;
+    display: flex;
 }
 
 .userbar_logout_icon_white {
