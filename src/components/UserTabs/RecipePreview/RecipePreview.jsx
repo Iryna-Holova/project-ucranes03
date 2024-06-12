@@ -1,17 +1,37 @@
 import css from './RecipePreview.module.css';
 import icons from '../../../images/icons.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { removeFavorite, removeOwnRecipe } from '../../../services/recipes';
+import Image from '../../../components/Shared/Image/Image';
 
-const RecipePreview = ({ recipes }) => {
+const RecipePreview = ({ recipes, update }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isFavorite = location.pathname.includes('favorites');
 
   const handleTrashIconClick = id => {
     if (isFavorite) {
-      console.log(`Remove recipe with id: ${id} from favorite recipes.`);
+      handleFavoriteRemove(id);
     } else {
-      console.log(`Remove recipe with id: ${id} from own recipes.`);
+      handleOwnRemove(id);
+    }
+  };
+
+  const handleFavoriteRemove = async id => {
+    try {
+      await removeFavorite(id);
+      if (update) update();
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+
+  const handleOwnRemove = async id => {
+    try {
+      await removeOwnRecipe(id);
+      if (update) update();
+    } catch (error) {
+      throw Error(error.message);
     }
   };
 
@@ -31,10 +51,10 @@ const RecipePreview = ({ recipes }) => {
           <li key={_id} className={css.preview_item}>
             <div className={css.info_wrapper}>
               <div className={css.thumb}>
-                <img src={thumb} alt={title} />
+                <Image publicId={thumb} alt={title} aspectRatio={1} />
               </div>
               <div>
-                <h2 className={css.title}>{title}</h2>
+                <h4 className={css.title}>{title}</h4>
                 <p className={css.description}>{description}</p>
               </div>
             </div>
