@@ -1,11 +1,12 @@
+import { useEffect, useState } from 'react';
 import MainTitle from 'components/Shared/MainTitle/MainTitle';
 import Subtitle from 'components/Shared/Subtitle/Subtitle';
-// import RecipeFilters from './RecipeFilters/RecipeFilters';
 import RecipeList from 'components/RecipeList/RecipeList';
-import { useEffect, useState } from 'react';
 import { getRecipes } from '../../services/recipes';
+import RecipeFilters from 'components/RecipeFilters/RecipeFilters';
 
 const Recipes = () => {
+  
   const [recipes, setRecipes] = useState([]);
 
   const fetchRecipes = async () => {
@@ -32,7 +33,7 @@ const Recipes = () => {
         </Subtitle>
       </div>
       <div>
-        {/* <RecipeFilters /> */}
+        <RecipeFilters />
         <RecipeList recipes={recipes} />
       </div>
     </section>

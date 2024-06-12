@@ -13,10 +13,11 @@ export const areasSlice = createSlice({
     builder
       .addCase(fetchAreas.pending, state => {
         state.isLoading = true;
+        state.error = null;
       })
-      .addCase(fetchAreas.fulfilled, (state, action) => {
+      .addCase(fetchAreas.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.areas = action.payload.data;
+        state.items = payload;
       })
       .addCase(fetchAreas.rejected, (state, action) => {
         state.isLoading = false;

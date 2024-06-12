@@ -9,7 +9,7 @@ const SelectFilter =({ options, onChange, value, placeholder, name }) => {
       onChange={(option) => onChange(option, { name })}
       value={value}
       placeholder={placeholder}
-    />
+      /> 
   );
 };
 export default SelectFilter;
