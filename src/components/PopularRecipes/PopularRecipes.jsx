@@ -22,7 +22,7 @@ const PopularRecipes = () => {
   return (
     <section className="section">
       <h2 className={css.title}>Popular recipes</h2>
-      <RecipeList recipes={popularRecipes} update={fetchRecipes} />
+      <RecipeList recipes={popularRecipes} />
     </section>
   );
 };

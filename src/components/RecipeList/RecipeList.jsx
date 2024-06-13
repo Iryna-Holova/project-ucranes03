@@ -1,13 +1,11 @@
 import RecipeCard from './RecipeCard/RecipeCard';
 import css from './RecipeList.module.css';
 
-const RecipeList = ({ recipes, update }) => {
+const RecipeList = ({ recipes }) => {
   return (
     <ul className={css.recipe_list}>
       {recipes &&
-        recipes.map(recipe => (
-          <RecipeCard key={recipe._id} recipe={recipe} update={update} />
-        ))}
+        recipes.map(recipe => <RecipeCard key={recipe._id} recipe={recipe} />)}
     </ul>
   );
 };

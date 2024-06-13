@@ -10,7 +10,7 @@ import Modal from 'components/Modal/Modal';
 import icons from 'images/icons.svg';
 import css from './RecipeCard.module.css';
 
-const RecipeCard = ({ recipe, update }) => {
+const RecipeCard = ({ recipe }) => {
   const { _id, title, owner, description, thumb, favorite } = recipe;
 
   const { onToggleMode, isSignUp } = useAuthModal();
@@ -54,7 +54,6 @@ const RecipeCard = ({ recipe, update }) => {
         setIsFavorite(true);
         await addFavorite(_id);
       }
-      if (update) update();
     } catch (error) {
       throw Error(error.message);
     }
