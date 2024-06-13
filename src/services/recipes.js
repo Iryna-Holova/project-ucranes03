@@ -1,5 +1,7 @@
 import { api } from './api';
 
+export const getRecipe = id => api.get(`/api/recipes/details/${id}`);
+
 export const getRecipes = ({
   page,
   limit,
