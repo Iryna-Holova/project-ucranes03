@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { removeFavorite, addFavorite } from 'services/recipes';
-import { selectUser } from 'store/userSlice/selectors';
+import { selectUser } from 'store/authSlice/selectors';
 import { useAuthModal } from 'hooks/use-auth-modal';
 import AuthModal from 'components/AuthModal/AuthModal';
 import Image from 'components/Shared/Image/Image';
