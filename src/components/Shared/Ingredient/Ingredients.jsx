@@ -1,18 +1,15 @@
 import css from './Ingredients.module.css';
 
 const Ingredient = ({ img, name, measure, callback = null }) => {
-  console.log(img);
   return (
     <li className={css.ingredient_container}>
-      <div className={css.img_wrapper}>
-        <img src={img} alt={name} />
-      </div>
+      <img src={img} alt={name} className={css.img_wrapper} />
       <div>
-        <p>{name}</p>
-        <p>{measure}</p>
+        <p className={css.name_style}>{name}</p>
+        <p className={css.measure_style}>{measure}</p>
       </div>
 
-      {callback && <button>X</button>}
+      {callback && <button className={css.btn}>X</button>}
     </li>
   );
 };

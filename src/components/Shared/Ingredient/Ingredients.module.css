@@ -1,5 +1,9 @@
 .ingredient_container {
+  position: relative;
+  flex-basis: calc((100% - 16px) / 2);
   display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .img_wrapper {
@@ -9,6 +13,24 @@
 
   border-radius: 15px;
   border: 1px solid var(--color-main-10, rgba(5, 5, 5, 0.1));
+}
+
+.name_style {
+  color: var(--color-main, #050505);
+  line-height: 1.42;
+  letter-spacing: -0.28px;
+}
+
+.measure_style {
+  color: var(--color-main-60, rgba(5, 5, 5, 0.6));
+  line-height: 1.42;
+  letter-spacing: -0.28px;
+}
+
+.btn {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 @media screen and (min-width: 768px) {

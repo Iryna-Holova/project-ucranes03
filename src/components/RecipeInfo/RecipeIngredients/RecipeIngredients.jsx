@@ -5,7 +5,7 @@ const RecipeIngredients = ({ ingredients = [] }) => {
   return (
     <div>
       <h3 className={css.title}>ingredients</h3>
-      <ul>
+      <ul className={css.list}>
         {ingredients.map(({ id: { name, _id, img }, measure }) => (
           <Ingredient
             key={_id}
