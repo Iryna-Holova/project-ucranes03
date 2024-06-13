@@ -1,14 +1,22 @@
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import sprite from '../../../images/icons.svg';
+import css from './UserCard.module.css';
 
 const UserCard = ({ user: { name, avatar_preview, recipes } }) => {
   return (
-    <li>
-      <div>
-        <img src={avatar_preview} alt={name + "'s photo"} />
+    <li className={css.follow_list_item}>
+      <div className={css.user_info_container}>
+        <div className={css.user_avatar_container}>
+          <img
+            className={css.user_avatar}
+            src={avatar_preview}
+            alt={name + "'s photo"}
+          />
+          <div className={css.selected_user}></div>
+        </div>
         <div>
-          <p>{name}</p>
-          <p>Own recipes: {recipes.length}</p>
+          <p className={css.user_name}>{name}</p>
+          <p className={css.user_recepies}>Own recipes: {recipes.length}</p>
           {/* <ButtonLink
             type="button"
             color="light"
@@ -27,16 +35,18 @@ const UserCard = ({ user: { name, avatar_preview, recipes } }) => {
           </ButtonLink>
         </div>
       </div>
-      <ul>
+      <ul className={css.recipes_pictures_list}>
         {recipes.map(recipe => (
           <li key={recipe.id}>
             <img src={recipe.preview} alt="recipe" />
           </li>
         ))}
       </ul>
-      <svg width="18" height="18">
-        <use href={sprite + '#icon-arrow-up-right'}></use>
-      </svg>
+      <div className={css.user_link_arrow}>
+        <svg width="16" height="16">
+          <use href={sprite + '#icon-arrow-up-right'}></use>
+        </svg>
+      </div>
     </li>
   );
 };
