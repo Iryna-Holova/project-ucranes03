@@ -8,9 +8,13 @@ import AuthModal from 'components/AuthModal/AuthModal';
 import Image from 'components/Shared/Image/Image';
 import Modal from 'components/Modal/Modal';
 import icons from 'images/icons.svg';
+import defaultAvatar from 'images/placeholder-avatar.svg';
 import css from './RecipeCard.module.css';
+import { useMobileMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
 
 const RecipeCard = ({ recipe }) => {
+  const isMobile = useMobileMediaQuery();
+  const isTablet = useTabletMediaQuery();
   const { _id, title, owner, description, thumb, favorite } = recipe;
 
   const { onToggleMode, isSignUp } = useAuthModal();
@@ -66,15 +70,23 @@ const RecipeCard = ({ recipe }) => {
   return (
     <>
       <li className={cardStyles}>
-        <div className={css.thumb}>
-          <Image publicId={thumb} alt={title} aspectRatio={1} />
-        </div>
+        <Image
+          publicId={thumb}
+          alt={title}
+          aspectRatio={isMobile ? 1.49 : isTablet ? 1.24 : 1}
+          className={css.thumb}
+        />
         <div className={css.card_details}>
           <h4 className={css.title}>{title}</h4>
           <p className={css.description}>{description}</p>
           <div className={css.owner_info}>
             <button className={css.owner_btn} onClick={handleOwnerBtnClick}>
-              <img className={css.avatar} src={owner.avatar} alt={owner.name} />
+              <Image
+                publicId={owner.avatar}
+                className={css.avatar}
+                defaultImage={defaultAvatar}
+                alt={owner.name}
+              />
               {owner.name}
             </button>
             <div className={css.icons_wrapper}>
