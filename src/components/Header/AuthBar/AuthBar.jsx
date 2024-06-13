@@ -1,10 +1,9 @@
-import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useAuthModal } from "hooks/use-auth-modal";
-import Modal from "../../Modal/Modal";
-import AuthModal from "../../AuthModal/AuthModal";
-import css from "./Auth.module.css";
+// import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useAuthModal } from 'hooks/use-auth-modal';
+import Modal from 'components/Modal/Modal';
+import AuthModal from 'components/AuthModal/AuthModal';
+import css from './Auth.module.css';
 
 const AuthBar = () => {
   const [isSignUpActive, setIsSignUpActive] = useState(true);
@@ -17,7 +16,7 @@ const AuthBar = () => {
     isSignUp,
   } = useAuthModal();
 
-  const isBlackTheme = useLocation().pathname !== "/";
+  // const isBlackTheme = useLocation().pathname !== '/';
 
   useEffect(() => {
     if (isSignUp) {
@@ -29,18 +28,20 @@ const AuthBar = () => {
 
   return (
     <div className={css.authbar_wrap}>
-      <Link
-        className={`${css.authbar_btn} ${!isSignUpActive ? css.activeBtn : ""}`}
+      <button
+        type="button"
+        className={`${css.authbar_btn} ${!isSignUpActive ? css.activeBtn : ''}`}
         onClick={isSignUpActive ? () => setIsSignUpActive(false) : onOpenSignIn}
       >
-        SIGN IN
-      </Link>
-      <Link
-        className={`${css.authbar_btn} ${isSignUpActive ? css.activeBtn : ""}`}
+        Sign in
+      </button>
+      <button
+        type="button"
+        className={`${css.authbar_btn} ${isSignUpActive ? css.activeBtn : ''}`}
         onClick={isSignUpActive ? onOpenSignUp : () => setIsSignUpActive(true)}
       >
-        SING UP{" "}
-      </Link>
+        Sign up
+      </button>
       {isAuthOpen && (
         <Modal onClose={onAuthClose}>
           <AuthModal isSignUp={isSignUp} onToggleMode={onToggleMode} />
