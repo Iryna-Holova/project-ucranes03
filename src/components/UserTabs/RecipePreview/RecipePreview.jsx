@@ -39,9 +39,12 @@ const RecipePreview = ({ recipe, update }) => {
   return (
     <li className={css.preview_item}>
       <div className={css.info_wrapper}>
-        <div className={css.thumb}>
-          <Image publicId={thumb} alt={title} aspectRatio={1} />
-        </div>
+        <Image
+          publicId={thumb}
+          alt={title}
+          aspectRatio={1}
+          className={css.thumb}
+        />
         <div>
           <h4 className={css.title}>{title}</h4>
           <p className={css.description}>{description}</p>

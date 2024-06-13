@@ -60,7 +60,7 @@ const Recipes = () => {
             'Discover a limitless world of culinary possibilities and enjoy exquisite recipes that combine taste, style and the warm atmosphere of the kitchen.'}
         </Subtitle>
       </div>
-      <div>
+      <div className={css.content}>
         <RecipeFilters />
         <div>
           <RecipeList recipes={recipes} />

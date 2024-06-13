@@ -24,3 +24,16 @@
     row-gap: 40px;
   }
 }
+
+@media screen and (min-width: 1440px) {
+  .section_row {
+    display: flex;
+    flex-direction: row;
+    column-gap: 40px;
+  }
+
+  .section_row > div:first-child {
+    flex-shrink: 0;
+    width: 394px;
+  }
+}
