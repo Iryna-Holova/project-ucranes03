@@ -160,6 +160,9 @@ letter-spacing: -0.02em;
     display: flex;
     gap:8px;
 }
+.boxArea {
+    margin-bottom: 32px;
+}
 .BtnTime {
     display: flex;
 padding: 16px;

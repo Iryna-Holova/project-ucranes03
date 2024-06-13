@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { EMAIL_REGEXP, MIN_PASSWORD } from 'constants/validation';
-import { registerUser } from '../../redux/userSlice/thunks';
+import { registerUser } from 'store/userSlice/thunks';
+import { selectIsLoading } from 'store/userSlice/selectors';
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import icons from '../../images/icons.svg';
 import css from './AuthModal.module.css';
-import { selectIsLoading } from '../../redux/userSlice/selectors';
 
 const schema = yup
   .object({
@@ -24,7 +24,7 @@ const schema = yup
   })
   .required();
 
-const SignUpForm = ({ toggleForm }) => {
+const SignUpForm = ({ onToggleMode }) => {
   const {
     register,
     handleSubmit,
@@ -38,7 +38,7 @@ const SignUpForm = ({ toggleForm }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const dispatch = useDispatch();
 
-  const isLoading = useSelector(selectIsLoading)
+  const isLoading = useSelector(selectIsLoading);
 
   const onSubmit = data => {
     dispatch(registerUser(data));
@@ -112,7 +112,7 @@ const SignUpForm = ({ toggleForm }) => {
       </form>
       <p className={css.text}>
         Already have an account?{' '}
-        <button onClick={toggleForm} className={css.switch_button}>
+        <button onClick={onToggleMode} className={css.switch_button}>
           Sign in
         </button>
       </p>

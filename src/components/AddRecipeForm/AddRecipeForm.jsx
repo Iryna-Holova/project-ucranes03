@@ -4,17 +4,55 @@ import css from './AddRecipeForm.module.css';
 import { Controller, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import Select from 'react-select';
-import {useSelector} from "react-redux";
-import {selectCategories, selectCategoriesOptions} from "../../redux/categoriesSlice/selectors.js"
+import { useSelector } from 'react-redux';
+import { selectCategoriesOptions } from 'store/categoriesSlice/selectors';
+import { selectIngredientsOptions } from 'store/ingredientsSlice/selectors';
+import { selectAreasOptions } from 'store/areasSlice/selectors';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-
-
-const ingredients = [
-  { value: 'sugar', label: 'Sugar' },
-  { value: 'flour', label: 'Flour' },
-  { value: 'butter', label: 'Butter' },
-];
-
+const schema = yup.object().shape({
+  thumb: yup
+    .mixed()
+    .required('Photo is required')
+    .test('fileType', 'Unsupported File Format', value => {
+      return (
+        value &&
+        value[0] &&
+        ['image/jpeg', 'image/png', 'image/gif'].includes(value[0].type)
+      );
+    }),
+  title: yup.string().required('Title is required'),
+  description: yup
+    .string()
+    .required('Description is required')
+    .max(200, 'Description should not exceed 200 characters'),
+  category: yup
+    .object()
+    .shape({
+      value: yup.string().required('Category is required'),
+    })
+    .required('Category is required'),
+  area: yup
+    .object()
+    .shape({
+      value: yup.string().required('Area is required'),
+    })
+    .required('Area is required'),
+  ingredientsList: yup
+    .array()
+    .of(
+      yup.object().shape({
+        id: yup.string().required('Ingredient is required'),
+        measure: yup.string().required('Measure is required'),
+      })
+    )
+    .min(1, 'At least one ingredient is required'),
+  instructions: yup
+    .string()
+    .required('Instructions are required')
+    .max(200, 'Instructions should not exceed 200 characters'),
+});
 const customStyles = {
   control: provided => ({
     ...provided,
@@ -54,21 +92,22 @@ const AddRecipeForm = () => {
   const [cookingTime, setCookingTime] = useState(0);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [countLength, setCountLength] = useState(0);
-  const categories = useSelector(selectCategories);
-//   const ingredient = useSelector(selectIngredients);
-// console.log(ingredient)
-console.log(categories)
-  
+  const categories = useSelector(selectCategoriesOptions);
+  const ingredients = useSelector(selectIngredientsOptions);
+  const areas = useSelector(selectAreasOptions);
+
   const {
     register,
     handleSubmit,
     control,
-    formState,
     formState: { errors },
     setValue,
     getValues,
     reset,
-  } = useForm();
+    trigger,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = data => {
     if (ingredientsList.length === 0) {
@@ -77,9 +116,11 @@ console.log(categories)
     }
     data.cookingTime = cookingTime;
     data.ingredients = ingredientsList;
-    console.log(data);
+    data.category = data.category.value;
+    data.area = data.area.value;
+    delete data.measure;
   };
-
+  console.log(errors);
   const handleAddTime = () => {
     setCookingTime(prevTime => prevTime + 10);
   };
@@ -100,15 +141,16 @@ console.log(categories)
     setCountLength(value.length);
   };
 
-  const handleAddIngredients = () => {
+  const handleAddIngredients = async () => {
     const ingredient = getValues('ingredients');
-    const quantity = getValues('quantity');
-    if (ingredient && quantity) {
-      setIngredientsList(prev => [...prev, { ingredient, quantity }]);
-      setValue('quantity', '');
-      setValue('ingredients', '');
+    const measure = getValues('measure');
+    if (ingredient && measure) {
+      setIngredientsList(prev => [...prev, { id: ingredient.value, measure }]);
+      setValue('measure', '');
+      setValue('ingredients', null);
+      await trigger('ingredientsList');
     } else {
-      alert('Please select an ingredient and enter a quantity');
+      alert('Please select an ingredient and enter a measure');
     }
   };
 
@@ -130,8 +172,7 @@ console.log(categories)
               </svg>
               <input
                 className={css.inputFile}
-                {...register('photo', {
-                  required: 'photo is required',
+                {...register('thumb', {
                   onChange: handleFileChange,
                 })}
                 type="file"
@@ -144,8 +185,7 @@ console.log(categories)
               </svg>
               <input
                 className={css.inputFile}
-                {...register('photo', {
-                  required: 'photo is required',
+                {...register('thumb', {
                   onChange: handleFileChange,
                 })}
                 type="file"
@@ -172,9 +212,7 @@ console.log(categories)
                 placeholder="The name of the recipe"
                 className={css.inputName}
                 type="text"
-                {...register('name', {
-                  required: 'Name is required for recipe',
-                })}
+                {...register('title')}
               />
               {errors.name && (
                 <span className={css.errorMessage}>{errors.name.message}</span>
@@ -183,11 +221,6 @@ console.log(categories)
                 <input
                   className={css.inputDescription}
                   {...register('description', {
-                    required: 'Description is required',
-                    maxLength: {
-                      value: 200,
-                      message: 'Description should not exceed 200 characters',
-                    },
                     onChange: handleDescription,
                   })}
                   placeholder="Enter a description of the dish"
@@ -205,7 +238,6 @@ console.log(categories)
               <div className={css.boxSelectCat}>
                 <label className={css.titleDescription}>Category</label>
                 <Controller
-                  rules={{ required: 'Categoty is required' }}
                   name="category"
                   control={control}
                   render={({ field }) => (
@@ -248,10 +280,24 @@ console.log(categories)
                 </div>
               </div>
             </div>
+            <div className={css.boxArea}>
+              <label className={css.titleDescription}>Area</label>
+              <Controller
+                name="area"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    placeholder="Pick area"
+                    styles={customStyles}
+                    {...field}
+                    options={areas}
+                  />
+                )}
+              />
+            </div>
             <div className={css.boxIngredients}>
               <label className={css.titleDescription}>Ingredients</label>
               <Controller
-                rules={{ required: 'Ingredients and quantity is required' }}
                 name="ingredients"
                 control={control}
                 render={({ field }) => (
@@ -265,7 +311,7 @@ console.log(categories)
               />
               <input
                 className={css.inputQuantity}
-                {...register('quantity', { required: 'Quantity is required' })}
+                {...register('measure')}
                 type="text"
                 placeholder="Enter quantity"
               />
@@ -294,13 +340,7 @@ console.log(categories)
             <label className={css.titleDescription}>Recipe Preparation</label>
             <textarea
               className={css.inputPreparation}
-              {...register('preparation', {
-                required: 'Preparation is required',
-                maxLength: {
-                  value: 200,
-                  message: 'Preparation should not exceed 200 characters',
-                },
-              })}
+              {...register('instructions')}
               placeholder="Enter recipe"
             ></textarea>
             {errors.preparation && (

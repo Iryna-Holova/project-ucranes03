@@ -1,7 +1,7 @@
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import sprite from '../../../images/icons.svg';
 
-const UserCard = ({ tabType, user: { name, avatar_preview, recipes } }) => {
+const UserCard = ({ user: { name, avatar_preview, recipes } }) => {
   return (
     <li>
       <div>
@@ -9,26 +9,22 @@ const UserCard = ({ tabType, user: { name, avatar_preview, recipes } }) => {
         <div>
           <p>{name}</p>
           <p>Own recipes: {recipes.length}</p>
-          {tabType === 'followers' && (
-            <ButtonLink
-              type="button"
-              color="light"
-              size="small"
-              onClick={console.log}
-            >
-              Follow
-            </ButtonLink>
-          )}
-          {tabType === 'following' && (
-            <ButtonLink
-              type="button"
-              color="light"
-              size="small"
-              onClick={console.log}
-            >
-              Following
-            </ButtonLink>
-          )}
+          {/* <ButtonLink
+            type="button"
+            color="light"
+            size="small"
+            onClick={console.log('Follow')}
+          >
+            Follow
+          </ButtonLink> */}
+          <ButtonLink
+            type="button"
+            color="light"
+            size="small"
+            onClick={console.log}
+          >
+            Following
+          </ButtonLink>
         </div>
       </div>
       <ul>

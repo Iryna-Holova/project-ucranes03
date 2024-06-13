@@ -13,10 +13,11 @@ export const ingredientsSlice = createSlice({
     builder
       .addCase(fetchIngredients.pending, state => {
         state.isLoading = true;
+        state.error = null;
       })
-      .addCase(fetchIngredients.fulfilled, (state, action) => {
+      .addCase(fetchIngredients.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.ingredients = action.payload.data;
+        state.items = payload;
       })
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.isLoading = false;
@@ -25,5 +26,4 @@ export const ingredientsSlice = createSlice({
   },
 });
 
-export const { setFilter } = ingredientsSlice.actions;
 export const ingredientsReducer = ingredientsSlice.reducer;
