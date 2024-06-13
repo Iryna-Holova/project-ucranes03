@@ -2,7 +2,17 @@ import { api } from './api';
 
 export const getRecipe = id => api.get(`/api/recipes/details/${id}`);
 
-export const getRecipes = () => api.get('/api/recipes');
+export const getRecipes = ({
+  page,
+  limit,
+  category,
+  ingredient,
+  area,
+} = {}) => {
+  return api.get('/api/recipes', {
+    params: { page, limit, category, ingredient, area },
+  });
+};
 
 export const getPopularRecipes = () => api.get('/api/recipes/popular');
 

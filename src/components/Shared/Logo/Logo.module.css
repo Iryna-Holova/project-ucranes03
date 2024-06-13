@@ -1,0 +1,26 @@
+.logo {
+    color: inherit;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+}
+
+.logo_white {
+    color: white;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+}
+
+.logo_black {
+    color: black;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+}

@@ -1,0 +1,141 @@
+.userbar_wrap {
+    min-width: 148px;
+    height: 50px;
+    background-color: var(--color-main);
+    border-radius: 30px;
+    display: flex;
+    column-gap: 6px;
+    padding-right: 14px;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.userbar_avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    flex-shrink: 0;
+}
+
+.userbar_avatar_img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+}
+
+.userbar_dropdown_wrap {
+    display: flex;
+    column-gap: 4px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userbar_dropdown_name {
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+.userbar_chevron_down {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+    color: var(--color-white);
+}
+
+.userbar_chevron_down:hover, .userbar_chevron_up:hover {
+   color: var(--color-white-80);
+}
+
+.userbar_chevron_up {
+    color: var(--color-white);
+    transform: rotate(180deg);
+    transition: var(--transition);
+    height: 18px;
+}
+
+.userbar_icon_chevron {
+    color: inherit;
+    width: 18px;
+    height: 18px;
+}
+
+.userbar_dropdown_menu {
+    position: absolute;
+    right: 14px;
+    bottom: -86px;
+    border-radius: 15px;
+    width: 148px;
+    padding: 15px;
+    border: 1px solid var(--color-white-20);
+    transition: all var(--transition);
+    transform: scale(1);
+}
+
+.userbar_dropdown_menu_none {
+    transform: scale(0);
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    bottom: 10px;
+    right: 14px;
+    transition: all var(--transition);
+    
+}
+
+.userbar_dropdown_menu_list {
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: c;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+}
+
+.userbar_dropdown_menu_item {
+    color: inherit;
+}
+
+.userbar_logout_arrow {
+    height: 18px;
+}
+
+.color_black {
+    color: var(--color-main);
+    display: flex;
+    column-gap: 2px;
+    height: 18px;
+    text-transform: uppercase;
+}
+
+.color_white {
+    color: var(--color-white);
+    display: flex;
+    column-gap: 2px;
+    height: 18px;
+    text-transform: uppercase;
+}
+
+.userbar_logout_icon {
+    color: inherit;
+    width: 18px;
+    height: 18px;
+    display: flex;
+}
+
+.color_black:hover, .color_white:hover {
+    opacity: 60%;
+}

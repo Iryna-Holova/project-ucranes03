@@ -36,4 +36,8 @@
   .page.home {
     padding-top: 120px;
   }
+
+  .page.profile {
+    row-gap: 40px;
+  }
 }

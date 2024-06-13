@@ -16,6 +16,7 @@ const Image = ({
   alt,
   aspectRatio = '1',
   defaultImage = defaultImg,
+  className = '',
 }) => {
   const [isError, setIsError] = useState(false);
   const isRetina = useRetinaMediaQuery();
@@ -31,13 +32,7 @@ const Image = ({
   };
 
   if (isError || !publicId) {
-    return (
-      <img
-        src={defaultImage}
-        alt={alt}
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-      />
-    );
+    return <img src={defaultImage} alt={alt} className={className} />;
   }
 
   return (
@@ -50,6 +45,7 @@ const Image = ({
       ]}
       alt={alt}
       onError={handleError}
+      className={className}
     />
   );
 };

@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
+import { getFavoriteRecipes } from 'services/recipes';
 import ListItems from 'components/UserTabs/ListItems/ListItems';
 import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
-import { useEffect, useState } from 'react';
-import { getFavoriteRecipes } from '../../services/recipes';
+import Empty from 'components/Shared/Empty/Empty';
 
 const Favorites = () => {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -9,7 +10,7 @@ const Favorites = () => {
   const fetchRecipes = async () => {
     try {
       const { data } = await getFavoriteRecipes();
-      setFavoriteRecipes(data);
+      setFavoriteRecipes(data.results);
     } catch (error) {
       throw Error(error.message);
     }
@@ -22,8 +23,23 @@ const Favorites = () => {
   return (
     <div>
       <h3 className="visually-hidden">Favorite recipes</h3>
-      <ListItems />
-      <RecipePreview recipes={favoriteRecipes} update={fetchRecipes} />
+      {favoriteRecipes.length === 0 ? (
+        <Empty>
+          Nothing has been added to your favorite recipes list yet. Please
+          browse our recipes and add your favorites for easy access in the
+          future.
+        </Empty>
+      ) : (
+        <ListItems>
+          {favoriteRecipes.map(recipe => (
+            <RecipePreview
+              key={recipe._id}
+              recipe={recipe}
+              update={fetchRecipes}
+            />
+          ))}
+        </ListItems>
+      )}
     </div>
   );
 };

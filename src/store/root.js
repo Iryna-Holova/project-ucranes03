@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer } from './userSlice/slice';
+import { userReducer } from './authSlice/slice';
 import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
@@ -25,7 +25,7 @@ const persistedReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
-    user: persistedReducer,
+    auth: persistedReducer,
     areas: areasReducer,
     categories: categoriesReducer,
     ingredients: ingredientsReducer,

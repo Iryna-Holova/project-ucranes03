@@ -7,20 +7,24 @@ import {
 } from './thunks';
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: 'auth',
   initialState: {
     user: null,
-    token: null,
+    isLoggedIn: false,
     isLoading: false,
+    isRefreshing: false,
+    token: null,
     error: null,
   },
   reducers: {
-    setUser(state, action) {
-      state.user = action.payload;
+    addFollowing(state, action) {
+      state.user.following.push(action.payload);
     },
-    logout(state) {
-      state.user = null;
-      state.token = null;
+    removeFollowing(state, action) {
+      state.user.setFollowing = state.user.following.splice(
+        state.user.following.indexOf(action.payload),
+        1
+      );
     },
   },
   extraReducers: builder => {
@@ -30,6 +34,7 @@ export const userSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isLoggedIn = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
@@ -38,22 +43,22 @@ export const userSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(fetchCurrentUser.pending, state => {
-        state.isLoading = true;
+        state.isRefreshing = true;
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        state.isLoading = false;
-        // state.user = action.payload.user;
-        // state.token = action.payload.token;
+        state.isRefreshing = false;
+        state.isLoggedIn = true;
+        state.user = action.payload;
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error.message;
+        state.isRefreshing = false;
       })
       .addCase(loginUser.pending, state => {
         state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isLoggedIn = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
@@ -66,6 +71,7 @@ export const userSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, state => {
         state.isLoading = false;
+        state.isLoggedIn = false;
         state.user = null;
         state.token = null;
       })
@@ -77,5 +83,4 @@ export const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const { setUser, logout, setSubscriptions, setFavorites } =
-  userSlice.actions;
+export const { addFollowing, removeFollowing } = userSlice.actions;

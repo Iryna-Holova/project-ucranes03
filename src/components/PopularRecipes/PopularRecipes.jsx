@@ -1,7 +1,7 @@
+import { useEffect, useState } from 'react';
+import { getPopularRecipes } from 'services/recipes';
 import RecipeList from 'components/RecipeList/RecipeList';
 import css from './PopularRecipes.module.css';
-import { useEffect, useState } from 'react';
-import { getPopularRecipes } from '../../services/recipes';
 
 const PopularRecipes = () => {
   const [popularRecipes, setPopularRecipes] = useState([]);
@@ -22,7 +22,7 @@ const PopularRecipes = () => {
   return (
     <section className="section">
       <h2 className={css.title}>Popular recipes</h2>
-      <RecipeList recipes={popularRecipes} update={fetchRecipes} />
+      <RecipeList recipes={popularRecipes} />
     </section>
   );
 };

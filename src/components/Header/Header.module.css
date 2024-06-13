@@ -1,0 +1,25 @@
+.header_section {
+  margin-top: 40px;
+  z-index: 2;
+}
+
+.header {
+  color: var(--color-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_white {
+  color: var(--color-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_black {
+  color: var(--color-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
