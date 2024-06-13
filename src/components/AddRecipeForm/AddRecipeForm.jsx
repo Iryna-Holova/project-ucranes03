@@ -163,15 +163,15 @@ const AddRecipeForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={css.boxForm}>
-        <div className={css.boxFile}>
+      <div className={css.box_form}>
+        <div className={css.box_file}>
           {previewImage ? (
             <label style={{ display: 'none' }}>
-              <svg className={css.iconCamera}>
+              <svg className={css.icon_camera}>
                 <use href={`${icons}#icon-camera`}></use>
               </svg>
               <input
-                className={css.inputFile}
+                className={css.input_file}
                 {...register('thumb', {
                   onChange: handleFileChange,
                 })}
@@ -180,11 +180,11 @@ const AddRecipeForm = () => {
             </label>
           ) : (
             <label>
-              <svg className={css.iconCamera}>
+              <svg className={css.icon_camera}>
                 <use href={`${icons}#icon-camera`}></use>
               </svg>
               <input
-                className={css.inputFile}
+                className={css.input_file}
                 {...register('thumb', {
                   onChange: handleFileChange,
                 })}
@@ -195,7 +195,7 @@ const AddRecipeForm = () => {
 
           {previewImage && (
             <img
-              className={css.photoFile}
+              className={css.photo_file}
               src={previewImage}
               alt="Preview"
               width="100"
@@ -203,23 +203,23 @@ const AddRecipeForm = () => {
           )}
         </div>
         {errors.photo && (
-          <span className={css.errorMessage}>{errors.photo.message}</span>
+          <span className={css.error_message}>{errors.photo.message}</span>
         )}
         <div>
-          <div className={css.boxNameCateIngr}>
-            <div className={css.boxInputName}>
+          <div className={css.box_name_cate_ingr}>
+            <div className={css.box_input_name}>
               <input
                 placeholder="The name of the recipe"
-                className={css.inputName}
+                className={css.input_name}
                 type="text"
                 {...register('title')}
               />
               {errors.name && (
-                <span className={css.errorMessage}>{errors.name.message}</span>
+                <span className={css.error_message}>{errors.name.message}</span>
               )}
-              <div className={css.boxDescription}>
+              <div className={css.box_description}>
                 <input
-                  className={css.inputDescription}
+                  className={css.input_description}
                   {...register('description', {
                     onChange: handleDescription,
                   })}
@@ -227,16 +227,16 @@ const AddRecipeForm = () => {
                   type="text"
                 />
                 {errors.description && (
-                  <span className={css.errorMessage}>
+                  <span className={css.error_message}>
                     {errors.description.message}
                   </span>
                 )}
-                <span className={css.textLength}>{`${countLength}/200`}</span>
+                <span className={css.text_length}>{`${countLength}/200`}</span>
               </div>
             </div>
-            <div className={css.boxTimeCategories}>
-              <div className={css.boxSelectCat}>
-                <label className={css.titleDescription}>Category</label>
+            <div className={css.box_time_categories}>
+              <div className={css.box_select_cat}>
+                <label className={css.title_description}>Category</label>
                 <Controller
                   name="category"
                   control={control}
@@ -250,38 +250,38 @@ const AddRecipeForm = () => {
                   )}
                 />
                 {errors.category && (
-                  <span className={css.errorMessage}>
+                  <span className={css.error_message}>
                     {errors.category.message}
                   </span>
                 )}
               </div>
               <div>
-                <label className={css.titleDescription}>COOKING TIME</label>
-                <div className={css.boxTimeBtn}>
+                <label className={css.title_description}>COOKING TIME</label>
+                <div className={css.box_time_btn}>
                   <button
-                    className={css.BtnTime}
+                    className={css.btn_time}
                     onClick={handleMinusTime}
                     type="button"
                   >
-                    <svg className={css.iconTime}>
+                    <svg className={css.icon_time}>
                       <use href={`${icons}#icon-minus`}></use>
                     </svg>
                   </button>
-                  <span className={css.counterTime}>{cookingTime} min</span>
+                  <span className={css.counter_time}>{cookingTime} min</span>
                   <button
-                    className={css.BtnTime}
+                    className={css.btn_time}
                     onClick={handleAddTime}
                     type="button"
                   >
-                    <svg className={css.iconTime}>
+                    <svg className={css.icon_time}>
                       <use href={`${icons}#icon-plus`}></use>
                     </svg>
                   </button>
                 </div>
               </div>
             </div>
-            <div className={css.boxArea}>
-              <label className={css.titleDescription}>Area</label>
+            <div className={css.box_area}>
+              <label className={css.title_description}>Area</label>
               <Controller
                 name="area"
                 control={control}
@@ -295,8 +295,8 @@ const AddRecipeForm = () => {
                 )}
               />
             </div>
-            <div className={css.boxIngredients}>
-              <label className={css.titleDescription}>Ingredients</label>
+            <div className={css.box_ingredients}>
+              <label className={css.title_description}>Ingredients</label>
               <Controller
                 name="ingredients"
                 control={control}
@@ -310,13 +310,13 @@ const AddRecipeForm = () => {
                 )}
               />
               <input
-                className={css.inputQuantity}
+                className={css.input_quantity}
                 {...register('measure')}
                 type="text"
                 placeholder="Enter quantity"
               />
               {errors.ingredients && errors.quantity && (
-                <span className={css.errorMessage}>
+                <span className={css.error_message}>
                   {errors.ingredients.message}
                 </span>
               )}
@@ -333,25 +333,25 @@ const AddRecipeForm = () => {
               <use href={`${icons}#icon-plus`} />
             </svg>
           </ButtonLink>
-          <ul className={css.listIngredients}>
+          <ul className={css.list_ingredients}>
             <li></li>
           </ul>
           <div>
-            <label className={css.titleDescription}>Recipe Preparation</label>
+            <label className={css.title_description}>Recipe Preparation</label>
             <textarea
-              className={css.inputPreparation}
+              className={css.input_preparation}
               {...register('instructions')}
               placeholder="Enter recipe"
             ></textarea>
             {errors.preparation && (
-              <span className={css.errorMessage}>
+              <span className={css.error_message}>
                 {errors.preparation.message}
               </span>
             )}
           </div>
-          <div className={css.boxBtnDelPub}>
-            <button onClick={handleDelete} className={css.deleteBtn}>
-              <svg className={css.btnDelete}>
+          <div className={css.box_btn_del_pub}>
+            <button onClick={handleDelete} className={css.delete_btn}>
+              <svg className={css.btn_delete}>
                 <use href={`${icons}#icon-trash`}></use>
               </svg>
             </button>
