@@ -6,7 +6,7 @@ import { useMobileMediaQuery } from 'hooks/device-type';
 import { getRecipes } from 'services/recipes';
 import MainTitle from 'components/Shared/MainTitle/MainTitle';
 import Subtitle from 'components/Shared/Subtitle/Subtitle';
-import RecipeFilters from 'components/RecipeFilters/RecipeFilters';
+import RecipeFilters from './RecipeFilters/RecipeFilters';
 import RecipeList from 'components/RecipeList/RecipeList';
 import Pagination from 'components/Shared/Pagination/Pagination';
 import icons from 'images/icons.svg';

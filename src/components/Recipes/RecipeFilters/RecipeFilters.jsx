@@ -1,21 +1,18 @@
 import SelectFilter from "components/Shared/SelectFilter/SelectFilter";
-import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { areasData } from "temp/areas";
-import { ingredientsData } from "temp/ingredients";
+import { selectIngredientsOptions } from "store/ingredientsSlice/selectors";
+import { selectAreasOptions } from "store/areasSlice/selectors";
 
 const RecipeFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const areas = areasData.map(area => ({ value: area._id, label: area.name }));
-  const ingredients = ingredientsData.map(ingredient => ({ value: ingredient._id, label: ingredient.name }));
-
-  const [ingredSelectionOption, setIngredSelectionOption] = useState(searchParams.get("ingredient"));
-  const [areasSelectionOption, setAreasSelectionOption] = useState(searchParams.get("area"));
+  const ingredientsOptions = useSelector(selectIngredientsOptions);
+  const areasOptions = useSelector(selectAreasOptions);
 
   const handleChange = (option, { name }) => {
     setSearchParams(prevParams => {
       const newParams = new URLSearchParams(prevParams);
+      newParams.set("page", 1);
       if (option) {
         newParams.set(name, option.value);
       } else {
@@ -23,28 +20,30 @@ const RecipeFilters = () => {
       }
       return newParams;
     });
-
-    if (name === "ingredient") {
-      setIngredSelectionOption(option);
-    } else if (name === "area") {
-      setAreasSelectionOption(option);
-    }
   };
+
+  const getOptionFromValue = (options, value) => {
+    return options.find(option => option.value === value) || null;
+  };
+
+  const selectedIngredient = getOptionFromValue(ingredientsOptions, searchParams.get("ingredient"));
+  const selectedArea = getOptionFromValue(areasOptions, searchParams.get("area"));
+
   return (
     <div>
       <SelectFilter
         name="ingredient"
-        options={ingredients}
+        options={ingredientsOptions}
         onChange={handleChange}
-        value={ingredSelectionOption}
-        placeholder="ingredients"
+        value={selectedIngredient}
+        placeholder="Ingredients"
       />
       <SelectFilter
         name="area"
-        options={areas}
+        options={areasOptions}
         onChange={handleChange}
-        value={areasSelectionOption}
-        placeholder="areas"
+        value={selectedArea}
+        placeholder="Areas"
       />
     </div>
   );
