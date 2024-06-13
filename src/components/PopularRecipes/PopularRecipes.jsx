@@ -1,7 +1,7 @@
+import { useEffect, useState } from 'react';
+import { getPopularRecipes } from 'services/recipes';
 import RecipeList from 'components/RecipeList/RecipeList';
 import css from './PopularRecipes.module.css';
-import { useEffect, useState } from 'react';
-import { getPopularRecipes } from '../../services/recipes';
 
 const PopularRecipes = () => {
   const [popularRecipes, setPopularRecipes] = useState([]);
