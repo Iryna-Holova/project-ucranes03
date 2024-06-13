@@ -6,8 +6,12 @@ const Pagination = ({ totalPages }) => {
   const currentPage = parseInt(searchParams.get('page')) || 1;
 
   const changePage = page => {
-    setSearchParams({ page });
-  };
+    setSearchParams(prevParams => {
+      const newParams = new URLSearchParams(prevParams);
+      newParams.set("page", page);
+      return newParams;
+    })
+  }
 
   const getPageNumbers = () => {
     if (totalPages <= 3) {
