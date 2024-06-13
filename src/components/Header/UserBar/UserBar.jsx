@@ -46,9 +46,7 @@ const UserBar = () => {
               ? css.userbar_dropdown_menu
               : css.userbar_dropdown_menu_none
           }
-          // style={{ color: 'red' }}
           style={isBlackTheme ? { borderColor: `rgba(5, 5, 5, 0.2)`} : { borderColor: `rgba(255, 255, 255, 0.20)`} }
-          // {isBlackTheme ? 'style={{borderColor: `#050505 }}' : ''}
         >
           <ul className={css.userbar_dropdown_menu_list}>
             <li className={isBlackTheme ? css.color_black : css.color_white}>

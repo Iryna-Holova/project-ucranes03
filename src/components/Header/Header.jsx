@@ -7,7 +7,7 @@ import UserBar from "./UserBar/UserBar";
 import css from "./Header.module.css";
 
 const Header = () => {
-  const [isUser, setIsUser] = useState(false);
+  const [isUser, setIsUser] = useState(true);
 
   const isBlackTheme = useLocation().pathname !== "/";
 
@@ -16,7 +16,7 @@ const Header = () => {
       <div className="container">
         <div className={isBlackTheme ? css.header_black : css.header_white}>
           <Logo />
-          {!isUser ? (
+          {isUser ? (
             <>
               <Nav />
               <UserBar />
