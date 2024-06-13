@@ -18,13 +18,13 @@
 .name_style {
   color: var(--color-main, #050505);
   line-height: 1.42;
-  letter-spacing: -0.28px;
+  letter-spacing: -0.02em;
 }
 
 .measure_style {
   color: var(--color-main-60, rgba(5, 5, 5, 0.6));
   line-height: 1.42;
-  letter-spacing: -0.28px;
+  letter-spacing: -0.02em;
 }
 
 .btn {
