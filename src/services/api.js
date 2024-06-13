@@ -16,37 +16,21 @@ export const clearToken = () => {
 };
 
 export const register = async data => {
-  try {
     const response = await api.post('/api/users/register', data);
     return response.data;
-  } catch (error) {
-    return error;
-  }
 };
 
 export const login = async data => {
-  try {
     const response = await api.post('/api/users/login', data);
     return response.data;
-  } catch (error) {
-    return error;
-  }
 };
 
 export const getCurrent = async () => {
-  try {
     const response = await api.get('/api/users/current');
     return response.data;
-  } catch (error) {
-    return error;
-  }
 };
 
 export const logout = async () => {
-  try {
     const response = await api.post('/api/users/logout');
     return response.data;
-  } catch (error) {
-    return error;
-  }
 };

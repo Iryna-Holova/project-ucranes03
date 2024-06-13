@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import SharedLayout from './SharedLayout';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,15 +24,17 @@ const App = () => {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
 
-  if (token) {
-    dispatch(fetchCurrentUser())
-  }
-  
-  dispatch(fetchIngredients());
-  dispatch(fetchAreas());
-  dispatch(fetchCategories());
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchCurrentUser())
+    }
+
+    dispatch(fetchIngredients());
+    dispatch(fetchAreas());
+    dispatch(fetchCategories());
 
 
+  })
 
   return (
     <Routes>
