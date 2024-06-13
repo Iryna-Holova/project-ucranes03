@@ -1,0 +1,35 @@
+.authbar_wrap {
+    width: 208px;
+    height: 46px;
+    background-color: var(--color-white);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-gray);
+}
+
+.authbar_btn {
+    width: 104px;  
+    height: 46px;
+    color: var(--color-main);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    background-color: transparent;
+    transition: var(--transition);
+}
+
+.activeBtn {
+    color: var(--color-white);
+    background-color: var(--color-main-90);
+    border: 1px solid var(--color-gray);
+    transition: var(--transition);
+}
