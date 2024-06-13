@@ -1,0 +1,18 @@
+.ingredient_container {
+  display: flex;
+}
+
+.img_wrapper {
+  max-width: 75px;
+  max-height: 75px;
+  padding: 10px;
+
+  border-radius: 15px;
+  border: 1px solid var(--color-main-10, rgba(5, 5, 5, 0.1));
+}
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1440px) {
+}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'https://goit-node-final-be.onrender.com/',
+  baseURL: 'https://goit-node-final-be.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },

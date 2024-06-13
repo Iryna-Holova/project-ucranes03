@@ -1,10 +1,19 @@
+import Ingredient from 'components/Shared/Ingredient/Ingredients';
+import css from './RecipeIngredients.module.css';
+
 const RecipeIngredients = ({ ingredients = [] }) => {
   return (
     <div>
-      <h3>ingredients</h3>
+      <h3 className={css.title}>ingredients</h3>
       <ul>
-        {ingredients.map(item => (
-          <li key={item.id}>{item.name}</li>
+        {ingredients.map(({ id: { name, _id, img }, measure }) => (
+          <Ingredient
+            key={_id}
+            img={img}
+            name={name}
+            measure={measure}
+            // callback={() => {}}
+          />
         ))}
       </ul>
     </div>

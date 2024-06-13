@@ -9,6 +9,7 @@ const RecipeInfo = ({ recipe }) => {
     category,
     time,
     description,
+    owner,
     ingredients,
     instructions,
   } = recipe;
@@ -18,9 +19,10 @@ const RecipeInfo = ({ recipe }) => {
       <RecipeMainInfo
         thumb={thumb}
         title={title}
-        category={category}
+        category={category.name}
         time={time}
         description={description}
+        owner={owner}
       />
       <RecipeIngredients ingredients={ingredients} />
       <RecipePreparation

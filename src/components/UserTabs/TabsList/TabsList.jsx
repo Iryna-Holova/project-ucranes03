@@ -16,7 +16,7 @@ const TabsList = () => {
   const [activeTabX, setActiveTabX] = useState(0);
   const tabsWrapperRef = useRef(null);
   const activeTabRef = useRef(null);
-
+  console.log('render');
   const updateActiveTabPosition = () => {
     const tabElement = activeTabRef.current;
     const tabRect = tabElement.getBoundingClientRect();
