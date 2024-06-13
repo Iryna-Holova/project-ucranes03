@@ -1,0 +1,137 @@
+.hero {
+  position: relative;
+  z-index: 1;
+  background-color: var(--color-black);
+  margin: -54px -16px 0 -16px;
+  padding: 194px 16px 0 16px;
+  height: 796px;
+  border-radius: 20px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.title {
+  margin-bottom: 20px;
+  color: var(--color-white, #fff);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
+  width: 326px;
+  max-width: 100%;
+  color: var(--color-white-80);
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+}
+
+.hero button {
+  margin: 0 auto;
+}
+
+.stroke {
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  opacity: 0.2;
+  background: linear-gradient(
+    to bottom,
+    rgb(255, 255, 255) 0%,
+    rgba(255, 255, 255, 0.18) 100%
+  );
+  animation: fadeDown 3s ease-in-out;
+}
+
+@keyframes fadeDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.stroke:nth-child(1),
+.stroke:nth-child(2) {
+  left: 16px;
+}
+
+.stroke:nth-child(3),
+.stroke:nth-child(4) {
+  right: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .hero {
+    margin: -70px -32px 0 -32px;
+    padding: 217px 32px 0 32px;
+    height: 992px;
+    border-radius: 30px;
+  }
+
+  .title {
+    margin-bottom: 40px;
+    font-size: 70px;
+  }
+
+  .subtitle {
+    margin-bottom: 40px;
+    width: 577px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .stroke:nth-child(1) {
+    left: 32px;
+  }
+
+  .stroke:nth-child(2) {
+    left: 229px;
+  }
+
+  .stroke:nth-child(3) {
+    right: 32px;
+  }
+
+  .stroke:nth-child(4) {
+    right: 240px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .hero {
+    margin: -70px -60px 0 -60px;
+    padding: 154px 60px 0 60px;
+    height: 970px;
+  }
+
+  .title {
+    margin: 0 auto 40px;
+    width: 875px;
+    font-size: 90px;
+  }
+
+  .stroke:nth-child(1) {
+    left: 60px;
+  }
+
+  .stroke:nth-child(2) {
+    left: 257px;
+  }
+
+  .stroke:nth-child(3) {
+    right: 60px;
+  }
+
+  .stroke:nth-child(4) {
+    right: 268px;
+  }
+}
