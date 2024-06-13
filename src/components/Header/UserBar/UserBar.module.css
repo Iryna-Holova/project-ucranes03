@@ -20,6 +20,10 @@
 }
 
 .userbar_avatar_img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
     overflow: hidden;
     border-radius: 50%;
     border: none;
@@ -73,7 +77,7 @@
     border-radius: 15px;
     width: 148px;
     padding: 15px;
-    border: 1px solid var(--color-main-20);
+    border: 1px solid var(--color-white-20);
     transition: all var(--transition);
     transform: scale(1);
 }

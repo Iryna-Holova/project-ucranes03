@@ -1,10 +1,10 @@
-import css from "./UserBar.module.css";
-import Modal from "../../Modal/Modal";
-import LogOutModal from "../../LogOutModal/LogOutModal";
-import icons from "../../../images/icons.svg";
-import UserAvatar from "../../../images/user_avatar.jpg";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import Modal from "../../Modal/Modal";
+import LogOutModal from "../../LogOutModal/LogOutModal";
+import UserAvatar from "../../../images/placeholder-avatar.svg";
+import icons from "../../../images/icons.svg";
+import css from "./UserBar.module.css";
 
 const UserBar = () => {
   const [isUserMenu, setIsUserMenu] = useState(false);
@@ -24,48 +24,54 @@ const UserBar = () => {
           />
         </div>
         <div className={css.userbar_dropdown_wrap}>
-          <p className={css.userbar_dropdown_name}>VICTORIAwdfwf3tw3efefeffgefc</p>
+          <p className={css.userbar_dropdown_name}>VICTORIA</p>
           <button
-            className={isOpenMenu ? css.userbar_chevron_up : css.userbar_chevron_down}
+            className={
+              isOpenMenu ? css.userbar_chevron_up : css.userbar_chevron_down
+            }
             onClick={() => {
-              setIsUserMenu((prev) => !prev)
-              setIsOpenMenu((prev) => !prev)
+              setIsUserMenu((prev) => !prev);
+              setIsOpenMenu((prev) => !prev);
             }}
           >
             <svg className={css.userbar_icon_chevron}>
-              <use
-                href={`${icons}#icon-chevron-down`}
-              />
+              <use href={`${icons}#icon-chevron-down`} />
             </svg>
           </button>
         </div>
 
-          <div className={isUserMenu ? css.userbar_dropdown_menu : css.userbar_dropdown_menu_none}>
-            <ul className={css.userbar_dropdown_menu_list}>
-              <li className={isBlackTheme ? css.color_black : css.color_white}>
-                <Link to="user/current" onClick={() => setIsUserMenu(false)}>
-                  profile
-                </Link>
-              </li>
-              <li className={css.userbar_dropdown_menu_item}>
-                <button
-                  className={isBlackTheme ? css.color_black : css.color_white}
-                  onClick={() => {
-                    setShowLogOutModal(true);
-                    setIsUserMenu(false);
-                  }}
-                >
-                 log out
-                  <svg
-                    className={css.userbar_logout_icon}
-                  >
-                    <use href={`${icons}#icon-arrow-up-right`} />
-                  </svg>
-                </button>
-              </li>
-            </ul>
-          </div>
-        
+        <div
+          className={
+            isUserMenu
+              ? css.userbar_dropdown_menu
+              : css.userbar_dropdown_menu_none
+          }
+          // style={{ color: 'red' }}
+          style={isBlackTheme ? { borderColor: `rgba(5, 5, 5, 0.2)`} : { borderColor: `rgba(255, 255, 255, 0.20)`} }
+          // {isBlackTheme ? 'style={{borderColor: `#050505 }}' : ''}
+        >
+          <ul className={css.userbar_dropdown_menu_list}>
+            <li className={isBlackTheme ? css.color_black : css.color_white}>
+              <Link to="user/current" onClick={() => setIsUserMenu(false)}>
+                profile
+              </Link>
+            </li>
+            <li className={css.userbar_dropdown_menu_item}>
+              <button
+                className={isBlackTheme ? css.color_black : css.color_white}
+                onClick={() => {
+                  setShowLogOutModal(true);
+                  setIsUserMenu(false);
+                }}
+              >
+                log out
+                <svg className={css.userbar_logout_icon}>
+                  <use href={`${icons}#icon-arrow-up-right`} />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
       {showLogOutModal && (
         <Modal onClose={() => setShowLogOutModal(false)}>
