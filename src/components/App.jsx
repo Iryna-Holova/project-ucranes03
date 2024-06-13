@@ -1,13 +1,11 @@
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import SharedLayout from './SharedLayout';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUser } from 'store/userSlice/thunks';
-import { selectToken } from 'store/userSlice/selectors';
-import { fetchIngredients } from "store/ingredientsSlice/thunks";
-import { fetchAreas } from "store/areasSlice/thunks";
+import { useDispatch } from 'react-redux';
+import { fetchCurrentUser } from 'store/authSlice/thunks';
+import { fetchIngredients } from 'store/ingredientsSlice/thunks';
+import { fetchAreas } from 'store/areasSlice/thunks';
 import { fetchCategories } from 'store/categoriesSlice/thunks';
-
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Categories = lazy(() => import('./Categories/Categories'));
@@ -22,17 +20,12 @@ const Following = lazy(() => import('./UserTabs/Following'));
 
 const App = () => {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
-
-  if (token) {
-    dispatch(fetchCurrentUser())
-  }
-  
-  dispatch(fetchIngredients());
-  dispatch(fetchAreas());
-  dispatch(fetchCategories());
-
-
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+    dispatch(fetchIngredients());
+    dispatch(fetchAreas());
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   return (
     <Routes>
