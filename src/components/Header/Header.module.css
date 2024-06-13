@@ -1,9 +1,9 @@
 .header_section {
-    margin-top: 40px;
-    /* position: absolute;
-    top: 40px;
+    position: absolute;
+    top: 36px;
     left: 50%;
-    transform: translateX(-50%); */
+    transform: translateX(-50%);
+    z-index: 999;
 }
 
 .header {
