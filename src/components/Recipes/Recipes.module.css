@@ -1,0 +1,30 @@
+.header {
+  position: relative;
+}
+
+.back_link {
+  position: absolute;
+  top: -32px;
+  display: flex;
+  column-gap: 4px;
+  color: var(--color-main);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 768px) {
+  .back_link {
+    top: -38px;
+    column-gap: 6px;
+    font-size: 14px;
+    line-height: 1.29;
+  }
+
+  .back_link svg {
+    width: 18px;
+    height: 18px;
+  }
+}
