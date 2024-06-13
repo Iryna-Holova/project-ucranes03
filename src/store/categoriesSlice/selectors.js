@@ -7,3 +7,7 @@ export const selectCategoriesOptions = createSelector(
   selectCategories,
   categories => categories.map(({ _id, name }) => ({ value: _id, label: name }))
 );
+export const selectActiveCategory = createSelector(
+  [selectCategories, (_, itemId) => itemId],
+  (items, itemId) => items?.find(({ _id }) => _id === itemId)
+);
