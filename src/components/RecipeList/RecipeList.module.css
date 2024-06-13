@@ -11,9 +11,3 @@
         column-gap: 20px;
     }
 }
-
-@media screen and (min-width:1440px) {
-    .all_recipes {
-        width: 910px;
-    }
-}

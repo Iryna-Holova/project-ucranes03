@@ -1,7 +1,7 @@
+import { useEffect, useState } from 'react';
+import { getFavoriteRecipes } from 'services/recipes';
 import ListItems from 'components/UserTabs/ListItems/ListItems';
 import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
-import { useEffect, useState } from 'react';
-import { getFavoriteRecipes } from '../../services/recipes';
 
 const Favorites = () => {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -9,7 +9,7 @@ const Favorites = () => {
   const fetchRecipes = async () => {
     try {
       const { data } = await getFavoriteRecipes();
-      setFavoriteRecipes(data);
+      setFavoriteRecipes(data.results);
     } catch (error) {
       throw Error(error.message);
     }

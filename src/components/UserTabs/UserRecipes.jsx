@@ -1,7 +1,7 @@
+import { useEffect, useState } from 'react';
+import { getOwnRecipes } from 'services/recipes';
 import ListItems from 'components/UserTabs/ListItems/ListItems';
 import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
-import { useEffect, useState } from 'react';
-import { getOwnRecipes } from '../../services/recipes';
 
 const UserRecipes = () => {
   const [recipes, setRecipes] = useState([]);

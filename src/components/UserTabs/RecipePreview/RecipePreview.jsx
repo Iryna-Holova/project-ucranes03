@@ -1,8 +1,8 @@
-import css from './RecipePreview.module.css';
-import icons from '../../../images/icons.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { removeFavorite, removeOwnRecipe } from '../../../services/recipes';
-import Image from '../../../components/Shared/Image/Image';
+import { removeFavorite, removeOwnRecipe } from 'services/recipes';
+import Image from 'components/Shared/Image/Image';
+import icons from 'images/icons.svg';
+import css from './RecipePreview.module.css';
 
 const RecipePreview = ({ recipes, update }) => {
   const navigate = useNavigate();
