@@ -15,12 +15,13 @@
   transition: border-color var(--transition), color var(--transition);
 }
 
-.page:disabled {
+.page.active {
   cursor: auto;
+  pointer-events: none;
 }
 
 .page:hover,
-.page:disabled {
+.page.active {
   border-color: var(--color-main);
   color: var(--color-main-87);
 }

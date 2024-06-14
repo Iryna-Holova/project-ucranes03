@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useSearchParams } from 'react-router-dom';
 import { selectActiveCategory } from 'store/categoriesSlice/selectors';
@@ -16,6 +16,7 @@ const Recipes = () => {
   const [params] = useSearchParams();
   const [recipes, setRecipes] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
+  const topElementRef = useRef(null);
   const isMobile = useMobileMediaQuery();
   const category = useSelector(state =>
     selectActiveCategory(state, params.get('category'))
@@ -48,7 +49,7 @@ const Recipes = () => {
   return (
     <section className="section">
       <div className={css.header}>
-        <Link to="/" className={css.back_link}>
+        <Link to="/" className={css.back_link} ref={topElementRef}>
           <svg width={16} height={16}>
             <use href={`${icons}#icon-arrow-left`} />
           </svg>
@@ -64,7 +65,12 @@ const Recipes = () => {
         <RecipeFilters />
         <div>
           <RecipeList recipes={recipes} />
-          {totalPages > 1 && <Pagination totalPages={totalPages} />}
+          {totalPages > 1 && (
+            <Pagination
+              totalPages={totalPages}
+              topElementRef={topElementRef.current}
+            />
+          )}
         </div>
       </div>
     </section>
