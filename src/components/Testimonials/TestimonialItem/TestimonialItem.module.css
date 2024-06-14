@@ -1,0 +1,30 @@
+.testimonial_item {
+    padding-top: 64px;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    width: 40px;
+    height: 32px;
+    fill: rgba(233, 233, 233, 1);
+    top: 0;
+    left: 8px;
+}
+
+.testimonial {
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.testimonial_author {
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 24px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: var(--color-main);
+    text-transform: uppercase;
+}
