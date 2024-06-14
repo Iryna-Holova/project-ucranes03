@@ -1,4 +1,5 @@
 import MainTitle from 'components/Shared/MainTitle/MainTitle';
+import {Swiper, SwiperSlide} from 'swiper/react';
 
 const Testimonials = () => {
   return (
