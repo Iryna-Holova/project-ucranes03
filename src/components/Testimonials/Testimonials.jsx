@@ -12,19 +12,22 @@ const Testimonials = () => {
   const testimonials = useSelector(selectTestimonials);
   const paginationConfig = {
     clickable: true,
-    renderBullet: function (index, className) {
+    renderBullet: function (_, className) {
       return '<span class="' + className + '"></span>';
     },
   };
-  console.log(testimonials);
   return (
     <section>
       <p className={css.info_title}>What our customer say</p>
       <MainTitle><span className={css.title}>Testimonials</span></MainTitle>
-      <Swiper pagination={paginationConfig} modules={[Pagination]} className="mySwiper">
+      <Swiper
+        pagination={paginationConfig}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
         {testimonials.map((it) => (
           <SwiperSlide key={it._id}>
-            <TestimonialItem author={it.owner.name} testimonial={it.testimonial}/>
+            <TestimonialItem author={it.owner.name} testimonial={it.testimonial} />
           </SwiperSlide>
         ))}
       </Swiper>
