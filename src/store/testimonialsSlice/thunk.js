@@ -6,7 +6,7 @@ export const fetchTestimonials = createAsyncThunk(
   'ingredients/fetchTestimonials',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await getTestimonials();
+      const data = await getTestimonials();
       return data;
     } catch (error) {
       return rejectWithValue(error);
