@@ -36,4 +36,15 @@
     flex-shrink: 0;
     width: 394px;
   }
+
+  .section_row > img:first-child {
+    flex-shrink: 0;
+    width: 551px;
+    border-radius: 30px;
+    align-self: flex-start;
+  }
+
+  .section_row > div:last-child {
+    flex-grow: 1;
+  }
 }

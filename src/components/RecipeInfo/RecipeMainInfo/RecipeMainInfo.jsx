@@ -1,3 +1,9 @@
+import {
+  useDesktopMediaQuery,
+  useMobileMediaQuery,
+  useTabletMediaQuery,
+} from 'hooks/device-type';
+
 import Image from 'components/Shared/Image/Image';
 import css from './RecipeMainInfo.module.css';
 import defaultAvatar from 'images/placeholder-avatar.svg';
@@ -10,14 +16,19 @@ const RecipeMainInfo = ({
   description,
   owner,
 }) => {
+  const isDesktop = useDesktopMediaQuery();
+  const isMobile = useMobileMediaQuery();
+  const isTablet = useTabletMediaQuery();
   return (
     <>
-      <Image
-        publicId={thumb}
-        alt={title}
-        aspectRatio="1.078"
-        className={css.img_container}
-      />
+      {!isDesktop && (
+        <Image
+          publicId={thumb}
+          alt={title}
+          aspectRatio={isMobile ? 1.078 : isTablet ? 1.76 : 1}
+          className={css.img_container}
+        />
+      )}
 
       <div className={css.container_info}>
         <h2 className={css.title}>{title}</h2>

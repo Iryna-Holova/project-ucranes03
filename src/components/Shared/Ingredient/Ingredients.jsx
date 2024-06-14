@@ -1,3 +1,4 @@
+import icons from '../../../images/icons.svg';
 import css from './Ingredients.module.css';
 
 const Ingredient = ({ img, name, measure, callback = null }) => {
@@ -9,7 +10,13 @@ const Ingredient = ({ img, name, measure, callback = null }) => {
         <p className={css.measure_style}>{measure}</p>
       </div>
 
-      {callback && <button className={css.btn}>X</button>}
+      {callback && (
+        <button className={css.btn} onClick={callback}>
+          <svg height={16} width={16}>
+            <use href={`${icons}#icon-close`}></use>
+          </svg>
+        </button>
+      )}
     </li>
   );
 };
