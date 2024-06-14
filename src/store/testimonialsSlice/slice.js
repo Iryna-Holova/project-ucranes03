@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTestimonials } from './thunks';
+import { fetchTestimonials } from './thunk';
 
 export const testimonialsSlice = createSlice({
   name: 'testimonials',

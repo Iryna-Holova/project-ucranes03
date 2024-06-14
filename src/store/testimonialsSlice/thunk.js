@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getIngredients } from 'services/testimonials';
+import { getTestimonials } from 'services/testimonials';
 
-export const fetchIngredients = createAsyncThunk(
-  'ingredients/fetchIngredients',
+export const fetchTestimonials = createAsyncThunk(
+  'ingredients/fetchTestimonials',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await getIngredients();
+      const { data } = await getTestimonials();
       return data;
     } catch (error) {
       return rejectWithValue(error);

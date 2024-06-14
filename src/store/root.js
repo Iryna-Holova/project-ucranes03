@@ -14,6 +14,7 @@ import {
 import { areasReducer } from './areasSlice/slice';
 import { categoriesReducer } from './categoriesSlice/slice';
 import { ingredientsReducer } from './ingredientsSlice/slice';
+import { testimonialsReducer } from './testimonialsSlice/slice';
 
 const persistConfig = {
   key: 'root',
@@ -29,6 +30,7 @@ export const store = configureStore({
     areas: areasReducer,
     categories: categoriesReducer,
     ingredients: ingredientsReducer,
+    testimonials: testimonialsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

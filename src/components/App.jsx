@@ -6,6 +6,7 @@ import { fetchCurrentUser } from 'store/authSlice/thunks';
 import { fetchIngredients } from 'store/ingredientsSlice/thunks';
 import { fetchAreas } from 'store/areasSlice/thunks';
 import { fetchCategories } from 'store/categoriesSlice/thunks';
+import { fetchTestimonials } from 'store/testimonialsSlice/thunk';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Categories = lazy(() => import('./Categories/Categories'));
@@ -25,6 +26,7 @@ const App = () => {
     dispatch(fetchIngredients());
     dispatch(fetchAreas());
     dispatch(fetchCategories());
+    dispatch(fetchTestimonials());
   }, [dispatch]);
 
   return (
