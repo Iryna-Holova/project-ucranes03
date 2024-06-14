@@ -1,8 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from 'react-redux';
+import { selectUser } from 'store/authSlice/selectors';
+import Image from "components/Shared/Image/Image";
 import Modal from "components/Modal/Modal";
 import LogOutModal from "components/LogOutModal/LogOutModal";
-import UserAvatar from "images/placeholder-avatar.svg";
+import defaultAvatar from "images/placeholder-avatar.svg";
 import icons from "images/icons.svg";
 import css from "./UserBar.module.css";
 
@@ -11,6 +14,8 @@ const UserBar = () => {
   const [isBurgerMenu, setIsBurgerMenu] = useState(true);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [showLogOutModal, setShowLogOutModal] = useState(false);
+  const user = useSelector(selectUser);
+  console.log(user);
 
   const pagesArray = ["/", `/recipes`];
   const location = useLocation().pathname;
@@ -26,14 +31,15 @@ const UserBar = () => {
         }
       >
         <div className={css.userbar_avatar}>
-          <img
-            className={css.userbar_avatar_img}
-            src={UserAvatar}
-            alt="User avatar"
-          />
+          <Image
+                publicId={user.avatar}
+                className={css.userbar_avatar_img}
+                defaultImage={defaultAvatar}
+                alt={user.name}
+              />
         </div>
         <div className={css.userbar_dropdown_wrap}>
-          <p className={css.userbar_dropdown_name}>VICTORIA</p>
+          <p className={css.userbar_dropdown_name}>{user.name}</p>
           <button
             className={
               isOpenMenu ? css.userbar_chevron_up : css.userbar_chevron_down
