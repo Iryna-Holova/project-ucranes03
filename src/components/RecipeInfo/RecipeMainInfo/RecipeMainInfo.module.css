@@ -47,9 +47,10 @@
 }
 
 .btn_wrapper {
-  display: flex;
+  display: inline-flex;
   column-gap: 16px;
   align-items: center;
+  width: 138px;
 }
 
 .creator {

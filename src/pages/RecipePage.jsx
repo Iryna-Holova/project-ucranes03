@@ -21,7 +21,9 @@ const RecipePage = () => {
         const { data } = await getRecipe(id);
 
         setRecipe(data);
-      } catch (error) {}
+      } catch (error) {
+        throw Error(error.message);
+      }
     };
 
     fetchRecipe();
