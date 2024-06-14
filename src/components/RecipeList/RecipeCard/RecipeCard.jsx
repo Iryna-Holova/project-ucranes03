@@ -17,7 +17,8 @@ const RecipeCard = ({ recipe }) => {
   const isTablet = useTabletMediaQuery();
   const { _id, title, owner, description, thumb, favorite } = recipe;
 
-  const { onToggleMode, isSignUp } = useAuthModal();
+  const { onAuthOpen, onAuthClose, onToggleMode, isAuthOpen, isSignUp } =
+    useAuthModal();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,7 +28,6 @@ const RecipeCard = ({ recipe }) => {
   const [isFavorite, setIsFavorite] = useState(
     user ? favorite.includes(user.id) : false
   );
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
 
   const cardStyles = location.pathname.includes('recipes')
     ? `${css.recipe_card} ${css.all_recipes}`
@@ -41,30 +41,26 @@ const RecipeCard = ({ recipe }) => {
     if (user) {
       navigate(`/user/${owner._id}/recipes`);
     } else {
-      setIsAuthOpen(true);
+      onAuthOpen(true);
     }
   };
 
   const handleHeartIconClick = async () => {
     if (!user) {
-      setIsAuthOpen(true);
+      onAuthOpen(true);
       return;
     }
     try {
       if (isFavorite) {
-        setIsFavorite(false);
         await removeFavorite(_id);
+        setIsFavorite(false);
       } else {
-        setIsFavorite(true);
         await addFavorite(_id);
+        setIsFavorite(true);
       }
     } catch (error) {
       throw Error(error.message);
     }
-  };
-
-  const onAuthClose = () => {
-    setIsAuthOpen(false);
   };
 
   return (
