@@ -11,3 +11,22 @@ export const scrollToElement = element => {
     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 };
+
+export const scrollToElementHorizontally = (container, element) => {
+  if (!container || !element) return;
+
+  const containerRect = container.getBoundingClientRect();
+  const elementRect = element.getBoundingClientRect();
+  const containerScrollLeft = container.scrollLeft;
+
+  const scrollLeft =
+    containerScrollLeft +
+    (elementRect.left - containerRect.left) -
+    containerRect.width / 2 +
+    elementRect.width / 2;
+
+  container.scrollTo({
+    left: scrollLeft,
+    behavior: 'smooth',
+  });
+};
