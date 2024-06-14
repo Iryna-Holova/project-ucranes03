@@ -129,7 +129,11 @@
   .arrow_icon {
     width: 42px;
     height: 42px;
+  }
+
+  .arrow_icon {
     transition: background-color var(--transition), color var(--transition);
+
   }
 
   .icon {
