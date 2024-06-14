@@ -11,11 +11,10 @@ import css from "./UserBar.module.css";
 
 const UserBar = () => {
   const [isUserMenu, setIsUserMenu] = useState(false);
-  const [isBurgerMenu, setIsBurgerMenu] = useState(true);
+  const [isBurgerMenu, setIsBurgerMenu] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [showLogOutModal, setShowLogOutModal] = useState(false);
   const user = useSelector(selectUser);
-  console.log(user);
 
   const pagesArray = ["/", `/recipes`];
   const location = useLocation().pathname;
@@ -96,48 +95,13 @@ const UserBar = () => {
         }
         onClick={() => setIsBurgerMenu((prev) => !prev)}
       >
-        <span
-          style={
-            isBlackTheme
-              ? { backgroundColor: `#050505` }
-              : { backgroundColor: `#ffffff` }
-          }
-        ></span>
-        <span
-          style={
-            isBlackTheme
-              ? { backgroundColor: `#050505` }
-              : { backgroundColor: `#ffffff` }
-          }
-        ></span>
-        <span
-          style={
-            isBlackTheme
-              ? { backgroundColor: `#050505` }
-              : { backgroundColor: `#ffffff` }
-          }
-        ></span>
-        <span
-          style={
-            isBlackTheme
-              ? { backgroundColor: `#050505` }
-              : { backgroundColor: `#ffffff` }
-          }
-        ></span>
-        <span
-          style={
-            isBlackTheme
-              ? { backgroundColor: `#050505` }
-              : { backgroundColor: `#ffffff` }
-          }
-        ></span>
-        <span
-          style={
-            isBlackTheme
-              ? { backgroundColor: `#050505` }
-              : { backgroundColor: `#ffffff` }
-          }
-        ></span>
+         {[...Array(6)].map((_, index) => (
+        <span key={index} style={
+          isBlackTheme
+            ? { backgroundColor: `#050505` }
+            : { backgroundColor: `#ffffff` }
+        }></span>
+      ))}
       </button>
       {showLogOutModal && (
         <Modal onClose={() => setShowLogOutModal(false)}>
