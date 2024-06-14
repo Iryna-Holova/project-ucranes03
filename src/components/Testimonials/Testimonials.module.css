@@ -3,13 +3,11 @@
 }
 
 :global(.swiper-pagination) {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     gap: 8px;
     z-index: 11;
+    width: max-content;
+    margin: 0 auto;
 }
 
 :global(.swiper-pagination-bullet) {
@@ -34,4 +32,15 @@
     display: block;
     margin: 0 auto;
     width: max-content;
+}
+
+@media screen and (min-width: 768px) {
+    :global(.swiper-pagination) {
+        gap: 12px;
+    }
+
+    :global(.swiper-pagination-bullet) {
+        width: 16px;
+        height: 16px;
+    }
 }
