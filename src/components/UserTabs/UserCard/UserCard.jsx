@@ -37,7 +37,7 @@ const UserCard = ({ user: { name, avatar_preview, recipes } }) => {
       </div>
       <ul className={css.recipes_pictures_list}>
         {recipes.map(recipe => (
-          <li key={recipe.id}>
+          <li className={css.recipes_pictures_item} key={recipe.id}>
             <img src={recipe.preview} alt="recipe" />
           </li>
         ))}

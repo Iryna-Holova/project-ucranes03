@@ -1,9 +1,25 @@
 .follow_list_item {
+  position: relative;
   width: 100%;
-  /* height: 90px; */
   display: flex;
   justify-content: space-between;
 }
+
+.follow_list_item:not(:last-child) {
+  padding-bottom: 8px;
+}
+
+.follow_list_item:not(:last-child)::after {
+  content: '';
+  display: block;
+  width: 100%;
+  position: absolute;
+  height: 1px;
+  background-color: var(--color-main-10);
+  bottom: -12px;
+  left: 0;
+}
+
 
 .recipes_pictures_list {
   display: none;
@@ -21,13 +37,16 @@
   transition: border-color var(--transition);
 }
 
+.user_link_arrow:hover {
+  border-color: var(--color-main);
+}
+
 .user_info_container {
   display: flex;
 }
 
 .user_avatar {
   border-radius: 100px;
-  padding: 23px 14px;
   width: 60px;
   height: 60px;
   background: var(--color-avatar);
@@ -59,11 +78,96 @@
   color: var(--color-black);
 }
 
-.user_recepies {  
+.user_recepies {
   margin-bottom: 8px;
-    font-weight: 500;
+  font-weight: 500;
   font-size: 12px;
   line-height: 1.5;
   letter-spacing: -0.02em;
   color: var(--color-main-60);
+}
+
+
+@media screen and (min-width: 768px) {
+
+
+  .follow_list_item:not(:last-child)::after {
+    bottom: 0;
+  }
+
+  .follow_list_item:not(:last-child) {
+    padding-bottom: 40px;
+  }
+
+  .recipes_pictures_list {
+    display: flex;
+    width: 324px;
+    gap: 12px;
+  }
+
+  .recipes_pictures_item {
+    width: calc((100% - 24px) /3);
+    height: 100px;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .user_avatar {
+    width: 85px;
+    height: 85px;
+  }
+
+  .user_link_arrow {
+    width: 42px;
+    height: 42px;
+  }
+
+  .user_name {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .user_recepies {
+    font-size: 14px;
+    line-height: 1.43;
+  }
+
+  .selected_user {
+    width: 16px;
+    height: 16px;
+  }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .recipes_pictures_item:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+
+@media screen and (min-width: 1440px) {
+
+  .follow_list_item {
+    /* outer container ins not correct */
+    /* width: 846px; */
+    width: 100%;
+  }
+
+
+  .recipes_pictures_list {
+    width: 436px;
+
+  }
+
+  .recipes_pictures_item {
+    width: calc((100% - 36px) /4);
+    height: 100px;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .recipes_pictures_item:nth-child(n + 5) {
+    display: none;
+  }
 }
