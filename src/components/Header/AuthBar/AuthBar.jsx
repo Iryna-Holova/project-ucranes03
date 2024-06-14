@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import { useAuthModal } from "hooks/use-auth-modal";
 import Modal from "components/Modal/Modal";
 import AuthModal from "components/AuthModal/AuthModal";
@@ -13,10 +12,6 @@ const AuthBar = () => {
     isAuthOpen,
     isSignUp,
   } = useAuthModal();
-
-  const pagesArray = ["/", `/recipes`];
-  const location = useLocation().pathname;
-  const isBlackTheme = !pagesArray.some((page) => page === location);
 
   return (
     <div className={css.authbar_wrap}>
