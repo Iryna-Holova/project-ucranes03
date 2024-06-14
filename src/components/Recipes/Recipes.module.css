@@ -49,4 +49,8 @@
     width: 330px;
     flex-shrink: 0;
   }
+
+  .content > div:last-child {
+    flex-grow: 1;
+  }
 }

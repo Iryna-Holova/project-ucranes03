@@ -92,11 +92,20 @@
   .arrow_icon {
     width: 42px;
     height: 42px;
+    transition: background-color var(--transition), color var(--transition);
   }
 
   .icon {
     width: 18px;
     height: 18px;
+  }
+
+  .arrow_icon:hover,
+  .trash_icon:hover,
+  .arrow_icon:focus,
+  .trash_icon:focus {
+    background-color: var(--color-main);
+    color: var(--color-secondary);
   }
 }
 

@@ -1,22 +1,30 @@
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { getRecipe } from 'services/recipes';
+
 import PathInfo from 'components/Shared/PathInfo/PathInfo';
 import PopularRecipes from 'components/PopularRecipes/PopularRecipes';
 import RecipeInfo from 'components/RecipeInfo/RecipeInfo';
 import PageContainer from 'components/Shared/PageContainer/PageContainer';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { recipes } from 'temp/foodies';
 
 const RecipePage = () => {
   const { id } = useParams();
-  const [recipe, setRecipe] = useState([]);
+  const [recipe, setRecipe] = useState(null);
+  // console.log(id);
+  // console.log(recipe);
 
   useEffect(() => {
-    const getRecipe = () => {
-      const data = recipes.find(item => item._id === id);
-      setRecipe(data);
+    const fetchRecipe = async () => {
+      try {
+        const { data } = await getRecipe(id);
+        setRecipe(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
-    getRecipe();
+    fetchRecipe();
   }, [id]);
 
   return (

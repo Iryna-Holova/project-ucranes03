@@ -36,5 +36,9 @@
     flex-shrink: 0;
     width: 394px;
   }
+
+  .section_row > div:last-child {
+    flex-grow: 1;
+  }
 }
 
