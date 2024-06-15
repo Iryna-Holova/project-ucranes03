@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EMAIL_REGEXP, MIN_PASSWORD } from 'constants/validation';
 import { loginUser } from 'store/authSlice/thunks';
-import { selectIsLoading } from 'store/authSlice/selectors';
+import { selectIsLoading, selectIsLoggedIn } from 'store/authSlice/selectors';
+import { useAuthModalContext } from 'components/AuthModalContext';
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import icons from '../../images/icons.svg';
 import css from './AuthModal.module.css';
@@ -23,7 +25,9 @@ const schema = yup
   })
   .required();
 
-const SignInForm = ({ onToggleMode }) => {
+const SignInForm = () => {
+  const { path, onToggleMode, onAuthClose } = useAuthModalContext();
+
   const {
     register,
     handleSubmit,
@@ -36,8 +40,16 @@ const SignInForm = ({ onToggleMode }) => {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const isLoading = useSelector(selectIsLoading);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      onAuthClose();
+      path && navigate(path);
+    }
+  }, [isLoggedIn, navigate, onAuthClose, path]);
 
   const onSubmit = data => {
     dispatch(loginUser(data));
