@@ -3,13 +3,18 @@ import { useSelector } from 'react-redux';
 import { selectTestimonials } from 'store/testimonialsSlice/selectors';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+import { selectAreTestimonialsLoading, selectTestimonialsError } from 'store/testimonialsSlice/selectors';
 
 import css from './Testimonials.module.css';
 import 'swiper/css';
 import TestimonialItem from './TestimonialItem/TestimonialItem';
+import Loader from 'components/Shared/Loader/Loader';
 
 const Testimonials = () => {
   const testimonials = useSelector(selectTestimonials);
+  const isLoading = useSelector(selectAreTestimonialsLoading);
+  const error = useSelector(selectTestimonialsError);
+
   const paginationConfig = {
     clickable: true,
     renderBullet: function (_, className) {
@@ -20,7 +25,7 @@ const Testimonials = () => {
     <section>
       <p className={css.info_title}>What our customer say</p>
       <MainTitle><span className={css.title}>Testimonials</span></MainTitle>
-      <Swiper
+      {isLoading? <Loader/> : <Swiper
         pagination={paginationConfig}
         modules={[Pagination]}
         className="mySwiper"
@@ -30,7 +35,7 @@ const Testimonials = () => {
             <TestimonialItem author={it.owner.name} testimonial={it.testimonial} />
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper>}
     </section>
   );
 };
