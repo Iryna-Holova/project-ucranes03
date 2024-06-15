@@ -1,65 +1,65 @@
 .header_nav {
-   display: none;
-   pointer-events: none;
+	display: none;
+	pointer-events: none;
 }
 
 @media screen and (min-width: 768px) {
-    .header_nav {
-        display: block;
-        pointer-events: auto;
-        position: absolute;
-        top: 16px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .header_navlist {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        column-gap: 2px;
-        color: inherit;
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 1.5;
-        letter-spacing: -0.02em;
-        text-transform: uppercase;
-    }
-    
-    .header_navlink {
-        padding: 14px;
-    }
-    
-    .header_navlink:hover {
-        border: 1px solid var(--color-main-20);
-        border-radius: 30px;
-        padding-left: 13px;
-        padding-right: 13px;
-    }
-    
-    .active_link {
-        width: 100%;
-        height: 100%; 
-        padding: 14px;
-        border: 1px solid var(--color-main-20);
-        border-radius: 30px;
-    }
-    
-    .active_link:hover {
-        cursor: default;
-    }
-    
-    .color_black {
-        color: var(--color-main);
-    }
-    
-    .color_white {
-        color: var(--color-white);
-    }
+	.header_nav {
+		display: block;
+		pointer-events: auto;
+		position: absolute;
+		top: 16px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.header_navlist {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		column-gap: 2px;
+		color: inherit;
+		font-size: 12px;
+		font-weight: 700;
+		line-height: 1.5;
+		letter-spacing: -0.02em;
+		text-transform: uppercase;
+	}
+
+	.header_navlink {
+		padding: 14px;
+	}
+
+	.header_navlink:hover {
+		border: 1px solid var(--color-main-20);
+		border-radius: 30px;
+		padding-left: 13px;
+		padding-right: 13px;
+	}
+
+	.active_link {
+		width: 100%;
+		height: 100%;
+		padding: 14px;
+		border: 1px solid var(--color-main-20);
+		border-radius: 30px;
+	}
+
+	.active_link:hover {
+		cursor: default;
+	}
+
+	.color_black {
+		color: var(--color-main);
+	}
+
+	.color_white {
+		color: var(--color-white);
+	}
 }
 
 @media screen and (min-width: 1440px) {
-    .header_navlist {
-        column-gap: 26px;
-    }
+	.header_navlist {
+		column-gap: 26px;
+	}
 }

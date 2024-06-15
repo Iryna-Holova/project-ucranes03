@@ -1,48 +1,48 @@
 .authbar_wrap {
-    width: 156px;
-    height: 38px;
-    background-color: var(--color-white);
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1.5;
-    letter-spacing: -0.02em;
-    border: 1px solid var(--color-gray);
+	width: 156px;
+	height: 38px;
+	background-color: var(--color-white);
+	border-radius: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.5;
+	letter-spacing: -0.02em;
+	border: 1px solid var(--color-gray);
 }
 
 .authbar_btn {
-    width: 78px;  
-    height: 38px;
-    color: var(--color-main);
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid transparent;
-    background-color: transparent;
-    transition: var(--transition);
-    text-transform: uppercase;
+	width: 78px;
+	height: 38px;
+	color: var(--color-main);
+	border-radius: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid transparent;
+	background-color: transparent;
+	transition: var(--transition);
+	text-transform: uppercase;
 }
 
 .activeBtn {
-    color: var(--color-white);
-    background-color: var(--color-main-90);
-    border: 1px solid var(--color-gray);
-    transition: var(--transition);
+	color: var(--color-white);
+	background-color: var(--color-main-90);
+	border: 1px solid var(--color-gray);
+	transition: var(--transition);
 }
 
 @media screen and (min-width: 768px) {
-    .authbar_wrap {
-        width: 208px;
-        height: 46px;
-    }
-    
-    .authbar_btn {
-        width: 104px;  
-        height: 46px;
-    }
+	.authbar_wrap {
+		width: 208px;
+		height: 46px;
+	}
+
+	.authbar_btn {
+		width: 104px;
+		height: 46px;
+	}
 
 }
