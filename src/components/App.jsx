@@ -1,12 +1,13 @@
 import { lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUser } from 'store/authSlice/thunks';
 import { fetchIngredients } from 'store/ingredientsSlice/thunks';
 import { fetchAreas } from 'store/areasSlice/thunks';
 import { fetchCategories } from 'store/categoriesSlice/thunks';
 import { fetchTestimonials } from 'store/testimonialsSlice/thunk';
 import { AuthModalProvider } from 'components/AuthModalContext';
+import { selectIsRefreshing } from 'store/authSlice/selectors';
 import SharedLayout from './SharedLayout';
 import PrivateRoute from './PrivateRoute';
 
@@ -22,6 +23,7 @@ const Followers = lazy(() => import('./UserTabs/Followers'));
 const Following = lazy(() => import('./UserTabs/Following'));
 
 const App = () => {
+  const isRefreshing = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -30,8 +32,10 @@ const App = () => {
     dispatch(fetchCategories());
     dispatch(fetchTestimonials());
   }, [dispatch]);
-
-  return (
+  console.log(isRefreshing);
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <AuthModalProvider>
       <Routes>
         <Route path="/" element={<SharedLayout />}>

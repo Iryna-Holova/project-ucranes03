@@ -16,7 +16,6 @@ export const fetchCurrentUser = createAsyncThunk(
       const user = await getCurrent();
       return user;
     } catch (error) {
-      showError(error);
       return rejectWithValue(error.message);
     }
   }
