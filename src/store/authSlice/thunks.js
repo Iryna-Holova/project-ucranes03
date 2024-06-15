@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getCurrent, register, login, logout } from 'services/api';
+import { getCurrent, register, login, logout } from 'services/user';
 import { setToken, clearToken } from 'services/api';
 
 export const fetchCurrentUser = createAsyncThunk(
