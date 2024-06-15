@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from 'react-redux';
 import { selectUser } from 'store/authSlice/selectors';
+import MobileMenu from "../MobileMenu/MobileMenu";
 import Image from "components/Shared/Image/Image";
 import Modal from "components/Modal/Modal";
 import LogOutModal from "components/LogOutModal/LogOutModal";
@@ -20,6 +21,8 @@ const UserBar = () => {
   const location = useLocation().pathname;
   const isBlackTheme = !pagesArray.some((page) => page === location);
 
+  const onCloseBurgerMenu = () => setIsBurgerMenu(false)
+  
   return (
     <div className={css.userbar_mobile_menu}>
       <div
@@ -93,7 +96,7 @@ const UserBar = () => {
         className={
           isBurgerMenu ? `${css.burger_icon} ${css.open}` : `${css.burger_icon}`
         }
-        onClick={() => setIsBurgerMenu((prev) => !prev)}
+        onClick={() => setIsBurgerMenu(true)}
       >
          {[...Array(6)].map((_, index) => (
         <span key={index} style={
@@ -103,6 +106,7 @@ const UserBar = () => {
         }></span>
       ))}
       </button>
+      <MobileMenu onCloseBurgerMenu={onCloseBurgerMenu} isBurgerMenu={isBurgerMenu} />
       {showLogOutModal && (
         <Modal onClose={() => setShowLogOutModal(false)}>
           <LogOutModal onClose={() => setShowLogOutModal(false)} />
