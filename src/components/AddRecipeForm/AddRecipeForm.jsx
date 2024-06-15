@@ -6,10 +6,14 @@ import { useState } from 'react';
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
 import { selectCategoriesOptions } from 'store/categoriesSlice/selectors';
-import { selectIngredientsOptions } from 'store/ingredientsSlice/selectors';
+import { selectIngredients, selectIngredientsOptions } from 'store/ingredientsSlice/selectors';
 import { selectAreasOptions } from 'store/areasSlice/selectors';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Ingredient from 'components/Shared/Ingredient/Ingredients';
+import { addRecipe } from 'services/recipes';
+import { showError } from 'helpers/notification';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object().shape({
   thumb: yup
@@ -51,7 +55,7 @@ const schema = yup.object().shape({
   instructions: yup
     .string()
     .required('Instructions are required')
-    .max(200, 'Instructions should not exceed 200 characters'),
+    .max(2500, 'Instructions should not exceed 2500 characters'),
 });
 const customStyles = {
   control: provided => ({
@@ -89,12 +93,18 @@ const customStyles = {
 
 const AddRecipeForm = () => {
   const [previewImage, setPreviewImage] = useState(null);
-  const [cookingTime, setCookingTime] = useState(0);
+  const [time, setTime] = useState(0);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [countLength, setCountLength] = useState(0);
   const categories = useSelector(selectCategoriesOptions);
   const ingredients = useSelector(selectIngredientsOptions);
   const areas = useSelector(selectAreasOptions);
+  const ingredientAddList = useSelector(selectIngredients);
+  const [ingregientsForList, setIngregientsForList] = useState([]);
+const navigate = useNavigate();
+
+
+
 
   const {
     register,
@@ -109,24 +119,49 @@ const AddRecipeForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     if (ingredientsList.length === 0) {
       alert('Please add at least one ingredient');
       return;
     }
-    data.cookingTime = cookingTime;
+    data.time = time;
     data.ingredients = ingredientsList;
     data.category = data.category.value;
     data.area = data.area.value;
     delete data.measure;
-  };
-  console.log(errors);
-  const handleAddTime = () => {
-    setCookingTime(prevTime => prevTime + 10);
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+    formData.append('category', data.category);
+    formData.append('area', data.area);
+    formData.append('instructions', data.instructions);
+    formData.append('thumb', data.thumb[0]); 
+    formData.append('time', data.time);
+    ingredientsList.forEach((ingredient, index) => {
+      formData.append(`ingredients[${index}][id]`, ingredient.id);
+      formData.append(`ingredients[${index}][measure]`, ingredient.measure);
+    });
+    try {
+       await addRecipe(formData);
+       navigate("/user/current");
+     
+    } catch (error) {
+      showError(error);
+    }
   };
 
+  const handleAddTime = () => {
+    setTime(prevTime => prevTime + 10);
+  };
+
+const handleCloseIngredient = (_id) => {
+  setIngredientsList(prev => prev.filter(ingredient => ingredient.id !== _id));
+  setIngregientsForList(prev => prev.filter(ingredient => ingredient._id !== _id));
+}
+
+
   const handleMinusTime = () => {
-    setCookingTime(prevTime => (prevTime > 0 ? prevTime - 10 : 0));
+    setTime(prevTime => (prevTime > 0 ? prevTime - 10 : 0));
   };
 
   const handleFileChange = evt => {
@@ -146,18 +181,25 @@ const AddRecipeForm = () => {
     const measure = getValues('measure');
     if (ingredient && measure) {
       setIngredientsList(prev => [...prev, { id: ingredient.value, measure }]);
+      const result = ingredientAddList.find(ing => ing._id === ingredient.value);
+      if(result) {
+        const newIngredient = { ...result, measure: measure };
+        setIngregientsForList(prev => [...prev, newIngredient]);
+      }
       setValue('measure', '');
       setValue('ingredients', null);
-      await trigger('ingredientsList');
+      await trigger('ingredientsList')
     } else {
       alert('Please select an ingredient and enter a measure');
     }
   };
 
+
+
   const handleDelete = () => {
     reset();
     setPreviewImage(null);
-    setCookingTime(0);
+    setTime(0);
     setIngredientsList([]);
   };
 
@@ -218,7 +260,7 @@ const AddRecipeForm = () => {
                 <span className={css.error_message}>{errors.name.message}</span>
               )}
               <div className={css.box_description}>
-                <input
+                <input maxLength={200}
                   className={css.input_description}
                   {...register('description', {
                     onChange: handleDescription,
@@ -267,7 +309,7 @@ const AddRecipeForm = () => {
                       <use href={`${icons}#icon-minus`}></use>
                     </svg>
                   </button>
-                  <span className={css.counter_time}>{cookingTime} min</span>
+                  <span className={css.counter_time}>{time} min</span>
                   <button
                     className={css.btn_time}
                     onClick={handleAddTime}
@@ -297,7 +339,8 @@ const AddRecipeForm = () => {
             </div>
             <div className={css.box_ingredients}>
               <label className={css.title_description}>Ingredients</label>
-              <Controller
+              <div className={css.boxIngredQuan}> 
+                <div> <Controller
                 name="ingredients"
                 control={control}
                 render={({ field }) => (
@@ -308,13 +351,14 @@ const AddRecipeForm = () => {
                     options={ingredients}
                   />
                 )}
-              />
-              <input
+              /></div>
+               <div> <input
                 className={css.input_quantity}
                 {...register('measure')}
                 type="text"
                 placeholder="Enter quantity"
-              />
+              /></div>
+              </div>
               {errors.ingredients && errors.quantity && (
                 <span className={css.error_message}>
                   {errors.ingredients.message}
@@ -334,7 +378,7 @@ const AddRecipeForm = () => {
             </svg>
           </ButtonLink>
           <ul className={css.list_ingredients}>
-            <li></li>
+           {ingregientsForList.length > 0 && ingregientsForList.map(({img, name, measure, _id}) => <Ingredient _id={_id} callback={handleCloseIngredient} key={_id} img={img} name={name} measure={measure}/>)}
           </ul>
           <div>
             <label className={css.title_description}>Recipe Preparation</label>

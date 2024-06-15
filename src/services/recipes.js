@@ -26,3 +26,9 @@ export const addFavorite = id => api.patch(`/api/recipes/addFavorite/${id}`);
 
 export const removeFavorite = id =>
   api.patch(`/api/recipes/removeFavorite/${id}`);
+
+export const addRecipe = data => api.post('/api/recipes/own', data,  {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+}); 
