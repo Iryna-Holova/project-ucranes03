@@ -1,4 +1,37 @@
 .list_info{ }
 .list_info_item{
-  
+
+}
+.avatar{
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.fileInputWrapper {
+  display: grid;
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--color-main, #050505);;
+  place-content: center;
+}
+
+.input_file {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+
+.icon_plus {
+  color: var(--color-white);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
