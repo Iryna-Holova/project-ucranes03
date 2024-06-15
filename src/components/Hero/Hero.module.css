@@ -10,6 +10,46 @@
   overflow: hidden;
 }
 
+.hero::before {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  top: 588px;
+  left: 38px;
+  width: 77px;
+  height: 70px;
+  background-image: url('images/hero/mobile-small.webp');
+  background-size: contain;
+  transform: rotate(11deg);
+  animation: fadeLeft 3s ease-in-out;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  top: 512px;
+  right: 44px;
+  width: 190px;
+  height: 172px;
+  background-image: url('images/hero/mobile.webp');
+  background-size: contain;
+  transform: rotate(-12deg);
+  animation: fadeRight 3s ease-in-out;
+}
+
+@media only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-device-pixel-ratio: 2) {
+  .hero::before {
+    background-image: url('images/hero/mobile-small@2x.webp');
+  }
+  .hero::after {
+    background-image: url('images/hero/mobile@2x.webp');
+  }
+}
+
 .title {
   margin-bottom: 20px;
   color: var(--color-white, #fff);
@@ -50,22 +90,11 @@
   animation: fadeDown 3s ease-in-out;
 }
 
-@keyframes fadeDown {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.stroke:nth-child(1),
-.stroke:nth-child(2) {
+.stroke:nth-child(1) {
   left: 16px;
 }
 
-.stroke:nth-child(3),
-.stroke:nth-child(4) {
+.stroke:nth-child(2) {
   right: 16px;
 }
 
@@ -75,6 +104,34 @@
     padding: 217px 32px 0 32px;
     height: 992px;
     border-radius: 30px;
+  }
+
+  .hero::before {
+    top: 715px;
+    left: 140px;
+    width: 128px;
+    height: 116px;
+    background-image: url('images/hero/tablet-small.webp');
+  }
+
+  .hero::after {
+    top: 600px;
+    right: 150px;
+    width: 302px;
+    height: 273px;
+    background-image: url('images/hero/tablet.webp');
+  }
+
+  @media only screen and (min--moz-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-device-pixel-ratio: 2) {
+    .hero::before {
+      background-image: url('images/hero/tablet-small@2x.webp');
+    }
+    .hero::after {
+      background-image: url('images/hero/tablet@2x.webp');
+    }
   }
 
   .title {
@@ -113,6 +170,16 @@
     height: 970px;
   }
 
+  .hero::before {
+    top: 702px;
+    left: 455px;
+  }
+
+  .hero::after {
+    top: 587px;
+    right: 470px;
+  }
+
   .title {
     margin: 0 auto 40px;
     width: 875px;
@@ -133,5 +200,28 @@
 
   .stroke:nth-child(4) {
     right: 268px;
+  }
+}
+
+@keyframes fadeDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
   }
 }
