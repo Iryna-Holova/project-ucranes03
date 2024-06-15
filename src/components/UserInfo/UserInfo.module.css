@@ -1,37 +1,103 @@
-.list_info{ }
-.list_info_item{
+.user_info_container {
+  
+} 
 
-}
-.avatar{
+.avatar {
   width: 100px;
   aspect-ratio: 1;
   border-radius: 50%;
 }
 
-.fileInputWrapper {
-  display: grid;
+.image_input_wrapper {
   position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.fileInputWrapper {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: var(--color-main, #050505);;
-  place-content: center;
+  background-color: var(--color-main, #050505);
+  cursor: pointer;
 }
 
 .input_file {
   position: absolute;
   opacity: 0;
-  top: 0;
-  left: 0;
   width: 28px;
   height: 28px;
   cursor: pointer;
 }
 
-
 .icon_plus {
   color: var(--color-white);
-  width: 24px;
-  height: 24px;
+  width: 10px;
+  height: 10px;
   cursor: pointer;
+}
+.icon_plus:hover {
+  color: var(--c);
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
+.name_items_list_wrapper{
+  border: solid 1px var(--color-main-20);
+    border-radius: 30px;
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+    /* row-gap: 16px; */
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+
+}
+.name {
+  color: var(--color-main, #050505);
+  font-family: Mulish;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.36px;
+  text-transform: uppercase;
+}
+
+.list_items {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  
+}
+
+.list_item {
+  display: flex;
+  align-items: center;
+}
+
+.item_name {
+  color: var(--color-main-60, rgba(5, 5, 5, 0.60));
+  font-family: Mulish;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.24px;
+}
+
+.item_value {
+  color: var(--color-main-90, rgba(5, 5, 5, 0.90));
+  font-family: Mulish;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.28px;
 }
