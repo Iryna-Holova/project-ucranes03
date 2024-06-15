@@ -3,19 +3,23 @@ import { useState } from 'react';
 export const useAuthModal = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isSignUp, setIsSignUp] = useState(true);
+  const [path, setPath] = useState(null);
 
-  const onAuthOpen = () => {
+  const onAuthOpen = (redirect = null) => {
     setIsAuthOpen(true);
+    setPath(redirect);
   };
 
-  const onOpenSignIn = () => {
+  const onOpenSignIn = (redirect = null) => {
     setIsSignUp(false);
     setIsAuthOpen(true);
+    setPath(redirect);
   };
 
-  const onOpenSignUp = () => {
+  const onOpenSignUp = (redirect = null) => {
     setIsSignUp(true);
     setIsAuthOpen(true);
+    setPath(redirect);
   };
 
   const onAuthClose = () => {
@@ -34,5 +38,6 @@ export const useAuthModal = () => {
     onToggleMode,
     isAuthOpen,
     isSignUp,
+    path,
   };
 };

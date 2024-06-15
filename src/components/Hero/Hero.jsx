@@ -1,7 +1,23 @@
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectIsLoggedIn } from 'store/authSlice/selectors';
+import { useAuthModalContext } from 'components/AuthModalContext';
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import css from './Hero.module.css';
 
 const Hero = () => {
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const { onAuthOpen } = useAuthModalContext();
+
+  const handleAddRecipeBtn = () => {
+    if (!isLoggedIn) {
+      onAuthOpen('/recipe/add');
+    } else {
+      navigate('/recipe/add');
+    }
+  };
+
   return (
     <section className={css.hero}>
       <h1 className={css.title}>Improve Your Culinary Talents</h1>
@@ -13,7 +29,7 @@ const Hero = () => {
         type="button"
         color="white"
         size="normal"
-        onClick={console.log}
+        onClick={handleAddRecipeBtn}
       >
         Add recipe
       </ButtonLink>

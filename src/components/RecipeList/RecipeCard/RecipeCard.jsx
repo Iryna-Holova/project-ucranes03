@@ -3,22 +3,18 @@ import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { removeFavorite, addFavorite } from 'services/recipes';
 import { selectUser } from 'store/authSlice/selectors';
-import { useAuthModal } from 'hooks/use-auth-modal';
-import AuthModal from 'components/AuthModal/AuthModal';
+import { useAuthModalContext } from 'components/AuthModalContext';
+import { useMobileMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
 import Image from 'components/Shared/Image/Image';
-import Modal from 'components/Modal/Modal';
 import icons from 'images/icons.svg';
 import defaultAvatar from 'images/placeholder-avatar.svg';
 import css from './RecipeCard.module.css';
-import { useMobileMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
 
 const RecipeCard = ({ recipe }) => {
+  const { onAuthOpen } = useAuthModalContext();
   const isMobile = useMobileMediaQuery();
   const isTablet = useTabletMediaQuery();
   const { _id, title, owner, description, thumb, favorite } = recipe;
-
-  const { onAuthOpen, onAuthClose, onToggleMode, isAuthOpen, isSignUp } =
-    useAuthModal();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,13 +37,13 @@ const RecipeCard = ({ recipe }) => {
     if (user) {
       navigate(`/user/${owner._id}/recipes`);
     } else {
-      onAuthOpen(true);
+      onAuthOpen(`/user/${owner._id}/recipes`);
     }
   };
 
   const handleHeartIconClick = async () => {
     if (!user) {
-      onAuthOpen(true);
+      onAuthOpen();
       return;
     }
     try {
@@ -106,11 +102,6 @@ const RecipeCard = ({ recipe }) => {
           </div>
         </div>
       </li>
-      {isAuthOpen && (
-        <Modal onClose={onAuthClose}>
-          <AuthModal isSignUp={isSignUp} onToggleMode={onToggleMode} />
-        </Modal>
-      )}
     </>
   );
 };

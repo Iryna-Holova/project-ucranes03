@@ -1,12 +1,14 @@
 import { lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import SharedLayout from './SharedLayout';
 import { useDispatch } from 'react-redux';
 import { fetchCurrentUser } from 'store/authSlice/thunks';
 import { fetchIngredients } from 'store/ingredientsSlice/thunks';
 import { fetchAreas } from 'store/areasSlice/thunks';
 import { fetchCategories } from 'store/categoriesSlice/thunks';
 import { fetchTestimonials } from 'store/testimonialsSlice/thunk';
+import { AuthModalProvider } from 'components/AuthModalContext';
+import SharedLayout from './SharedLayout';
+import PrivateRoute from './PrivateRoute';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Categories = lazy(() => import('./Categories/Categories'));
@@ -30,24 +32,40 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <Routes>
-      <Route path="/" element={<SharedLayout />}>
-        <Route path="" element={<HomePage />}>
-          <Route index element={<Categories />} />
-          <Route path="recipes" element={<Recipes />} />
+    <AuthModalProvider>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route path="" element={<HomePage />}>
+            <Route index element={<Categories />} />
+            <Route path="recipes" element={<Recipes />} />
+          </Route>
+          <Route path="recipe/:id" element={<RecipePage />} />
+          <Route
+            path="recipe/add"
+            element={
+              <PrivateRoute>
+                <AddRecipePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="user/:id"
+            element={
+              <PrivateRoute>
+                <UserPage />
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<Navigate to="recipes" replace />} />
+            <Route path="recipes" element={<UserRecipes />} />
+            <Route path="favorites" element={<Favorites />} />
+            <Route path="followers" element={<Followers />} />
+            <Route path="following" element={<Following />} />
+          </Route>
         </Route>
-        <Route path="recipe/:id" element={<RecipePage />} />
-        <Route path="recipe/add" element={<AddRecipePage />} />
-        <Route path="user/:id" element={<UserPage />}>
-          <Route index element={<Navigate to="recipes" replace />} />
-          <Route path="recipes" element={<UserRecipes />} />
-          <Route path="favorites" element={<Favorites />} />
-          <Route path="followers" element={<Followers />} />
-          <Route path="following" element={<Following />} />
-        </Route>
-      </Route>
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </AuthModalProvider>
   );
 };
 
