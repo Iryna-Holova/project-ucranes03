@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/project-ucranes03/static/css/main.1ea37e37.css",
-    "main.js": "/project-ucranes03/static/js/main.4d0409bb.js",
-    "static/css/894.71d6038c.chunk.css": "/project-ucranes03/static/css/894.71d6038c.chunk.css",
-    "static/js/894.9b3bbb39.chunk.js": "/project-ucranes03/static/js/894.9b3bbb39.chunk.js",
+    "main.js": "/project-ucranes03/static/js/main.1480bac3.js",
+    "static/css/894.94067c10.chunk.css": "/project-ucranes03/static/css/894.94067c10.chunk.css",
+    "static/js/894.215812b9.chunk.js": "/project-ucranes03/static/js/894.215812b9.chunk.js",
     "static/css/821.591803b6.chunk.css": "/project-ucranes03/static/css/821.591803b6.chunk.css",
     "static/js/821.ec09386c.chunk.js": "/project-ucranes03/static/js/821.ec09386c.chunk.js",
     "static/css/688.5f7b9b63.chunk.css": "/project-ucranes03/static/css/688.5f7b9b63.chunk.css",
@@ -27,20 +27,28 @@
     "static/media/Mulish-Bold.ttf": "/project-ucranes03/static/media/Mulish-Bold.6cb68186a91bb3fcb0b7.ttf",
     "static/media/Mulish-Medium.ttf": "/project-ucranes03/static/media/Mulish-Medium.8bdb52a1df8fba9da3ef.ttf",
     "static/media/Mulish-ExtraBold.ttf": "/project-ucranes03/static/media/Mulish-ExtraBold.06b5157c67b69344b4be.ttf",
+    "static/media/tablet@2x.webp": "/project-ucranes03/static/media/tablet@2x.874203f758022b9c5c76.webp",
     "static/media/Mulish-ExtraBold.woff": "/project-ucranes03/static/media/Mulish-ExtraBold.98eff3b46c53cbf0ddac.woff",
     "static/media/Mulish-Medium.woff": "/project-ucranes03/static/media/Mulish-Medium.90b6c12144973d12d52b.woff",
     "static/media/Mulish-Bold.woff": "/project-ucranes03/static/media/Mulish-Bold.1c36dbec852a671590cc.woff",
+    "static/media/mobile@2x.webp": "/project-ucranes03/static/media/mobile@2x.6cc5670e1535194ab648.webp",
     "static/media/Mulish-ExtraBold.woff2": "/project-ucranes03/static/media/Mulish-ExtraBold.f00943087ecb22c2e820.woff2",
     "static/media/Mulish-Bold.woff2": "/project-ucranes03/static/media/Mulish-Bold.9bd640fe3cb3b7d73163.woff2",
     "static/media/Mulish-Medium.woff2": "/project-ucranes03/static/media/Mulish-Medium.8d81a3fc287214fb8f74.woff2",
+    "static/media/tablet.webp": "/project-ucranes03/static/media/tablet.c0fb7f6b49b1ca2c841e.webp",
     "static/media/icons.svg": "/project-ucranes03/static/media/icons.1b8c7fc1ec7996694335e309a6f00f6c.svg",
+    "static/media/tablet-small@2x.webp": "/project-ucranes03/static/media/tablet-small@2x.1802976e7903e58987e4.webp",
+    "static/media/mobile.webp": "/project-ucranes03/static/media/mobile.182ac3c1a36c5ff5f8f9.webp",
+    "static/media/mobile-small@2x.webp": "/project-ucranes03/static/media/mobile-small@2x.89a3fe59225e4445aa4c.webp",
+    "static/media/tablet-small.webp": "/project-ucranes03/static/media/tablet-small.8294ffda09343b91635e.webp",
+    "static/media/mobile-small.webp": "/project-ucranes03/static/media/mobile-small.97abd82c881e44a646f0.webp",
     "index.html": "/project-ucranes03/index.html",
     "static/media/placeholder-image.svg": "/project-ucranes03/static/media/placeholder-image.47615446a99f198bfa3c72de94c54a99.svg",
     "static/media/placeholder-avatar.svg": "/project-ucranes03/static/media/placeholder-avatar.a5762a0bde5ee77856c905f6adbb0195.svg",
     "main.1ea37e37.css.map": "/project-ucranes03/static/css/main.1ea37e37.css.map",
-    "main.4d0409bb.js.map": "/project-ucranes03/static/js/main.4d0409bb.js.map",
-    "894.71d6038c.chunk.css.map": "/project-ucranes03/static/css/894.71d6038c.chunk.css.map",
-    "894.9b3bbb39.chunk.js.map": "/project-ucranes03/static/js/894.9b3bbb39.chunk.js.map",
+    "main.1480bac3.js.map": "/project-ucranes03/static/js/main.1480bac3.js.map",
+    "894.94067c10.chunk.css.map": "/project-ucranes03/static/css/894.94067c10.chunk.css.map",
+    "894.215812b9.chunk.js.map": "/project-ucranes03/static/js/894.215812b9.chunk.js.map",
     "821.591803b6.chunk.css.map": "/project-ucranes03/static/css/821.591803b6.chunk.css.map",
     "821.ec09386c.chunk.js.map": "/project-ucranes03/static/js/821.ec09386c.chunk.js.map",
     "688.5f7b9b63.chunk.css.map": "/project-ucranes03/static/css/688.5f7b9b63.chunk.css.map",
@@ -64,6 +72,6 @@
   },
   "entrypoints": [
     "static/css/main.1ea37e37.css",
-    "static/js/main.4d0409bb.js"
+    "static/js/main.1480bac3.js"
   ]
 }
