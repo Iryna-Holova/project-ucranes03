@@ -2,11 +2,13 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectIsLoggedIn } from 'store/authSlice/selectors';
 import { useAuthModalContext } from 'components/AuthModalContext';
+import { useMobileMediaQuery } from 'hooks/device-type';
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import css from './Hero.module.css';
 
 const Hero = () => {
   const navigate = useNavigate();
+  const isMobile = useMobileMediaQuery();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const { onAuthOpen } = useAuthModalContext();
 
@@ -34,10 +36,9 @@ const Hero = () => {
         Add recipe
       </ButtonLink>
       <div>
-        <span className={css.stroke}></span>
-        <span className={css.stroke}></span>
-        <span className={css.stroke}></span>
-        <span className={css.stroke}></span>
+        {[...Array(isMobile ? 2 : 4)].map((_, idx) => (
+          <span key={idx} className={css.stroke}></span>
+        ))}
       </div>
     </section>
   );
