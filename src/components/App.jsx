@@ -32,7 +32,7 @@ const App = () => {
     dispatch(fetchCategories());
     dispatch(fetchTestimonials());
   }, [dispatch]);
-  console.log(isRefreshing);
+
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
