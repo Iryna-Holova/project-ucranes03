@@ -8,8 +8,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFollowing } from 'store/authSlice/selectors';
 import { addToFollowing, removeFromFollowing } from 'services/followers';
-import { addFollowing, removeFollowing } from 'store/authSlice/slice';
-
+import { setFollowing } from 'store/authSlice/slice';
 
 const UserCard = ({ user: { id, name, avatar, recipes } }) => {
   const isTablet = useTabletMediaQuery();
@@ -17,17 +16,17 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
   const following = useSelector(selectFollowing);
   const dispatch = useDispatch();
 
-  const handleRemoveFollowing = id => {
+  const handleRemoveFollowing = async id => {
     try {
-      removeFromFollowing(id);
-      dispatch(removeFollowing(id));
+      const { data } = await removeFromFollowing(id);
+      dispatch(setFollowing(data.following));
     } catch (error) {}
   };
 
-  const handleAddFollowing = id => {
+  const handleAddFollowing = async id => {
     try {
-      addToFollowing(id);
-      dispatch(addFollowing(id));
+      const { data } = await addToFollowing(id);
+      dispatch(setFollowing(data.following));
     } catch (error) {}
   };
 
