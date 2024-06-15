@@ -15,6 +15,7 @@ const RecipeMainInfo = ({
   time,
   description,
   owner,
+  handlerGoToOwner,
 }) => {
   const isDesktop = useDesktopMediaQuery();
   const isMobile = useMobileMediaQuery();
@@ -37,7 +38,11 @@ const RecipeMainInfo = ({
           <li className={css.list_item}>{time} min</li>
         </ul>
         <p className={css.description}>{description}</p>
-        <button className={css.btn_wrapper}>
+        <button
+          type="button"
+          className={css.btn_wrapper}
+          onClick={handlerGoToOwner}
+        >
           <Image
             publicId={owner.avatar}
             alt={owner.name}
