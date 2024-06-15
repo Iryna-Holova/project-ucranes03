@@ -1,38 +1,50 @@
-import ListItems from 'components/UserTabs/ListItems/ListItems';
-import UserCard from './UserCard/UserCard';
-import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { selectFollowing } from 'store/authSlice/selectors';
-import { getFollowers } from 'services/followers';
+import { getFollowers, getOwnFollowers } from 'services/followers';
 import Pagination from 'components/Shared/Pagination/Pagination';
-
+import ListItems from 'components/UserTabs/ListItems/ListItems';
+import UserCard from './UserCard/UserCard';
+import UserCardSkeleton from './UserCard/UserCardSkeleton';
 
 const Followers = () => {
   const [params] = useSearchParams();
+  const user = useParams().id;
+  const isCurrent = user === 'current';
+  const [isLoading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const following = useSelector(selectFollowing);
   useEffect(() => {
     const fetchUsers = async () => {
+      setLoading(true);
       try {
         const page = params.get('page') || 1;
-        const { data } = await getFollowers({
-          page,
-          limit: 5,
-        });
-        console.log(data);
+        const { data } = isCurrent
+          ? await getOwnFollowers({
+              page,
+              limit: 5,
+            })
+          : await getFollowers(user, {
+              page,
+              limit: 5,
+            });
         setUsers(data.results);
         setTotalPages(data.totalPages);
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     };
     fetchUsers();
-  }, [params]);
+  }, [params, user, isCurrent]);
   return (
     <div>
       <h3 className="visually-hidden">Followers</h3>
       <ListItems>
-        {users.map(user => (
+        {isLoading && [...Array(5)].map((item, idx) => <UserCardSkeleton />)}
+        {!isLoading&&users.map(user => (
           <UserCard key={user.id} user={user} following={following} />
         ))}
       </ListItems>
