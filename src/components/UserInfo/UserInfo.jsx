@@ -2,20 +2,24 @@
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import Image from 'components/Shared/Image/Image';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getOwnInfo, getInfo, updateAvatar } from 'services/userInfo';
 import defaultAvatar from 'images/placeholder-avatar.svg';
 import icons from 'images/icons.svg';
 import css from './UserInfo.module.css';
-import { setAvatar } from 'store/authSlice/slice';
+import { setFollowing, setAvatar } from 'store/authSlice/slice';
 import Modal from 'components/Modal/Modal';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
+import { selectFollowing } from 'store/authSlice/selectors';
+import { showError } from 'helpers/notification';
+import { addToFollowing, removeFromFollowing } from 'services/followers';
+
 
 
 
 const UserInfo = () => {
-
+  const followingArray = useSelector(selectFollowing);
   const dispatch = useDispatch();
   const user = useParams().id;
   const isCurrent = user === 'current';
@@ -50,16 +54,29 @@ const UserInfo = () => {
         dispatch(setAvatar(data.avatar));
     }
     catch (error) { 
-      console.log(error)
+        showError(error);
     }
 
     }
+  };
+  const handleRemoveFollowing =async id => {
+    try {
+      const {data} = await removeFromFollowing(id);
+      dispatch(setFollowing(data.following));
+    } catch (error) {}
+  };
+
+  const handleAddFollowing = async id => {
+    try {
+     const {data} = await addToFollowing(id);
+      dispatch(setFollowing(data.following));
+    } catch (error) {}
   };
 
   const { email, recipes, favorites, followers, following, name, avatar } = userData || {};
 
   return (
-    <>
+    <div>
       <Image publicId={avatar} alt="avatar" defaultImage={defaultAvatar} className={css.avatar} />
       { isCurrent&&
       <div className={css.fileInputWrapper}>
@@ -87,9 +104,15 @@ const UserInfo = () => {
           </ButtonLink>
         )}
         {!isCurrent && (
-          <ButtonLink type="button" onClick={() => console.log('Follow clicked')}>
-            Follow
+          followingArray?.includes(user) ?
+            <ButtonLink type="button" onClick={() => handleRemoveFollowing(user)}>
+            Following
           </ButtonLink>
+            :
+          <ButtonLink type="button" onClick={() => handleAddFollowing(user)}>
+            Follow
+            </ButtonLink> 
+            
           
         )}
         {isModalOpen && (
@@ -98,7 +121,7 @@ const UserInfo = () => {
         </Modal>
       )}
       </div>
-    </>
+    </div>
   );
 };
 

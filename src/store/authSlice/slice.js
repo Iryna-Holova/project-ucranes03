@@ -17,14 +17,8 @@ export const userSlice = createSlice({
     error: null,
   },
   reducers: {
-    addFollowing(state, action) {
-      state.user.following.push(action.payload);
-    },
-    removeFollowing(state, action) {
-      state.user.setFollowing = state.user.following.splice(
-        state.user.following.indexOf(action.payload),
-        1
-      );
+    setFollowing(state, action) {
+      state.user.following = action.payload;
     },
     setAvatar(state, action) {
       state.user.avatar = action.payload;
@@ -86,4 +80,4 @@ export const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const { addFollowing, removeFollowing, setAvatar } = userSlice.actions;
+export const { setFollowing, setAvatar } = userSlice.actions;
