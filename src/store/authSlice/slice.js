@@ -26,6 +26,9 @@ export const userSlice = createSlice({
         1
       );
     },
+    setAvatar(state, action) {
+      state.user.avatar = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -83,4 +86,4 @@ export const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const { addFollowing, removeFollowing } = userSlice.actions;
+export const { addFollowing, removeFollowing, setAvatar } = userSlice.actions;
