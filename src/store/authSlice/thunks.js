@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getCurrent, register, login, logout } from 'services/user';
 import { setToken, clearToken } from 'services/api';
+import { showError } from 'helpers/notification';
 
 export const fetchCurrentUser = createAsyncThunk(
   'auth/fetchCurrentUser',
@@ -15,6 +16,7 @@ export const fetchCurrentUser = createAsyncThunk(
       const user = await getCurrent();
       return user;
     } catch (error) {
+      showError(error);
       return rejectWithValue(error.message);
     }
   }
@@ -28,6 +30,7 @@ export const registerUser = createAsyncThunk(
       setToken(resp.token);
       return resp;
     } catch (error) {
+      showError(error);
       return rejectWithValue(error.message);
     }
   }
@@ -41,6 +44,7 @@ export const loginUser = createAsyncThunk(
       setToken(resp.token);
       return resp;
     } catch (error) {
+      showError(error);
       return rejectWithValue(error.message);
     }
   }
@@ -54,6 +58,7 @@ export const logoutUser = createAsyncThunk(
       clearToken();
       return response;
     } catch (error) {
+      showError(error);
       return rejectWithValue(error.message);
     }
   }
