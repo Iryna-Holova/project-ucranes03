@@ -1,7 +1,7 @@
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import css from './RecipePreparation.module.css';
 
-const RecipePreparation = ({ instructions, status }) => {
+const RecipePreparation = ({ instructions, status, handlerAddToFavorite }) => {
   const transformInstructions = instructions.split('\r\n');
   return (
     <>
@@ -15,7 +15,7 @@ const RecipePreparation = ({ instructions, status }) => {
         type="button"
         color="light"
         size="normal"
-        onClick={console.log}
+        onClick={handlerAddToFavorite}
       >
         {status}
       </ButtonLink>
