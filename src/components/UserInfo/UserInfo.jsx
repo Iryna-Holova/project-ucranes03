@@ -76,28 +76,33 @@ const UserInfo = () => {
   const { email, recipes, favorites, followers, following, name, avatar } = userData || {};
 
   return (
-    <div>
-      <Image publicId={avatar} alt="avatar" defaultImage={defaultAvatar} className={css.avatar} />
-      { isCurrent&&
-      <div className={css.fileInputWrapper}>
-         <input
-          className={css.input_file}
-          type="file"
-          onChange={handleFileChange}
-        />
-        <svg className={css.icon_plus}>
-          <use href={`${icons}#icon-plus`}></use>
-        </svg>
-      </div>}
+    <div className={css.user_info_container}>
       <div>
-        <p>{name}</p>
-        <ul>
-          <li><span>Email</span>: <span>{email}</span></li>
-          <li><span>Added recipes</span>: <span>{recipes}</span></li>
-          {isCurrent && <li><span>Favorites</span>: <span>{favorites}</span></li>}
-          <li><span>Followers</span>: <span>{followers}</span></li>
-          {isCurrent && <li><span>Following</span>: <span>{following}</span></li>}
+
+      <div className={css.image_input_wrapper}>
+  <Image publicId={avatar} alt="avatar" defaultImage={defaultAvatar} className={css.avatar} />
+  {isCurrent && (
+    <div className={css.fileInputWrapper}>
+      <input
+        className={css.input_file}
+        type="file"
+        onChange={handleFileChange}
+        />
+      <svg className={css.icon_plus}>
+        <use href={`${icons}#icon-plus`}></use>
+      </svg>
+    </div>
+  )}
+</div>
+        <p className={css.name}>{name}</p>
+        <ul className={css.list_items}>
+          <li className={css.list_item}><span className={css.item_name}>Email:</span> <span className={css.item_value}>{email}</span></li>
+          <li className={css.list_item}><span className={css.item_name}>Added recipes: </span > <span className={css.item_value}>{recipes}</span></li>
+          {isCurrent && <li className={css.list_item}><span className={css.item_name}>Favorites :</span> <span className={css.item_value}>{favorites}</span></li>}
+          <li><span className={css.item_name}>Followers: </span> <span className={css.item_value}>{followers}</span></li>
+          {isCurrent && <li className={css.list_item}><span className={css.item_name}>Following: </span> <span className={css.item_value}>{following}</span></li>}
         </ul>
+        </div>
         {isCurrent && (
           <ButtonLink type="button" onClick={() =>setIsModalOpen(true)}>
             Log out
@@ -120,7 +125,6 @@ const UserInfo = () => {
           <LogOutModal onClose={() => setIsModalOpen(false)} />
         </Modal>
       )}
-      </div>
     </div>
   );
 };
