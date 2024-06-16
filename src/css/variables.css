@@ -1,4 +1,4 @@
-:root {
+:root[data-theme='LIGHT'] {
   /* static colors */
   --color-black: #050505;
   --color-black-90: rgba(5, 5, 5, 0.9);
