@@ -21,10 +21,6 @@
   background-size: cover;
 }
 
-.category_item:nth-child(n + 9) {
-  display: none;
-}
-
 .all_categories {
   height: 250px;
   border-radius: 20px;
@@ -98,17 +94,11 @@
     height: 369px;
     border-radius: 30px;
   }
-
   .all_categories {
     width: calc((100% - 20px) / 2);
     height: 369px;
     border-radius: 30px;
   }
-
-  .category_item:nth-child(-n + 11) {
-    display: block;
-  }
-
   .category_item:nth-child(5n + 3) {
     width: 100%;
   }
@@ -122,16 +112,10 @@
   .category_item:nth-child(n) {
     width: calc((100% / 4) + 5px);
   }
-  .category_item:nth-child(3) {
-    width: calc((100% - 100px) / 2);
-  }
-  .category_item:nth-child(4) {
-    width: calc((100% - 100px) / 2);
-  }
-  .category_item:nth-child(8) {
-    width: calc((100% - 100px) / 2);
-  }
-  .category_item:nth-child(10) {
+  .category_item:nth-child(12n + 3),
+  .category_item:nth-child(12n + 4),
+  .category_item:nth-child(12n + 8),
+  .category_item:nth-child(12n + 10) {
     width: calc((100% - 100px) / 2);
   }
   .all_categories {

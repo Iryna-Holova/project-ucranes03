@@ -2,11 +2,14 @@ import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import icons from '../../images/icons.svg';
 import css from './AddRecipeForm.module.css';
 import { Controller, useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCategoriesOptions } from 'store/categoriesSlice/selectors';
-import { selectIngredients, selectIngredientsOptions } from 'store/ingredientsSlice/selectors';
+import {
+  selectIngredients,
+  selectIngredientsOptions,
+} from 'store/ingredientsSlice/selectors';
 import { selectAreasOptions } from 'store/areasSlice/selectors';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,6 +17,7 @@ import Ingredient from 'components/Shared/Ingredient/Ingredients';
 import { addRecipe } from 'services/recipes';
 import { showError } from 'helpers/notification';
 import { useNavigate } from 'react-router-dom';
+import { fetchCategories } from 'store/categoriesSlice/thunks';
 
 const schema = yup.object().shape({
   thumb: yup
@@ -101,10 +105,14 @@ const AddRecipeForm = () => {
   const areas = useSelector(selectAreasOptions);
   const ingredientAddList = useSelector(selectIngredients);
   const [ingregientsForList, setIngregientsForList] = useState([]);
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-
-
+  useEffect(() => {
+    if (!categories.length) {
+      dispatch(fetchCategories());
+    }
+  }, [categories.length, dispatch]);
 
   const {
     register,
@@ -135,16 +143,15 @@ const navigate = useNavigate();
     formData.append('category', data.category);
     formData.append('area', data.area);
     formData.append('instructions', data.instructions);
-    formData.append('thumb', data.thumb[0]); 
+    formData.append('thumb', data.thumb[0]);
     formData.append('time', data.time);
     ingredientsList.forEach((ingredient, index) => {
       formData.append(`ingredients[${index}][id]`, ingredient.id);
       formData.append(`ingredients[${index}][measure]`, ingredient.measure);
     });
     try {
-       await addRecipe(formData);
-       navigate("/user/current");
-     
+      await addRecipe(formData);
+      navigate('/user/current');
     } catch (error) {
       showError(error);
     }
@@ -154,11 +161,14 @@ const navigate = useNavigate();
     setTime(prevTime => prevTime + 10);
   };
 
-const handleCloseIngredient = (_id) => {
-  setIngredientsList(prev => prev.filter(ingredient => ingredient.id !== _id));
-  setIngregientsForList(prev => prev.filter(ingredient => ingredient._id !== _id));
-}
-
+  const handleCloseIngredient = _id => {
+    setIngredientsList(prev =>
+      prev.filter(ingredient => ingredient.id !== _id)
+    );
+    setIngregientsForList(prev =>
+      prev.filter(ingredient => ingredient._id !== _id)
+    );
+  };
 
   const handleMinusTime = () => {
     setTime(prevTime => (prevTime > 0 ? prevTime - 10 : 0));
@@ -181,20 +191,20 @@ const handleCloseIngredient = (_id) => {
     const measure = getValues('measure');
     if (ingredient && measure) {
       setIngredientsList(prev => [...prev, { id: ingredient.value, measure }]);
-      const result = ingredientAddList.find(ing => ing._id === ingredient.value);
-      if(result) {
+      const result = ingredientAddList.find(
+        ing => ing._id === ingredient.value
+      );
+      if (result) {
         const newIngredient = { ...result, measure: measure };
         setIngregientsForList(prev => [...prev, newIngredient]);
       }
       setValue('measure', '');
       setValue('ingredients', null);
-      await trigger('ingredientsList')
+      await trigger('ingredientsList');
     } else {
       alert('Please select an ingredient and enter a measure');
     }
   };
-
-
 
   const handleDelete = () => {
     reset();
@@ -260,7 +270,8 @@ const handleCloseIngredient = (_id) => {
                 <span className={css.error_message}>{errors.name.message}</span>
               )}
               <div className={css.box_description}>
-                <input maxLength={200}
+                <input
+                  maxLength={200}
                   className={css.input_description}
                   {...register('description', {
                     onChange: handleDescription,
@@ -339,25 +350,31 @@ const handleCloseIngredient = (_id) => {
             </div>
             <div className={css.box_ingredients}>
               <label className={css.title_description}>Ingredients</label>
-              <div className={css.boxIngredQuan}> 
-                <div> <Controller
-                name="ingredients"
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    placeholder="Add the ingredient"
-                    styles={customStyles}
-                    {...field}
-                    options={ingredients}
+              <div className={css.boxIngredQuan}>
+                <div>
+                  {' '}
+                  <Controller
+                    name="ingredients"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        placeholder="Add the ingredient"
+                        styles={customStyles}
+                        {...field}
+                        options={ingredients}
+                      />
+                    )}
                   />
-                )}
-              /></div>
-               <div> <input
-                className={css.input_quantity}
-                {...register('measure')}
-                type="text"
-                placeholder="Enter quantity"
-              /></div>
+                </div>
+                <div>
+                  {' '}
+                  <input
+                    className={css.input_quantity}
+                    {...register('measure')}
+                    type="text"
+                    placeholder="Enter quantity"
+                  />
+                </div>
               </div>
               {errors.ingredients && errors.quantity && (
                 <span className={css.error_message}>
@@ -378,7 +395,17 @@ const handleCloseIngredient = (_id) => {
             </svg>
           </ButtonLink>
           <ul className={css.list_ingredients}>
-           {ingregientsForList.length > 0 && ingregientsForList.map(({img, name, measure, _id}) => <Ingredient _id={_id} callback={handleCloseIngredient} key={_id} img={img} name={name} measure={measure}/>)}
+            {ingregientsForList.length > 0 &&
+              ingregientsForList.map(({ img, name, measure, _id }) => (
+                <Ingredient
+                  _id={_id}
+                  callback={handleCloseIngredient}
+                  key={_id}
+                  img={img}
+                  name={name}
+                  measure={measure}
+                />
+              ))}
           </ul>
           <div>
             <label className={css.title_description}>Recipe Preparation</label>

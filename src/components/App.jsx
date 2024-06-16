@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUser } from 'store/authSlice/thunks';
 import { fetchIngredients } from 'store/ingredientsSlice/thunks';
 import { fetchAreas } from 'store/areasSlice/thunks';
-import { fetchCategories } from 'store/categoriesSlice/thunks';
 import { fetchTestimonials } from 'store/testimonialsSlice/thunk';
 import { AuthModalProvider } from 'components/AuthModalContext';
 import { selectIsRefreshing } from 'store/authSlice/selectors';
@@ -29,7 +28,6 @@ const App = () => {
     dispatch(fetchCurrentUser());
     dispatch(fetchIngredients());
     dispatch(fetchAreas());
-    dispatch(fetchCategories());
     dispatch(fetchTestimonials());
   }, [dispatch]);
 
