@@ -14,22 +14,32 @@ const RecipeFilters = () => {
     setSearchParams(prevParams => {
       const newParams = new URLSearchParams(prevParams);
       newParams.set('page', 1);
-      if (option) {
+
+      if (option && Array.isArray(option)) {
+        if (option.length > 0) {
+          newParams.set(name, option.map(opt => opt.value).join(','));
+        } else {
+          newParams.delete(name);
+        }
+      } else if (option) {
         newParams.set(name, option.value);
       } else {
         newParams.delete(name);
       }
+
       return newParams;
     });
   };
 
   const getOptionFromValue = (options, value) => {
-    return options.find(option => option.value === value) || null;
+    if (!value) return null;
+    const valuesArray = value.split(',');
+    return options.filter(option => valuesArray.includes(option.value));
   };
 
   const selectedIngredient = getOptionFromValue(
     ingredientsOptions,
-    searchParams.get('ingredient')
+    searchParams.get('ingredients')
   );
   const selectedArea = getOptionFromValue(
     areasOptions,
@@ -39,11 +49,12 @@ const RecipeFilters = () => {
   return (
     <div className={css.filters_container}>
       <SelectFilter
-        name="ingredient"
+        name="ingredients"
         options={ingredientsOptions}
         onChange={handleChange}
         value={selectedIngredient}
-        placeholder="Ingredients"
+        placeholder="Ingredient"
+        isMulti={true}
       />
       <SelectFilter
         name="area"

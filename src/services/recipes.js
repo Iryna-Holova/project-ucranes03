@@ -6,11 +6,11 @@ export const getRecipes = ({
   page,
   limit,
   category,
-  ingredient,
+  ingredients,
   area,
 } = {}) => {
   return api.get('/api/recipes', {
-    params: { page, limit, category, ingredient, area },
+    params: { page, limit, category, ingredients, area },
   });
 };
 

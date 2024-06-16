@@ -16,7 +16,7 @@ export const fetchCurrentUser = createAsyncThunk(
       const user = await getCurrent();
       return user;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -29,8 +29,8 @@ export const registerUser = createAsyncThunk(
       setToken(resp.token);
       return resp;
     } catch (error) {
-      showError(error);
-      return rejectWithValue(error.message);
+      showError(error.response.data);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -43,8 +43,8 @@ export const loginUser = createAsyncThunk(
       setToken(resp.token);
       return resp;
     } catch (error) {
-      showError(error);
-      return rejectWithValue(error.message);
+      showError(error.response.data);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -57,8 +57,8 @@ export const logoutUser = createAsyncThunk(
       clearToken();
       return response;
     } catch (error) {
-      showError(error);
-      return rejectWithValue(error.message);
+      showError(error.response.data);
+      return rejectWithValue(error.response.data);
     }
   }
 );

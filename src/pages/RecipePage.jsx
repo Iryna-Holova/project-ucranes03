@@ -1,19 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getRecipe } from 'services/recipes';
+import { showError } from 'helpers/notification';
+import { useDesktopMediaQuery } from 'hooks/device-type';
 
 import PathInfo from 'components/Shared/PathInfo/PathInfo';
 import PopularRecipes from 'components/PopularRecipes/PopularRecipes';
 import RecipeInfo from 'components/RecipeInfo/RecipeInfo';
 import PageContainer from 'components/Shared/PageContainer/PageContainer';
-import { useDesktopMediaQuery } from 'hooks/device-type';
 import Image from 'components/Shared/Image/Image';
 
 const RecipePage = () => {
   const isDesktop = useDesktopMediaQuery();
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const recipeRef = useRef(null);
+
+  useEffect(() => {
+    if (recipeRef) {
+      recipeRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -22,7 +30,7 @@ const RecipePage = () => {
 
         setRecipe(data);
       } catch (error) {
-        throw Error(error.message);
+        showError(error);
       }
     };
 
@@ -31,7 +39,7 @@ const RecipePage = () => {
 
   return (
     <PageContainer page="recipe">
-      <section className="section ">
+      <section className="section " ref={recipeRef}>
         <PathInfo current={recipe?.title} />
         <div className="section_row">
           {recipe && (
