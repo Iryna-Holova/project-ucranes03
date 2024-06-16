@@ -28,13 +28,15 @@
 
 	.header_navlink {
 		padding: 14px;
+		border: 1px solid transparent;
+		border-radius: 30px;
+		transition: border-color var(--transition);
 	}
 
 	.header_navlink:hover {
-		border: 1px solid var(--color-main-20);
+		border-color: var(--color-main-20);
 		border-radius: 30px;
-		padding-left: 13px;
-		padding-right: 13px;
+		
 	}
 
 	.active_link {
