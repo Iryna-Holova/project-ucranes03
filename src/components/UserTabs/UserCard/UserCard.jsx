@@ -14,8 +14,7 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
   const isTablet = useTabletMediaQuery();
   const isDesktop = useDesktopMediaQuery();
   const following = useSelector(selectFollowing);
-  const currentUser = useSelector(selectUser);
-  console.log(currentUser);
+  const currentUser = useSelector(selectUser);  
   const dispatch = useDispatch();
 
   const handleRemoveFollowing = async id => {

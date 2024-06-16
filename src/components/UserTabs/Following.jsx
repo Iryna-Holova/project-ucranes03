@@ -19,8 +19,7 @@ const Following = () => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const page = params.get('page') || 1;
-        console.log(page);
+        const page = params.get('page') || 1;        
         const { data } = await getFollowings({
           page,
           limit: 5,
