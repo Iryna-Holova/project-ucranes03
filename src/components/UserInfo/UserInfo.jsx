@@ -77,8 +77,8 @@ const UserInfo = () => {
 
   return (
     <div className={css.user_info_container}>
-      <div>
 
+  <div className={css.name_items_list_wrapper}>
       <div className={css.image_input_wrapper}>
   <Image publicId={avatar} alt="avatar" defaultImage={defaultAvatar} className={css.avatar} />
   {isCurrent && (
@@ -94,15 +94,17 @@ const UserInfo = () => {
     </div>
   )}
 </div>
-        <p className={css.name}>{name}</p>
+
+  < p className={css.name}>{name}</p>
         <ul className={css.list_items}>
           <li className={css.list_item}><span className={css.item_name}>Email:</span> <span className={css.item_value}>{email}</span></li>
           <li className={css.list_item}><span className={css.item_name}>Added recipes: </span > <span className={css.item_value}>{recipes}</span></li>
           {isCurrent && <li className={css.list_item}><span className={css.item_name}>Favorites :</span> <span className={css.item_value}>{favorites}</span></li>}
-          <li><span className={css.item_name}>Followers: </span> <span className={css.item_value}>{followers}</span></li>
+          <li className={css.list_item}><span className={css.item_name}>Followers: </span> <span className={css.item_value}>{followers}</span></li>
           {isCurrent && <li className={css.list_item}><span className={css.item_name}>Following: </span> <span className={css.item_value}>{following}</span></li>}
         </ul>
-        </div>
+      </div>
+        
         {isCurrent && (
           <ButtonLink type="button" onClick={() =>setIsModalOpen(true)}>
             Log out
