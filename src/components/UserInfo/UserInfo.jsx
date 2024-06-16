@@ -107,22 +107,22 @@ const UserInfo = () => {
             <span className={css.item_value}>{email}</span>
           </li>
           <li className={css.list_item}>
-            <span className={css.item_name}>Added recipes: </span>
+            <span className={css.item_name}>Added recipes:</span>
             <span className={css.item_value}>{recipes}</span>
           </li>
           {isCurrent && (
             <li className={css.list_item}>
-              <span className={css.item_name}>Favorites :</span>
+              <span className={css.item_name}>Favorites:</span>
               <span className={css.item_value}>{favorites}</span>
             </li>
           )}
           <li className={css.list_item}>
-            <span className={css.item_name}>Followers: </span>
+            <span className={css.item_name}>Followers:</span>
             <span className={css.item_value}>{followers}</span>
           </li>
           {isCurrent && (
             <li className={css.list_item}>
-              <span className={css.item_name}>Following: </span>
+              <span className={css.item_name}>Following:</span>
               <span className={css.item_value}>{following}</span>
             </li>
           )}
