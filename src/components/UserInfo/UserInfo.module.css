@@ -36,8 +36,8 @@
   pointer-events: none;
 }
 .icon_plus {
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
 }
 .file_input_label:hover {
   color: var(--color-main);
