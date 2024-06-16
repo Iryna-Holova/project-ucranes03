@@ -1,13 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
-import { scrollToElement } from 'helpers/scolls';
 import css from './Pagination.module.css';
 
-const Pagination = ({ totalPages, topElementRef }) => {
+const Pagination = ({ totalPages }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get('page')) || 1;
 
   const changePage = page => {
-    scrollToElement(topElementRef);
     setSearchParams(prevParams => {
       const newParams = new URLSearchParams(prevParams);
       newParams.set('page', page);
