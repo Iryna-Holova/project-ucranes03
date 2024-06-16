@@ -1,19 +1,20 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { selectFollowing, selectUser } from 'store/authSlice/selectors';
+import { setFollowing } from 'store/authSlice/slice';
+import { useDesktopMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
+import { addToFollowing, removeFromFollowing } from 'services/followers';
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import sprite from 'images/icons.svg';
-import css from './UserCard.module.css';
-import { useDesktopMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
-import Image from 'components/Shared/Image/Image';
 import defaultAvatar from 'images/placeholder-avatar.svg';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectFollowing } from 'store/authSlice/selectors';
-import { addToFollowing, removeFromFollowing } from 'services/followers';
-import { setFollowing } from 'store/authSlice/slice';
+import Image from 'components/Shared/Image/Image';
+import css from './UserCard.module.css';
 
 const UserCard = ({ user: { id, name, avatar, recipes } }) => {
   const isTablet = useTabletMediaQuery();
   const isDesktop = useDesktopMediaQuery();
   const following = useSelector(selectFollowing);
+  const currentUser = useSelector(selectUser);  
   const dispatch = useDispatch();
 
   const handleRemoveFollowing = async id => {
@@ -40,30 +41,31 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
             alt={name + "'s photo"}
             defaultImage={defaultAvatar}
           />
-          <div className={css.selected_user}></div>
+          {/* <div className={css.selected_user}></div> */}
         </div>
         <div>
           <p className={css.user_name}>{name}</p>
           <p className={css.user_recepies}>Own recipes: {recipes.length}</p>
-          {following.includes(id) ? (
-            <ButtonLink
-              type="button"
-              color="light"
-              size="small"
-              onClick={() => handleRemoveFollowing(id)}
-            >
-              Following
-            </ButtonLink>
-          ) : (
-            <ButtonLink
-              type="button"
-              color="light"
-              size="small"
-              onClick={() => handleAddFollowing(id)}
-            >
-              Follow
-            </ButtonLink>
-          )}
+          {currentUser.id !== id &&
+            (following.includes(id) ? (
+              <ButtonLink
+                type="button"
+                color="light"
+                size="small"
+                onClick={() => handleRemoveFollowing(id)}
+              >
+                Following
+              </ButtonLink>
+            ) : (
+              <ButtonLink
+                type="button"
+                color="light"
+                size="small"
+                onClick={() => handleAddFollowing(id)}
+              >
+                Follow
+              </ButtonLink>
+            ))}
         </div>
       </div>
       {(isDesktop || isTablet) && (
@@ -77,11 +79,14 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
           ))}
         </ul>
       )}
-      <div className={css.user_link_arrow}>
+      <Link
+        to={currentUser.id !== id ? `/user/${id}` : '/user/current'}
+        className={css.user_link_arrow}
+      >
         <svg width="16" height="16">
           <use href={sprite + '#icon-arrow-up-right'}></use>
         </svg>
-      </div>
+      </Link>
     </li>
   );
 };
