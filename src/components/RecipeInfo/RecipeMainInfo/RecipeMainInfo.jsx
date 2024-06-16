@@ -13,6 +13,7 @@ const RecipeMainInfo = ({
   title,
   category,
   time,
+  area,
   description,
   owner,
   handlerGoToOwner,
@@ -34,6 +35,7 @@ const RecipeMainInfo = ({
       <div className={css.container_info}>
         <h2 className={css.title}>{title}</h2>
         <ul className={css.list}>
+          <li className={css.list_item}>{area}</li>
           <li className={css.list_item}>{category}</li>
           <li className={css.list_item}>{time} min</li>
         </ul>

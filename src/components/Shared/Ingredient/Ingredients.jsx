@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import css from './Ingredients.module.css';
-import icons from '../../../images/icons.svg';
+import icons from 'images/icons.svg';
 import defaultImg from 'images/placeholder-image.svg';
 
 const Ingredient = ({ img, name, measure, _id, callback = null }) => {
