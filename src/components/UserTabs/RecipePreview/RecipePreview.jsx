@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { removeFavorite, removeOwnRecipe } from 'services/recipes';
 import { showError } from 'helpers/notification';
 import Image from 'components/Shared/Image/Image';
@@ -7,6 +7,7 @@ import css from './RecipePreview.module.css';
 
 const RecipePreview = ({ recipe, update }) => {
   const { _id, title, description, thumb } = recipe;
+  const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const isFavorite = location.pathname.includes('favorites');
@@ -60,14 +61,16 @@ const RecipePreview = ({ recipe, update }) => {
             <use href={`${icons}#icon-arrow-up-right`} />
           </svg>
         </button>
-        <button
-          className={css.trash_icon}
-          onClick={() => handleTrashIconClick(_id)}
-        >
-          <svg className={css.icon}>
-            <use href={`${icons}#icon-trash`} />
-          </svg>
-        </button>
+        {id === 'current' && (
+          <button
+            className={css.trash_icon}
+            onClick={() => handleTrashIconClick(_id)}
+          >
+            <svg className={css.icon}>
+              <use href={`${icons}#icon-trash`} />
+            </svg>
+          </button>
+        )}
       </div>
     </li>
   );

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { getOwnRecipes } from 'services/recipes';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { getOwnRecipes, getUserRecipes } from 'services/recipes';
 import { showError } from 'helpers/notification';
 import ListItems from 'components/UserTabs/ListItems/ListItems';
 import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
@@ -9,6 +9,7 @@ import Pagination from 'components/Shared/Pagination/Pagination';
 
 const UserRecipes = () => {
   const [params] = useSearchParams();
+  const { id } = useParams();
   const topElementRef = useRef(null);
   const [totalPages, setTotalPages] = useState(0);
   const [recipes, setRecipes] = useState([]);
@@ -16,13 +17,20 @@ const UserRecipes = () => {
   const fetchRecipes = useCallback(async () => {
     try {
       const page = params.get('page') || 1;
-      const { data } = await getOwnRecipes({ page });
+      let data;
+      if (id !== 'current') {
+        const result = await getUserRecipes({ page }, id);
+        data = result.data;
+      } else {
+        const result = await getOwnRecipes({ page });
+        data = result.data;
+      }
       setRecipes(data.results);
       setTotalPages(data.totalPages);
     } catch (error) {
       showError(error);
     }
-  }, [params]);
+  }, [id, params]);
 
   useEffect(() => {
     fetchRecipes();

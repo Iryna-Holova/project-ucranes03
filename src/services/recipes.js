@@ -26,6 +26,11 @@ export const getOwnRecipes = ({ page } = {}) =>
     params: { page, limit: 9 },
   });
 
+export const getUserRecipes = ({ page } = {}, id) =>
+  api.get(`/api/recipes/own/${id}`, {
+    params: { page, limit: 9 },
+  });
+
 export const removeOwnRecipe = id => api.delete(`/api/own/${id}`);
 
 export const addFavorite = id => api.patch(`/api/recipes/addFavorite/${id}`);
