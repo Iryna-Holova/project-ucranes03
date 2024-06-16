@@ -32,7 +32,7 @@
 }
 
 .description {
-  flex-grow: 1;
+  height: 40px;
   font-size: 14px;
   line-height: 1.43;
   letter-spacing: -0.02em;
@@ -81,17 +81,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.heart_icon:hover,
+.arrow_icon:hover,
+.heart_icon:focus,
+.arrow_icon:focus {
+  background-color: var(--color-main);
+  color: var(--color-secondary);
+}
+
+.heart_icon:disabled {
+  cursor: auto;
+}
+
+.heart_icon:disabled .icon {
+  animation: var(--animation-rotate);
 }
 
 .icon {
   width: 16px;
   height: 16px;
-}
-
-.favorite_heart {
-  background-color: var(--color-main);
-  color: var(--color-secondary);
-  border: none;
+  transition: transform var(--transition);
 }
 
 @media screen and (min-width: 768px) {
@@ -111,6 +123,7 @@
   }
 
   .description {
+    height: 48px;
     font-size: 16px;
     line-height: 1.5;
   }
@@ -131,20 +144,9 @@
     height: 42px;
   }
 
-  .arrow_icon {
-    transition: background-color var(--transition), color var(--transition);
-
-  }
-
   .icon {
     width: 18px;
     height: 18px;
-  }
-
-  .arrow_icon:hover,
-  .arrow_icon:focus {
-    background-color: var(--color-main);
-    color: var(--color-secondary);
   }
 }
 

@@ -135,6 +135,7 @@
 	column-gap: 2px;
 	height: 18px;
 	text-transform: uppercase;
+	transition: all var(--transition);
 }
 
 .color_white {
@@ -143,6 +144,12 @@
 	column-gap: 2px;
 	height: 18px;
 	text-transform: uppercase;
+	transition: all var(--transition);
+}
+
+.color_black:hover, .color_white:hover, .color_black a:hover, .color_white a:hover {
+	opacity: 50%;
+	
 }
 
 .userbar_logout_icon {

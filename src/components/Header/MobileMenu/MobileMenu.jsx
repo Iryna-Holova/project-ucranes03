@@ -51,7 +51,7 @@ const MobileMenu = ({ onCloseBurgerMenu, isBurgerMenu }) => {
           </Link>
         </li>
       </ul>
-      <div className={css.mobile_menu_hero}></div>
+      {isBurgerMenu && <div className={css.mobile_menu_hero}></div>}
     </div>
   );
 };

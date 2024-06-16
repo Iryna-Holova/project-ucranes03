@@ -12,7 +12,7 @@ export const userSlice = createSlice({
     user: null,
     isLoggedIn: false,
     isLoading: false,
-    isRefreshing: false,
+    isRefreshing: true,
     token: null,
     error: null,
   },
@@ -43,8 +43,8 @@ export const userSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        state.isRefreshing = false;
         state.isLoggedIn = true;
+        state.isRefreshing = false;
         state.user = action.payload;
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {

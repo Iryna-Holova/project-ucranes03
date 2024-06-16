@@ -1,4 +1,4 @@
-:root {
+:root[data-theme='LIGHT'] {
   /* static colors */
   --color-black: #050505;
   --color-black-90: rgba(5, 5, 5, 0.9);
@@ -30,4 +30,42 @@
   --color-error: #d00000;
 
   --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-skeleton: pulse 1s alternate infinite;
+  --animation-rotate: rotate 1s alternate infinite;
+}
+
+:root[data-theme='DARK'] {
+  /* static colors */
+  --color-black: #050505;
+  --color-black-90: rgba(5, 5, 5, 0.9);
+  --color-gray: #e8e8e8;
+  --color-white: #ffffff;
+  --color-white-90: rgba(255, 255, 255, 0.9);
+  --color-white-80: rgba(255, 255, 255, 0.8);
+  --color-white-40: rgba(255, 255, 255, 0.4);
+  --color-white-30: rgba(255, 255, 255, 0.3);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-avatar: #e0e0e0;
+  --color-backdrop: rgba(5, 5, 5, 0.6);
+  /* theme colors */
+  --color-main: #ffffff;
+  --color-main-90: rgba(255, 255, 255, 0.9);
+  --color-main-87: rgba(255, 255, 255, 0.87);
+  --color-main-85: rgba(255, 255, 255, 0.85);
+  --color-main-80: rgba(255, 255, 255, 0.8);
+  --color-main-60: rgba(255, 255, 255, 0.6);
+  --color-main-40: rgba(255, 255, 255, 0.4);
+  --color-main-30: rgba(255, 255, 255, 0.3);
+  --color-main-20: rgba(255, 255, 255, 0.2);
+  --color-main-15: rgba(255, 255, 255, 0.15);
+  --color-main-12: rgba(255, 255, 255, 0.12);
+  --color-main-10: rgba(255, 255, 255, 0.1);
+  --color-bg: #222222;
+  --color-secondary: #050505;
+  --color-secondary-40: rgba(5, 5, 5, 0.4);
+  --color-error: #ff5252;
+
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-skeleton: pulse 1s alternate infinite;
+  --animation-rotate: rotate 1s alternate infinite;
 }

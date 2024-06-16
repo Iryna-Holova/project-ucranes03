@@ -2,9 +2,9 @@ import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import icons from '../../images/icons.svg';
 import css from './AddRecipeForm.module.css';
 import { Controller, useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCategoriesOptions } from 'store/categoriesSlice/selectors';
 import {
   selectIngredients,
@@ -17,6 +17,7 @@ import Ingredient from 'components/Shared/Ingredient/Ingredients';
 import { addRecipe } from 'services/recipes';
 import { showError } from 'helpers/notification';
 import { useNavigate } from 'react-router-dom';
+import { fetchCategories } from 'store/categoriesSlice/thunks';
 
 const schema = yup.object().shape({
   thumb: yup
@@ -106,6 +107,13 @@ const AddRecipeForm = () => {
   const ingredientAddList = useSelector(selectIngredients);
   const [ingregientsForList, setIngregientsForList] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!categories.length) {
+      dispatch(fetchCategories());
+    }
+  }, [categories.length, dispatch]);
 
   const {
     register,
