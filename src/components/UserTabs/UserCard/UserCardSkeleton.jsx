@@ -1,5 +1,4 @@
 import { useDesktopMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
-import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
 import css from './UserCard.module.css';
 
 const UserCardSkeleton = () => {
@@ -7,38 +6,15 @@ const UserCardSkeleton = () => {
   const isTablet = useTabletMediaQuery();
   const isDesktop = useDesktopMediaQuery();
   return (
-    <li style={{ height: '142.02px' }} className={css.follow_list_item}>
+    <li className={`${css.follow_list_item} ${css.follow_list_item_skeleton}`}>
       <div className={css.user_info_container}>
-        <div
-          style={{ ...style, marginRight: '16px' }}
-          className={css.user_avatar}
-        ></div>
+        <div className={`${css.user_avatar} ${css.user_avatar_skeleton}`}></div>
         <div>
-          <p
-            style={{
-              ...style,
-              width: '64px',
-              height: '20px',
-              marginBottom: '16px',
-            }}
-            className={css.user_name}
-          >
+          <p className={`${css.user_name} ${css.user_name_skeleton}`}> </p>
+          <p className={`${css.user_recepies} ${css.user_recepies_skeleton}`}>
             {' '}
           </p>
-          <p
-            style={{ ...style, width: '80px', height: '12px' }}
-            className={css.user_recepies}
-          >
-            {' '}
-          </p>
-          <ButtonLink
-            style={{ backgroundColor: '#05050570', color: '#05050500' }}
-            type="button"
-            color="light"
-            size="small"
-          >
-            Following
-          </ButtonLink>
+          <div className={css.button_skeleton}></div>
         </div>
       </div>
 
@@ -46,24 +22,21 @@ const UserCardSkeleton = () => {
         {isDesktop &&
           [...Array(4)].map((item, idx) => (
             <li
-              style={style}
-              className={css.recipes_pictures_item}
+              className={`${css.recipes_pictures_item} ${css.recipes_pictures_item_skeleton}`}
               key={idx}
             ></li>
           ))}
         {isTablet &&
           [...Array(3)].map((item, idx) => (
             <li
-              style={style}
-              className={css.recipes_pictures_item}
+              className={`${css.recipes_pictures_item} ${css.recipes_pictures_item_skeleton}`}
               key={idx}
             ></li>
           ))}
       </ul>
 
       <div
-        style={{ backgroundColor: '#05050570' }}
-        className={css.user_link_arrow}
+        className={`${css.user_link_arrow} ${css.user_link_arrow_skeleton}`}
       ></div>
     </li>
   );

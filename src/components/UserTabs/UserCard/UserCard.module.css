@@ -20,6 +20,11 @@
   left: 0;
 }
 
+.follow_list_item_skeleton {
+  height: 142.02px;
+  animation: var(--animation-skeleton);
+}
+
 .user_link_arrow {
   display: flex;
   align-items: center;
@@ -36,6 +41,11 @@
   border-color: var(--color-main);
 }
 
+.user_link_arrow_skeleton {
+  background-color: var(--color-main-10);
+  border: none;
+}
+
 .user_info_container {
   display: flex;
 }
@@ -48,6 +58,11 @@
 
 .user_avatar_container {
   position: relative;
+  margin-right: 16px;
+}
+
+.user_avatar_skeleton {
+  background-color: var(--color-main-10);
   margin-right: 16px;
 }
 
@@ -72,12 +87,32 @@
   color: var(--color-black);
 }
 
+.user_name_skeleton {
+  width: 64px;
+  height: 20px;
+  margin-bottom: 16px;
+  background-color: var(--color-main-10);
+}
+
 .user_recepies {
   margin-bottom: 8px;
   font-size: 12px;
   line-height: 1.5;
   letter-spacing: -0.02em;
   color: var(--color-main-60);
+}
+
+.user_recepies_skeleton {
+  width: 80px;
+  height: 12px;
+  background-color: var(--color-main-10);
+}
+
+.button_skeleton {
+  width: 116px;
+  height: 36px;
+  border-radius: 30px;
+  background-color: var(--color-main-10);
 }
 
 @media screen and (min-width: 768px) {
@@ -100,6 +135,10 @@
     height: 100px;
     border-radius: 15px;
     overflow: hidden;
+  }
+
+  .recipes_pictures_item_skeleton {
+    background-color: var(--color-main-10);
   }
 
   .user_avatar {
@@ -126,6 +165,11 @@
     width: 16px;
     height: 16px;
   }
+
+  .button_skeleton {
+    width: 144px;
+    height: 44px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -142,5 +186,5 @@
     height: 100px;
     border-radius: 15px;
     overflow: hidden;
-  }  
+  }
 }
