@@ -51,6 +51,9 @@ export const customStyles = {
     transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
     color: 'var(--color-main, #050505)',
     padding: 4,
+    '&:hover': {
+      color: 'var(--color-main, #050505)',
+    },
   }),
   clearIndicator: provided => ({
     ...provided,
