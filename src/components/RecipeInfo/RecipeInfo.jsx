@@ -8,9 +8,8 @@ import { selectUser } from 'store/authSlice/selectors';
 import RecipeIngredients from './RecipeIngredients/RecipeIngredients';
 import RecipeMainInfo from './RecipeMainInfo/RecipeMainInfo';
 import RecipePreparation from './RecipePreparation/RecipePreparation';
-import { useAuthModal } from 'hooks/use-auth-modal';
-import Modal from 'components/Modal/Modal';
-import AuthModal from 'components/AuthModal/AuthModal';
+import { useAuthModalContext } from 'components/AuthModalContext';
+import { showError } from 'helpers/notification';
 
 const RecipeInfo = ({ recipe }) => {
   const {
@@ -25,7 +24,8 @@ const RecipeInfo = ({ recipe }) => {
     favorite,
   } = recipe;
 
-  const { onAuthOpen, onAuthClose, onToggleMode, isAuthOpen } = useAuthModal();
+  const { onAuthOpen } = useAuthModalContext();
+
   const user = useSelector(selectUser);
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ const RecipeInfo = ({ recipe }) => {
         setIsFavorite(true);
       }
     } catch (error) {
-      throw Error(error.message);
+      showError(error);
     }
   };
 
@@ -76,11 +76,6 @@ const RecipeInfo = ({ recipe }) => {
         status={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         handlerAddToFavorite={handlerAddToFavorite}
       />
-      {isAuthOpen && (
-        <Modal onClose={onAuthClose}>
-          <AuthModal onToggleMode={onToggleMode} />
-        </Modal>
-      )}
     </>
   );
 };

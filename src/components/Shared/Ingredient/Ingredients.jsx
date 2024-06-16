@@ -1,10 +1,23 @@
-import icons from '../../../images/icons.svg';
+import { useState } from 'react';
 import css from './Ingredients.module.css';
+import icons from '../../../images/icons.svg';
+import defaultImg from 'images/placeholder-image.svg';
 
-const Ingredient = ({ img, name, measure, _id,  callback = null }) => {
+const Ingredient = ({ img, name, measure, _id, callback = null }) => {
+  const [imgUrl, setImgUrl] = useState(img);
+
+  const handlerSetDefault = () => {
+    setImgUrl(defaultImg);
+  };
+
   return (
     <li className={css.ingredient_container}>
-      <img src={img} alt={name} className={css.img_wrapper} />
+      <img
+        src={imgUrl}
+        alt={name}
+        className={css.img_wrapper}
+        onError={handlerSetDefault}
+      />
       <div>
         <p className={css.name_style}>{name}</p>
         <p className={css.measure_style}>{measure}</p>
