@@ -41,13 +41,14 @@ const Recipes = () => {
         const limit = isMobile ? 8 : 12;
         const page = params.get('page') || 1;
         const category = params.get('category');
-        const ingredient = params.get('ingredient');
+        const ingredients = params.get('ingredients')?.split(',');
+        console.log(ingredients);
         const area = params.get('area');
         const { data } = await getRecipes({
           page,
           limit,
           category,
-          ingredient,
+          ingredients,
           area,
         });
         setRecipes(data.results);
