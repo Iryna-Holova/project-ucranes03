@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getPopularRecipes } from 'services/recipes';
+import { showError } from 'helpers/notification';
 import RecipeList from 'components/RecipeList/RecipeList';
 import css from './PopularRecipes.module.css';
 
@@ -11,7 +12,7 @@ const PopularRecipes = () => {
       const { data } = await getPopularRecipes();
       setPopularRecipes(data);
     } catch (error) {
-      throw Error(error.message);
+      showError(error);
     }
   };
 

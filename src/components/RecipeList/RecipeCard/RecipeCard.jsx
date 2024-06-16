@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { removeFavorite, addFavorite } from 'services/recipes';
 import { selectUser } from 'store/authSlice/selectors';
+import { showError } from 'helpers/notification';
 import { useAuthModalContext } from 'components/AuthModalContext';
 import { useMobileMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
 import Image from 'components/Shared/Image/Image';
@@ -55,7 +56,7 @@ const RecipeCard = ({ recipe }) => {
         setIsFavorite(true);
       }
     } catch (error) {
-      throw Error(error.message);
+      showError(error);
     }
   };
 

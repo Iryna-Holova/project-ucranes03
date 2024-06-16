@@ -1,24 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getOwnRecipes } from 'services/recipes';
+import { showError } from 'helpers/notification';
 import ListItems from 'components/UserTabs/ListItems/ListItems';
 import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
 import Empty from 'components/Shared/Empty/Empty';
+import Pagination from 'components/Shared/Pagination/Pagination';
 
 const UserRecipes = () => {
+  const [params] = useSearchParams();
+  const topElementRef = useRef(null);
+  const [totalPages, setTotalPages] = useState(0);
   const [recipes, setRecipes] = useState([]);
 
-  const fetchRecipes = async () => {
+  const fetchRecipes = useCallback(async () => {
     try {
-      const { data } = await getOwnRecipes();
+      const page = params.get('page') || 1;
+      const { data } = await getOwnRecipes({ page });
       setRecipes(data.results);
+      setTotalPages(data.totalPages);
     } catch (error) {
-      throw Error(error.message);
+      showError(error);
     }
-  };
+  }, [params]);
 
   useEffect(() => {
     fetchRecipes();
-  }, []);
+  }, [fetchRecipes]);
 
   return (
     <div>
@@ -38,6 +46,12 @@ const UserRecipes = () => {
             />
           ))}
         </ListItems>
+      )}
+      {totalPages > 1 && (
+        <Pagination
+          totalPages={totalPages}
+          topElementRef={topElementRef.current}
+        />
       )}
     </div>
   );
