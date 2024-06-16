@@ -43,7 +43,7 @@ const Followers = () => {
     <div>
       <h3 className="visually-hidden">Followers</h3>
       <ListItems>
-        {isLoading && [...Array(5)].map((item, idx) => <UserCardSkeleton />)}
+        {isLoading && [...Array(5)].map((item, idx) => <UserCardSkeleton key ={idx} />)}
         {!isLoading&&users.map(user => (
           <UserCard key={user.id} user={user} following={following} />
         ))}

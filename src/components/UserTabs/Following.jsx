@@ -19,7 +19,7 @@ const Following = () => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const page = params.get('page') || 1;        
+        const page = params.get('page') || 1;
         const { data } = await getFollowings({
           page,
           limit: 5,
@@ -33,12 +33,12 @@ const Following = () => {
     };
     fetchUsers();
   }, [params, following]);
-
   return (
     <div>
       <h3 className="visually-hidden">Following</h3>
       <ListItems>
-        {isLoading && [...Array(5)].map((item, idx) => <UserCardSkeleton />)}
+        {isLoading &&
+          [...Array(5)].map((item, idx) => <UserCardSkeleton key={idx} />)}
         {!isLoading &&
           users.map(user => (
             <UserCard key={user.id} user={user} following={following} />
