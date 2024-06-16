@@ -1,0 +1,23 @@
+.footerWide {
+  position: relative;
+}
+.footerContent {
+  display: flex;
+  margin-bottom: 80px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.line {
+  position: absolute;
+  top: 76px;
+  width: 100vw;
+  height: 1px;
+  background-color: var(--color-main-10);
+}
+
+@media screen and (min-width: 768px) {
+  .line {
+    top: 80px;
+  }
+}
