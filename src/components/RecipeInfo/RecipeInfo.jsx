@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { addFavorite, removeFavorite } from 'services/recipes';
 import { selectUser } from 'store/authSlice/selectors';
+import { showError } from 'helpers/notification';
 
 import RecipeIngredients from './RecipeIngredients/RecipeIngredients';
 import RecipeMainInfo from './RecipeMainInfo/RecipeMainInfo';
 import RecipePreparation from './RecipePreparation/RecipePreparation';
-import { useAuthModal } from 'hooks/use-auth-modal';
-import Modal from 'components/Modal/Modal';
-import AuthModal from 'components/AuthModal/AuthModal';
+import { useAuthModalContext } from 'components/AuthModalContext';
 
 const RecipeInfo = ({ recipe }) => {
   const {
@@ -18,6 +17,7 @@ const RecipeInfo = ({ recipe }) => {
     title,
     category,
     time,
+    area: { name },
     description,
     owner,
     ingredients,
@@ -25,10 +25,11 @@ const RecipeInfo = ({ recipe }) => {
     favorite,
   } = recipe;
 
-  const { onAuthOpen, onAuthClose, onToggleMode, isAuthOpen } = useAuthModal();
+  const { onAuthOpen } = useAuthModalContext();
+
   const user = useSelector(selectUser);
   const navigate = useNavigate();
-
+  const [isPending, setIsPending] = useState(false);
   const [isFavorite, setIsFavorite] = useState(
     user ? favorite.includes(user.id) : false
   );
@@ -37,16 +38,17 @@ const RecipeInfo = ({ recipe }) => {
     if (user) {
       navigate(`/user/${recipe.owner._id}/recipes`);
     } else {
-      onAuthOpen(true);
+      onAuthOpen(`/user/${recipe.owner._id}/recipes`);
     }
   };
 
   const handlerAddToFavorite = async () => {
     if (!user) {
-      onAuthOpen(true);
+      onAuthOpen();
       return;
     }
     try {
+      setIsPending(true);
       if (isFavorite) {
         await removeFavorite(recipe._id);
         setIsFavorite(false);
@@ -55,7 +57,9 @@ const RecipeInfo = ({ recipe }) => {
         setIsFavorite(true);
       }
     } catch (error) {
-      throw Error(error.message);
+      showError(error);
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -66,6 +70,7 @@ const RecipeInfo = ({ recipe }) => {
         title={title}
         category={category.name}
         time={time}
+        area={name}
         description={description}
         owner={owner}
         handlerGoToOwner={handlerGoToOwner}
@@ -75,12 +80,8 @@ const RecipeInfo = ({ recipe }) => {
         instructions={instructions}
         status={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         handlerAddToFavorite={handlerAddToFavorite}
+        isPending={isPending}
       />
-      {isAuthOpen && (
-        <Modal onClose={onAuthClose}>
-          <AuthModal onToggleMode={onToggleMode} />
-        </Modal>
-      )}
     </>
   );
 };

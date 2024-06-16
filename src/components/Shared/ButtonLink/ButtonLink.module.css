@@ -59,11 +59,16 @@
 .button.light {
   border: 1px solid var(--color-gray);
   color: var(--color-main-90);
-  transition: border-color var(--transition);
+  transition: border-color var(--transition), opacity var(--transition);
 }
 
 .button.light:hover {
   border-color: var(--color-main);
+}
+
+.button.light:disabled {
+  opacity: 0.5;
+  cursor: none;
 }
 
 .button.white {
