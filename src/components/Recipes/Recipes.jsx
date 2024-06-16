@@ -14,6 +14,7 @@ import RecipeList from 'components/RecipeList/RecipeList';
 import RecipeCard from 'components/RecipeList/RecipeCard/RecipeCard';
 import RecipeCardSkeleton from 'components/RecipeList/RecipeCard/RecipeCardSkeleton';
 import Pagination from 'components/Shared/Pagination/Pagination';
+import Empty from 'components/Shared/Empty/Empty';
 import icons from 'images/icons.svg';
 import css from './Recipes.module.css';
 
@@ -82,13 +83,17 @@ const Recipes = () => {
         <RecipeFilters />
         <div>
           <RecipeList recipes={recipes}>
-            {isLoading
-              ? [...Array(isMobile ? 8 : 12)].map((_, idx) => (
-                  <RecipeCardSkeleton key={idx} />
-                ))
-              : recipes.map(recipe => (
-                  <RecipeCard key={recipe._id} recipe={recipe} />
-                ))}
+            {isLoading ? (
+              [...Array(isMobile ? 8 : 12)].map((_, idx) => (
+                <RecipeCardSkeleton key={idx} />
+              ))
+            ) : !recipes.length ? (
+              <Empty>Recipes not found</Empty>
+            ) : (
+              recipes.map(recipe => (
+                <RecipeCard key={recipe._id} recipe={recipe} />
+              ))
+            )}
           </RecipeList>
           {totalPages > 1 && (
             <Pagination
