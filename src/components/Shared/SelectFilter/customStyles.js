@@ -12,6 +12,7 @@ export const customStyles = {
     color: 'var(--color-main, #050505)',
     boxShadow: 'none',
     padding: '16px 18px',
+    backgroundColor: 'var(--color-bg)',
     '&:hover': {
       borderColor: 'var(--color-main)',
     },
@@ -62,6 +63,7 @@ export const customStyles = {
   }),
   menu: provided => ({
     ...provided,
+    backgroundColor: 'var(--color-bg)',
     borderRadius: '0px',
   }),
   option: (provided, state) => ({
