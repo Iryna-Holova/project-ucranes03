@@ -16,6 +16,7 @@ export const customStyles = {
     '&:hover': {
       borderColor: 'var(--color-main)',
     },
+    cursor: 'pointer',
   }),
   valueContainer: provided => ({
     ...provided,
@@ -30,8 +31,8 @@ export const customStyles = {
   singleValue: provided => ({
     ...provided,
     color: 'var(--color-main, #050505)',
-    padding: '0',
     margin: '0',
+    padding: '0',
   }),
   placeholder: provided => ({
     ...provided,
@@ -48,7 +49,7 @@ export const customStyles = {
   }),
   dropdownIndicator: (provided, state) => ({
     ...provided,
-    transition: 'transform 0.3s ease',
+    transition: 'var(--transition)',
     transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
     color: 'var(--color-main, #050505)',
     padding: 4,
@@ -64,8 +65,29 @@ export const customStyles = {
   menu: provided => ({
     ...provided,
     backgroundColor: 'var(--color-bg)',
-    borderRadius: '0px',
+    borderRadius: '15px',
+
+    borderColor: 'var(--color-main-20, rgba(5, 5, 5, 0.20))',
+    padding: '16px 0',
   }),
+  menuList: provided => ({
+    ...provided,
+    '::-webkit-scrollbar': {
+      width: '5px',
+    },
+    '::-webkit-scrollbar-track': {
+      background: 'transparent',
+    },
+    '::-webkit-scrollbar-thumb': {
+      borderRadius: '3px',
+      background: 'var(--color-main-80)',
+    },
+    '::-webkit-scrollbar-thumb:hover': {
+      background: 'var(--color-main)',
+    },
+    padding: '0 13px 0 18px',
+  }),
+
   option: (provided, state) => ({
     ...provided,
     fontFamily: 'Mulish',
@@ -75,12 +97,19 @@ export const customStyles = {
     lineHeight: '24px',
     letterSpacing: '-0.02em',
     color: 'var(--color-main, #050505)',
-    padding: '0',
+    borderRadius: '4px',
+    padding: '0 4px',
     margin: '0',
     backgroundColor: state.isSelected
-      ? 'var(--color-main-20, rgba(5, 5, 5, 0.20))'
+      ? 'var(--color-main-20)'
       : state.isFocused
-      ? 'var(--color-main-20, rgba(5, 5, 5, 0.20))'
+      ? 'var(--color-main-10)'
       : null,
+    '&:active': {
+      backgroundColor: 'var(--color-main-20)',
+    },
+    '&:selected': {
+      backgroundColor: 'var(--color-main-10)',
+    },
   }),
 };
