@@ -2,7 +2,7 @@ import MainTitle from 'components/Shared/MainTitle/MainTitle';
 import { useSelector } from 'react-redux';
 import { selectTestimonials } from 'store/testimonialsSlice/selectors';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { selectAreTestimonialsLoading } from 'store/testimonialsSlice/selectors';
 
 import css from './Testimonials.module.css';
@@ -21,11 +21,16 @@ const Testimonials = () => {
     },
   };
 
+  const autoplayConfig = {
+    delay: 5000
+  };
+
   const testimonialsList = testimonials.length ? (
     <Swiper
       pagination={paginationConfig}
-      modules={[Pagination]}
+      modules={[Pagination, Autoplay]}
       className="mySwiper"
+      autoplay={autoplayConfig}
     >
       {testimonials.map(it => (
         <SwiperSlide key={it._id}>

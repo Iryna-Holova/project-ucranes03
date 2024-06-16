@@ -6,8 +6,8 @@ import { logoutUser } from 'store/authSlice/thunks';
 const LogOutModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(logoutUser)
-  }
+    dispatch(logoutUser());
+  };
   return (
     <>
       <h2 className={css.title}>Are you logging out?</h2>

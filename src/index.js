@@ -10,7 +10,7 @@ import { themeStorageKey, themes } from 'constants/themes';
 import './index.css';
 
 
-const rootElement = document.getElementById('root');
+const rootElement = document.documentElement;
 const theme = localStorage.getItem(themeStorageKey);
 
 if (!theme) {
@@ -20,7 +20,7 @@ if (!theme) {
   rootElement.dataset.theme = theme;
 }
 
-ReactDOM.createRoot(rootElement).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter basename="project-ucranes03">
       <Provider store={store}>
