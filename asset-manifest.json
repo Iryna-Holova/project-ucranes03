@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/project-ucranes03/static/css/main.1fcb33fe.css",
+    "main.css": "/project-ucranes03/static/css/main.7df8672b.css",
     "main.js": "/project-ucranes03/static/js/main.67686b3e.js",
     "static/css/894.fd1e3098.chunk.css": "/project-ucranes03/static/css/894.fd1e3098.chunk.css",
     "static/js/894.f2d46706.chunk.js": "/project-ucranes03/static/js/894.f2d46706.chunk.js",
@@ -45,7 +45,7 @@
     "index.html": "/project-ucranes03/index.html",
     "static/media/placeholder-image.svg": "/project-ucranes03/static/media/placeholder-image.47615446a99f198bfa3c72de94c54a99.svg",
     "static/media/placeholder-avatar.svg": "/project-ucranes03/static/media/placeholder-avatar.a5762a0bde5ee77856c905f6adbb0195.svg",
-    "main.1fcb33fe.css.map": "/project-ucranes03/static/css/main.1fcb33fe.css.map",
+    "main.7df8672b.css.map": "/project-ucranes03/static/css/main.7df8672b.css.map",
     "main.67686b3e.js.map": "/project-ucranes03/static/js/main.67686b3e.js.map",
     "894.fd1e3098.chunk.css.map": "/project-ucranes03/static/css/894.fd1e3098.chunk.css.map",
     "894.f2d46706.chunk.js.map": "/project-ucranes03/static/js/894.f2d46706.chunk.js.map",
@@ -71,7 +71,7 @@
     "930.72461c9c.chunk.js.map": "/project-ucranes03/static/js/930.72461c9c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1fcb33fe.css",
+    "static/css/main.7df8672b.css",
     "static/js/main.67686b3e.js"
   ]
 }
