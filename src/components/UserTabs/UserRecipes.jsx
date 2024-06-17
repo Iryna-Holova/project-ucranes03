@@ -6,6 +6,7 @@ import ListItems from 'components/UserTabs/ListItems/ListItems';
 import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
 import Empty from 'components/Shared/Empty/Empty';
 import Pagination from 'components/Shared/Pagination/Pagination';
+import RecipePreviewSkeleton from './RecipePreview/RecipePreviewSkeleton';
 
 const UserRecipes = () => {
   const [params] = useSearchParams();
@@ -13,8 +14,10 @@ const UserRecipes = () => {
   const topElementRef = useRef(null);
   const [totalPages, setTotalPages] = useState(0);
   const [recipes, setRecipes] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   const fetchRecipes = useCallback(async () => {
+    setLoading(true);
     try {
       const page = params.get('page') || 1;
       let data;
@@ -29,6 +32,8 @@ const UserRecipes = () => {
       setTotalPages(data.totalPages);
     } catch (error) {
       showError(error);
+    } finally {
+      setLoading(false);
     }
   }, [id, params]);
 
@@ -39,14 +44,18 @@ const UserRecipes = () => {
   return (
     <div>
       <h3 className="visually-hidden">Recipes</h3>
-      {recipes.length === 0 ? (
+      {!isLoading &&recipes.length === 0 ? (
         <Empty>
           Nothing has been added to your recipes list yet. Please browse our
           recipes and add your favorites for easy access in the future.
         </Empty>
       ) : (
         <ListItems>
-          {recipes.map(recipe => (
+          {isLoading &&
+            [...Array(9)].map((item, idx) => (
+              <RecipePreviewSkeleton key={idx} />
+            ))}
+          {!isLoading &&recipes.map(recipe => (
             <RecipePreview
               key={recipe._id}
               recipe={recipe}
