@@ -61,13 +61,11 @@ const schema = yup.object().shape({
     .string()
     .required('Instructions are required')
     .max(2500, 'Instructions should not exceed 2500 characters'),
-    time: yup
+  time: yup
     .number()
     .required('Time is required')
     .min(1, 'Time should be at least 1 minute'),
 });
-
-
 
 const AddRecipeForm = () => {
   const [previewImage, setPreviewImage] = useState(null);
@@ -97,8 +95,7 @@ const AddRecipeForm = () => {
     reset,
     trigger,
     clearErrors,
-    
-  } =  useForm({
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       time: 0,
@@ -151,7 +148,7 @@ const AddRecipeForm = () => {
   const handleMinusTime = () => {
     const newTime = getValues('time') > 10 ? getValues('time') - 10 : 0;
     setValue('time', newTime);
-    trigger('time'); 
+    trigger('time');
   };
 
   const handleFileChange = evt => {
@@ -191,7 +188,6 @@ const AddRecipeForm = () => {
     reset();
     setPreviewImage(null);
     setIngredientsList([]);
-    
   };
 
   return (
@@ -204,7 +200,7 @@ const AddRecipeForm = () => {
                 <use href={`${icons}#icon-camera`}></use>
               </svg>
               <input
-                className={css.input_file }
+                className={css.input_file}
                 {...register('thumb', {
                   onChange: handleFileChange,
                 })}
@@ -235,34 +231,46 @@ const AddRecipeForm = () => {
               width="100"
             />
           )}
-            {errors.thumb && (
-          <span className={css.error_file}>{errors.thumb.message}</span>
-        )}
+          {errors.thumb && (
+            <span className={css.error_file}>{errors.thumb.message}</span>
+          )}
         </div>
-      
+
         <div className={css.boxInputsForm}>
           <div className={css.box_name_cate_ingr}>
             <div className={css.box_input_name}>
               <div className={css.boxError}>
-              <input
-                placeholder={errors.title ? "Name is required enter name your recipe" : "The name of the recipe"}
-                className={`${css.input_name} ${errors.title ? css.input_error : ""}`}
-                type="text"
-                {...register('title')}
-              />
+                <input
+                  placeholder={
+                    errors.title
+                      ? 'Name is required enter name your recipe'
+                      : 'The name of the recipe'
+                  }
+                  className={`${css.input_name} ${
+                    errors.title ? css.input_error : ''
+                  }`}
+                  type="text"
+                  {...register('title')}
+                />
               </div>
-              
+
               <div className={css.box_description}>
                 <input
                   maxLength={200}
-                  className={`${css.input_description} ${errors.description && css.input_error}`}
+                  className={`${css.input_description} ${
+                    errors.description && css.input_error
+                  }`}
                   {...register('description', {
                     onChange: handleDescription,
                   })}
-                  placeholder={errors.description? "Description is required,enter your description": "Enter a description of the dish"}
+                  placeholder={
+                    errors.description
+                      ? 'Description is required,enter your description'
+                      : 'Enter a description of the dish'
+                  }
                   type="text"
                 />
-                
+
                 <span className={css.text_length}>{`${countLength}/200`}</span>
               </div>
             </div>
@@ -274,7 +282,11 @@ const AddRecipeForm = () => {
                   control={control}
                   render={({ field }) => (
                     <Select
-                      placeholder={errors.category ? "Category is required,pick category": "Select a category"}
+                      placeholder={
+                        errors.category
+                          ? 'Category is required,pick category'
+                          : 'Select a category'
+                      }
                       styles={customStyles}
                       {...field}
                       options={categories}
@@ -294,7 +306,13 @@ const AddRecipeForm = () => {
                       <use href={`${icons}#icon-minus`}></use>
                     </svg>
                   </button>
-                  <span className={`${css.counter_time} ${errors.time && css.error_message}`}>{getValues('time')} min</span>
+                  <span
+                    className={`${css.counter_time} ${
+                      errors.time && css.error_message
+                    }`}
+                  >
+                    {getValues('time')} min
+                  </span>
                   <button
                     className={css.btn_time}
                     onClick={handleAddTime}
@@ -305,7 +323,9 @@ const AddRecipeForm = () => {
                     </svg>
                   </button>
                 </div>
-                {errors.time && <span className={css.error_message}>Time is required</span>}
+                {errors.time && (
+                  <span className={css.error_message}>Time is required</span>
+                )}
               </div>
             </div>
             <div className={css.box_area}>
@@ -380,11 +400,16 @@ const AddRecipeForm = () => {
           <div className={css.box_preparation}>
             <label className={css.title_description}>Recipe Preparation</label>
             <textarea
-              className={`${css.input_preparation} ${errors.instructions ? css.input_error : ""}`}
+              className={`${css.input_preparation} ${
+                errors.instructions ? css.input_error : ''
+              }`}
               {...register('instructions')}
-              placeholder={errors.instructions ? "Preparation is required,enter preparation" : "Enter recipe"}
+              placeholder={
+                errors.instructions
+                  ? 'Preparation is required,enter preparation'
+                  : 'Enter recipe'
+              }
             ></textarea>
-            
           </div>
           <div className={css.box_btn_del_pub}>
             <button onClick={handleDelete} className={css.delete_btn}>
