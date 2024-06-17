@@ -44,12 +44,6 @@ export const customStyles = {
   multiValueLabel: base => ({
     ...base,
     color: 'var(--color-main, #050505)',
-    fontFamily: 'Mulish',
-    fontSize: '16px',
-    fontStyle: 'normal',
-    fontWeight: 500,
-    lineHeight: '24px',
-    letterSpacing: '-0.02em',
     padding: '0',
     margin: '0',
   }),
