@@ -1,14 +1,30 @@
-import SelectFilter from 'components/Shared/SelectFilter/SelectFilter';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import SelectFilter from 'components/Shared/SelectFilter/SelectFilter';
 import { selectIngredientsOptions } from 'store/ingredientsSlice/selectors';
 import { selectAreasOptions } from 'store/areasSlice/selectors';
+import { fetchIngredients } from 'store/ingredientsSlice/thunks';
+import { fetchAreas } from 'store/areasSlice/thunks';
 import css from './RecipeFilter.module.css';
 
 const RecipeFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const ingredientsOptions = useSelector(selectIngredientsOptions);
   const areasOptions = useSelector(selectAreasOptions);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!ingredientsOptions.length) {
+      dispatch(fetchIngredients());
+    }
+  }, [dispatch, ingredientsOptions]);
+
+  useEffect(() => {
+    if (!areasOptions.length) {
+      dispatch(fetchAreas());
+    }
+  }, [dispatch, areasOptions]);
 
   const handleChange = (option, { name }) => {
     setSearchParams(prevParams => {
