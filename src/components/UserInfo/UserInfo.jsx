@@ -130,7 +130,13 @@ const UserInfo = () => {
       </div>
 
       {isCurrent && (
-        <ButtonLink type="button" onClick={() => setIsModalOpen(true)}>
+        <ButtonLink
+          type="button"
+          onClick={() => setIsModalOpen(true)}
+          aria-label="Log out"
+          aria-haspopup="dialog"
+          aria-expanded={isModalOpen}
+        >
           Log out
         </ButtonLink>
       )}
@@ -144,11 +150,9 @@ const UserInfo = () => {
             Follow
           </ButtonLink>
         ))}
-      {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <LogOutModal onClose={() => setIsModalOpen(false)} />
-        </Modal>
-      )}
+      <Modal showModal={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <LogOutModal onClose={() => setIsModalOpen(false)} />
+      </Modal>
     </div>
   );
 };

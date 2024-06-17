@@ -27,11 +27,17 @@ const Pagination = ({ totalPages }) => {
   };
 
   return (
-    <div className={css.pagination}>
+    <div
+      className={css.pagination}
+      aria-label="Page navigation"
+      role="navigation"
+    >
       {currentPage > 1 && (
         <button
           onClick={() => changePage(currentPage - 1)}
           className={css.prev}
+          aria-label="Previous page"
+          title="Previous page"
         >
           Previous
         </button>
@@ -41,6 +47,9 @@ const Pagination = ({ totalPages }) => {
           key={page}
           onClick={() => changePage(page)}
           className={`${page === currentPage && css.active} ${css.page}`}
+          aria-label={`Page ${page}`}
+          aria-current={page === currentPage}
+          title={`Page ${page}`}
         >
           {page}
         </button>
@@ -49,6 +58,8 @@ const Pagination = ({ totalPages }) => {
         <button
           onClick={() => changePage(currentPage + 1)}
           className={css.next}
+          aria-label="Next page"
+          title="Next page"
         >
           Next
         </button>

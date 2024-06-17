@@ -73,6 +73,8 @@
 
 .hero button {
   margin: 0 auto;
+  position: relative;
+  z-index: 4;
 }
 
 .stroke {

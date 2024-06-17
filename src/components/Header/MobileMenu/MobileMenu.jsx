@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import css from "./MobileMenu.module.css";
+import { Link } from 'react-router-dom';
+import css from './MobileMenu.module.css';
 
 const MobileMenu = ({ onCloseBurgerMenu, isBurgerMenu }) => {
   return (
@@ -9,6 +9,9 @@ const MobileMenu = ({ onCloseBurgerMenu, isBurgerMenu }) => {
           ? `${css.mobile_menu} ${css.menu_open}`
           : `${css.mobile_menu}`
       }
+      id="mobile-menu"
+      role="menu"
+      aria-hidden={!isBurgerMenu}
     >
       <div className={css.mobile_menu_header}>
         <Link

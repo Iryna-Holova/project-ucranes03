@@ -1,38 +1,31 @@
 import { useAuthModalContext } from 'components/AuthModalContext';
-import { useLocation } from 'react-router-dom';
 import css from './Auth.module.css';
 
-
 const AuthBar = () => {
-  const { onOpenSignIn, onOpenSignUp, isSignUp } = useAuthModalContext();
-
-  const pagesArray = ["/", `/recipes`];
-  const location = useLocation().pathname;
-  const isBlackTheme = !pagesArray.some((page) => page === location);
+  const { onOpenSignIn, onOpenSignUp, isSignUp, isAuthOpen } =
+    useAuthModalContext();
 
   return (
     <div className={css.authbar_wrap}>
       <button
         type="button"
         className={`${css.authbar_btn} ${!isSignUp ? css.activeBtn : ''}`}
-        style={
-          isBlackTheme
-            ? { borderColor: `var(--color-main-20)` }
-            : { borderColor: `rgba(255, 255, 255, 0.20)` }
-        }
+        style={{ transform: 'translateX(-1px)' }}
         onClick={() => onOpenSignIn()}
+        aria-haspopup="dialog"
+        aria-expanded={isAuthOpen && !isSignUp}
+        aria-label="Sign in"
       >
         Sign in
       </button>
       <button
         type="button"
         className={`${css.authbar_btn} ${isSignUp ? css.activeBtn : ''}`}
-        style={
-          isBlackTheme
-            ? { borderColor: `var(--color-main-20)` }
-            : { borderColor: `rgba(255, 255, 255, 0.20)` }
-        }
+        style={{ transform: 'translateX(1px)' }}
         onClick={() => onOpenSignUp()}
+        aria-haspopup="dialog"
+        aria-expanded={isAuthOpen && isSignUp}
+        aria-label="Sign up"
       >
         Sign up
       </button>
