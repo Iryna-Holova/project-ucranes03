@@ -21,7 +21,6 @@ const RecipePage = () => {
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
-        block: 'start',
       });
     };
 
