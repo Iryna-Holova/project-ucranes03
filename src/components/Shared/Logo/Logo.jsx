@@ -2,10 +2,12 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import css from './Logo.module.css';
 
-const Logo = () => {
+const Logo = ({ inFooter = false }) => {
   const pagesArray = ['/', `/recipes`];
   const location = useLocation().pathname;
-  const isBlackTheme = !pagesArray.some(page => page === location);
+  const isBlackTheme = !inFooter
+    ? !pagesArray.some(page => page === location)
+    : pagesArray.some(page => page === location);
 
   return (
     <Link
