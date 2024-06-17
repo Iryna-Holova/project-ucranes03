@@ -1,8 +1,10 @@
-export const customStyles = {
+export const customStyles = hasError => ({
   control: provided => ({
     ...provided,
     borderRadius: '30px',
-    border: '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
+    border: hasError
+      ? '1px solid red'
+      : '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
     fontFamily: 'Mulish',
     fontSize: '16px',
     fontStyle: 'normal',
@@ -44,6 +46,12 @@ export const customStyles = {
   multiValueLabel: base => ({
     ...base,
     color: 'var(--color-main, #050505)',
+    fontFamily: 'Mulish',
+    fontSize: '16px',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    lineHeight: '24px',
+    letterSpacing: '-0.02em',
     padding: '0',
     margin: '0',
   }),
@@ -127,4 +135,4 @@ export const customStyles = {
       backgroundColor: 'var(--color-main-10)',
     },
   }),
-};
+});
