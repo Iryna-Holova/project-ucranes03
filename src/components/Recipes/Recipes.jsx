@@ -60,15 +60,16 @@ const Recipes = () => {
         setIsLoading(false);
       }
     };
-    scrollToElement(topElementRef.current);
     fetchRecipes();
+    setTimeout(() => {
+      scrollToElement(topElementRef.current);
+    }, 100);
   }, [isMobile, params]);
 
   return (
     <section className="section">
-      <div ref={topElementRef}></div>
       <div className={css.header}>
-        <Link to="/" className={css.back_link}>
+        <Link to="/" className={css.back_link} ref={topElementRef}>
           <svg width={16} height={16}>
             <use href={`${icons}#icon-arrow-left`} />
           </svg>
@@ -83,7 +84,7 @@ const Recipes = () => {
       <div className={css.content}>
         <RecipeFilters />
         <div>
-          <RecipeList recipes={recipes}>
+          <RecipeList>
             {isLoading ? (
               [...Array(isMobile ? 8 : 12)].map((_, idx) => (
                 <RecipeCardSkeleton key={idx} />
