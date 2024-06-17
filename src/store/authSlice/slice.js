@@ -21,6 +21,12 @@ export const userSlice = createSlice({
     setFollowing(state, action) {
       state.user.following = action.payload;
     },
+    updateCounterFavorites(state, action) {
+      state.user.favorites += action.payload;
+    },
+    updateCounterRecipes(state, action) {
+      state.user.recipes += action.payload;
+    },
     setAvatar(state, action) {
       state.user.avatar = action.payload;
     },
@@ -84,4 +90,9 @@ export const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const { setFollowing, setAvatar } = userSlice.actions;
+export const {
+  setFollowing,
+  updateCounterFavorites,
+  updateCounterRecipes,
+  setAvatar,
+} = userSlice.actions;
