@@ -1,8 +1,9 @@
-import SelectFilter from "components/Shared/SelectFilter/SelectFilter";
-import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import { selectIngredientsOptions } from "store/ingredientsSlice/selectors";
-import { selectAreasOptions } from "store/areasSlice/selectors";
+import SelectFilter from 'components/Shared/SelectFilter/SelectFilter';
+import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
+import { selectIngredientsOptions } from 'store/ingredientsSlice/selectors';
+import { selectAreasOptions } from 'store/areasSlice/selectors';
+import css from './RecipeFilter.module.css';
 
 const RecipeFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,31 +13,48 @@ const RecipeFilters = () => {
   const handleChange = (option, { name }) => {
     setSearchParams(prevParams => {
       const newParams = new URLSearchParams(prevParams);
-      newParams.set("page", 1);
-      if (option) {
+      newParams.set('page', 1);
+
+      if (option && Array.isArray(option)) {
+        if (option.length > 0) {
+          newParams.set(name, option.map(opt => opt.value).join(','));
+        } else {
+          newParams.delete(name);
+        }
+      } else if (option) {
         newParams.set(name, option.value);
       } else {
         newParams.delete(name);
       }
+
       return newParams;
     });
   };
 
   const getOptionFromValue = (options, value) => {
-    return options.find(option => option.value === value) || null;
+    if (!value) return null;
+    const valuesArray = value.split(',');
+    return options.filter(option => valuesArray.includes(option.value));
   };
 
-  const selectedIngredient = getOptionFromValue(ingredientsOptions, searchParams.get("ingredient"));
-  const selectedArea = getOptionFromValue(areasOptions, searchParams.get("area"));
+  const selectedIngredient = getOptionFromValue(
+    ingredientsOptions,
+    searchParams.get('ingredients')
+  );
+  const selectedArea = getOptionFromValue(
+    areasOptions,
+    searchParams.get('area')
+  );
 
   return (
-    <div>
+    <div className={css.filters_container}>
       <SelectFilter
-        name="ingredient"
+        name="ingredients"
         options={ingredientsOptions}
         onChange={handleChange}
         value={selectedIngredient}
-        placeholder="Ingredients"
+        placeholder="Ingredient"
+        isMulti={true}
       />
       <SelectFilter
         name="area"

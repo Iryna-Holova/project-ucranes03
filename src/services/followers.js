@@ -12,7 +12,13 @@ export const addToFollowing = id =>
   api.patch(`/api/users/addFollowing/${id}`);
 
 
-export const getFollowers = ({ page, limit } = {}) =>
+export const getFollowers = (id, { page, limit } = {}) =>
+  api.get(`/api/users/followers/${id}`, {
+    params: { page, limit },
+  });
+
+
+  export const getOwnFollowers = ({ page, limit} = {}) =>
   api.get('/api/users/followers', {
     params: { page, limit },
   });

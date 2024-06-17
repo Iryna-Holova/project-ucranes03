@@ -7,6 +7,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from 'components/App';
 
 import './index.css';
+import { setInitialTheme } from 'helpers/themes-toggler';
+
+setInitialTheme();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

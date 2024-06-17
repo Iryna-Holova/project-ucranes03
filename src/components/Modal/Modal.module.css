@@ -10,9 +10,9 @@
 
 .modal {
   position: fixed;
-  right: 50%;
+  left: 50%;
   top: 50%;
-  transform: translate(50%, -50%);
+  transform: translate(-50%, -50%);
   width: 343px;
   max-width: 100%;
   max-height: 100%;
@@ -20,7 +20,52 @@
   padding: 60px 30px;
   border-radius: 20px;
   background-color: var(--color-bg);
+  overflow: hidden;
   z-index: 101;
+}
+
+.modal-enter > .backdrop {
+  opacity: 0;
+}
+
+.modal-enter-active > .backdrop {
+  opacity: 1;
+  transition: opacity var(--transition);
+}
+
+.modal-exit > .backdrop {
+  opacity: 1;
+}
+
+.modal-exit-active > .backdrop {
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.modal-enter-active > .modal {
+  animation: moveUp 300ms ease-out forwards;
+}
+
+.modal-exit-active > .modal {
+  animation: moveDown 300ms ease-out forwards;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes moveDown {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    transform: translate(-50%, 100%);
+  }
 }
 
 .close {
@@ -36,7 +81,7 @@
 }
 
 .close:hover > svg {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .content {
@@ -44,10 +89,23 @@
   width: 100%;
 }
 
-@media screen and (min-width: 768px) {
-  .close {
-    padding: 20px;
-  }
+.content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content::-webkit-scrollbar-track {
+  background-color: var(--color-gray);
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: var(--color-black-90);
+  border-radius: 10px;
+  border: 1px solid var(--color-gray);
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-black);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

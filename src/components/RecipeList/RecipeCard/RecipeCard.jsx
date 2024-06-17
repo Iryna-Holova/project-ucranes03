@@ -1,37 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { removeFavorite, addFavorite } from 'services/recipes';
 import { selectUser } from 'store/authSlice/selectors';
 import { useAuthModalContext } from 'components/AuthModalContext';
 import { useMobileMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
+import { showError } from 'helpers/notification';
 import Image from 'components/Shared/Image/Image';
-import icons from 'images/icons.svg';
 import defaultAvatar from 'images/placeholder-avatar.svg';
+import icons from 'images/icons.svg';
 import css from './RecipeCard.module.css';
 
 const RecipeCard = ({ recipe }) => {
+  const { _id, title, owner, description, thumb, favorite } = recipe;
   const { onAuthOpen } = useAuthModalContext();
   const isMobile = useMobileMediaQuery();
   const isTablet = useTabletMediaQuery();
-  const { _id, title, owner, description, thumb, favorite } = recipe;
-
-  const navigate = useNavigate();
   const location = useLocation();
-
+  const navigate = useNavigate();
   const user = useSelector(selectUser);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
-  const [isFavorite, setIsFavorite] = useState(
-    user ? favorite.includes(user.id) : false
-  );
+  useEffect(() => {
+    user && setIsFavorite(favorite.includes(user.id));
+  }, [favorite, user]);
 
   const cardStyles = location.pathname.includes('recipes')
     ? `${css.recipe_card} ${css.all_recipes}`
     : `${css.recipe_card} ${css.popular_recipes}`;
-
-  const heartIconStyles = isFavorite
-    ? `${css.heart_icon} ${css.favorite_heart}`
-    : `${css.heart_icon}`;
 
   const handleOwnerBtnClick = () => {
     if (user) {
@@ -46,6 +43,8 @@ const RecipeCard = ({ recipe }) => {
       onAuthOpen();
       return;
     }
+
+    setIsPending(true);
     try {
       if (isFavorite) {
         await removeFavorite(_id);
@@ -55,54 +54,59 @@ const RecipeCard = ({ recipe }) => {
         setIsFavorite(true);
       }
     } catch (error) {
-      throw Error(error.message);
+      showError(error);
+    } finally {
+      setIsPending(false);
     }
   };
 
   return (
-    <>
-      <li className={cardStyles}>
-        <Image
-          publicId={thumb}
-          alt={title}
-          aspectRatio={isMobile ? 1.49 : isTablet ? 1.24 : 1}
-          className={css.thumb}
-        />
-        <div className={css.card_details}>
-          <h4 className={css.title}>{title}</h4>
-          <p className={css.description}>{description}</p>
-          <div className={css.owner_info}>
-            <button className={css.owner_btn} onClick={handleOwnerBtnClick}>
-              <Image
-                publicId={owner.avatar}
-                className={css.avatar}
-                defaultImage={defaultAvatar}
-                alt={owner.name}
-              />
-              {owner.name}
+    <li className={cardStyles}>
+      <Image
+        publicId={thumb}
+        alt={title}
+        aspectRatio={isMobile ? 1.49 : isTablet ? 1.24 : 1}
+        className={css.thumb}
+      />
+      <div className={css.card_details}>
+        <h4 className={css.title}>{title}</h4>
+        <p className={css.description}>{description}</p>
+        <div className={css.owner_info}>
+          <button className={css.owner_btn} onClick={handleOwnerBtnClick}>
+            <Image
+              publicId={owner.avatar}
+              className={css.avatar}
+              defaultImage={defaultAvatar}
+              alt={owner.name}
+            />
+            {owner.name}
+          </button>
+          <div className={css.icons_wrapper}>
+            <button
+              className={css.heart_icon}
+              onClick={handleHeartIconClick}
+              disabled={isPending}
+            >
+              <svg className={css.icon}>
+                <use
+                  href={`${icons}${
+                    isFavorite ? '#icon-heart-filled' : '#icon-heart'
+                  }`}
+                />
+              </svg>
             </button>
-            <div className={css.icons_wrapper}>
-              <button
-                className={heartIconStyles}
-                onClick={handleHeartIconClick}
-              >
-                <svg className={css.icon}>
-                  <use href={`${icons}#icon-heart`} />
-                </svg>
-              </button>
-              <button
-                className={css.arrow_icon}
-                onClick={() => navigate(`/recipe/${_id}`)}
-              >
-                <svg className={css.icon}>
-                  <use href={`${icons}#icon-arrow-up-right`} />
-                </svg>
-              </button>
-            </div>
+            <button
+              className={css.arrow_icon}
+              onClick={() => navigate(`/recipe/${_id}`)}
+            >
+              <svg className={css.icon}>
+                <use href={`${icons}#icon-arrow-up-right`} />
+              </svg>
+            </button>
           </div>
         </div>
-      </li>
-    </>
+      </div>
+    </li>
   );
 };
 

@@ -26,13 +26,14 @@ const schema = yup
   .required();
 
 const SignInForm = () => {
-  const { path, onToggleMode, onAuthClose } = useAuthModalContext();
+  const { path, onToggleMode, onAuthClose, isSignUp } = useAuthModalContext();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
+    setFocus,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onSubmit',
@@ -51,6 +52,14 @@ const SignInForm = () => {
     }
   }, [isLoggedIn, navigate, onAuthClose, path]);
 
+  useEffect(() => {
+    if (!isSignUp) {
+      setTimeout(() => {
+        setFocus('email');
+      }, 300);
+    }
+  }, [isSignUp, setFocus]);
+
   const onSubmit = data => {
     dispatch(loginUser(data));
   };
@@ -60,8 +69,13 @@ const SignInForm = () => {
   const isFormFilled = email && password;
 
   return (
-    <div>
-      <h2 className={css.title}>Sign in</h2>
+    <div className={`${css.signin_wrapper} ${!isSignUp ? css.is_active : ''}`}>
+      <h2 id="modal-title" className={css.title}>
+        Sign in
+      </h2>
+      <p id="modal-description" className="visually-hidden">
+        Sign in
+      </p>
       <form onSubmit={handleSubmit(onSubmit)} className={css.form} noValidate>
         <div className={css.inputs}>
           <div className={css.input_field}>
@@ -89,28 +103,45 @@ const SignInForm = () => {
             />
             <button
               type="button"
-              onClick={() =>
-                setIsPasswordVisible(isPasswordVisible => !isPasswordVisible)
-              }
+              onClick={() => {
+                setIsPasswordVisible(isPasswordVisible => !isPasswordVisible);
+                setFocus('password');
+              }}
+              aria-label="Toggle password visibility"
               className={css.input_button}
             >
-              <svg width={18} height={18}>
-                <use
-                  href={`${icons}${
-                    isPasswordVisible ? '#icon-eye' : '#icon-eye-off'
-                  }`}
-                />
+              <svg
+                width={18}
+                height={18}
+                className={`${css.button_icon} ${
+                  isPasswordVisible ? css.visible : ''
+                }`}
+              >
+                <use href={`${icons}#icon-eye`} />
+              </svg>{' '}
+              <svg
+                width={18}
+                height={18}
+                className={`${css.button_icon} ${
+                  !isPasswordVisible ? css.visible : ''
+                }`}
+              >
+                <use href={`${icons}#icon-eye-off`} />
               </svg>
             </button>
           </div>
         </div>
-        <ButtonLink disabled={!isFormFilled} type="submit">
+        <ButtonLink type="submit" disabled={!isFormFilled || isLoading}>
           {isLoading ? 'Loading...' : 'Sign in'}
         </ButtonLink>
       </form>
       <span className={css.text}>
         Don't have an account?{' '}
-        <button onClick={onToggleMode} className={css.switch_button}>
+        <button
+          onClick={onToggleMode}
+          className={css.switch_button}
+          type="button"
+        >
           Create an account
         </button>
       </span>

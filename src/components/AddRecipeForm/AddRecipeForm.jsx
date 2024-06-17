@@ -18,6 +18,7 @@ import { addRecipe } from 'services/recipes';
 import { showError } from 'helpers/notification';
 import { useNavigate } from 'react-router-dom';
 import { fetchCategories } from 'store/categoriesSlice/thunks';
+import { customStyles } from 'components/Shared/SelectFilter/customStyles';
 
 const schema = yup.object().shape({
   thumb: yup
@@ -60,44 +61,14 @@ const schema = yup.object().shape({
     .string()
     .required('Instructions are required')
     .max(2500, 'Instructions should not exceed 2500 characters'),
+  time: yup
+    .number()
+    .required('Time is required')
+    .min(1, 'Time should be at least 1 minute'),
 });
-const customStyles = {
-  control: provided => ({
-    ...provided,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '188px',
-    borderRadius: '30px',
-    border: '1px solid var(--color-main-12, rgba(5, 5, 5, 0.12))',
-    width: '100%',
-    marginTop: '8px',
-  }),
-  singleValue: provided => ({
-    ...provided,
-    color: 'var(--color-main-60, rgba(5, 5, 5, 0.60))',
-    fontSize: '14px',
-    fontWeight: '500',
-    lineHeight: '1.4',
-    letterSpacing: '-0.02em',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    width: '100%',
-  }),
-  menu: provided => ({
-    ...provided,
-    color: 'var(--color-main-60, rgba(5, 5, 5, 0.60))',
-    fontSize: '14px',
-    fontWeight: '500',
-    lineHeight: '1.4',
-    letterSpacing: '-0.02em',
-  }),
-};
 
 const AddRecipeForm = () => {
   const [previewImage, setPreviewImage] = useState(null);
-  const [time, setTime] = useState(0);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [countLength, setCountLength] = useState(0);
   const categories = useSelector(selectCategoriesOptions);
@@ -123,8 +94,12 @@ const AddRecipeForm = () => {
     getValues,
     reset,
     trigger,
+    clearErrors,
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      time: 0,
+    },
   });
 
   const onSubmit = async data => {
@@ -132,7 +107,6 @@ const AddRecipeForm = () => {
       alert('Please add at least one ingredient');
       return;
     }
-    data.time = time;
     data.ingredients = ingredientsList;
     data.category = data.category.value;
     data.area = data.area.value;
@@ -158,7 +132,8 @@ const AddRecipeForm = () => {
   };
 
   const handleAddTime = () => {
-    setTime(prevTime => prevTime + 10);
+    setValue('time', getValues('time') + 10);
+    trigger('time');
   };
 
   const handleCloseIngredient = _id => {
@@ -171,7 +146,9 @@ const AddRecipeForm = () => {
   };
 
   const handleMinusTime = () => {
-    setTime(prevTime => (prevTime > 0 ? prevTime - 10 : 0));
+    const newTime = getValues('time') > 10 ? getValues('time') - 10 : 0;
+    setValue('time', newTime);
+    trigger('time');
   };
 
   const handleFileChange = evt => {
@@ -207,16 +184,16 @@ const AddRecipeForm = () => {
   };
 
   const handleDelete = () => {
+    clearErrors();
     reset();
     setPreviewImage(null);
-    setTime(0);
     setIngredientsList([]);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={css.box_form}>
-        <div className={css.box_file}>
+        <div className={`${css.box_file} ${errors.thumb && css.input_error}`}>
           {previewImage ? (
             <label style={{ display: 'none' }}>
               <svg className={css.icon_camera}>
@@ -231,10 +208,11 @@ const AddRecipeForm = () => {
               />
             </label>
           ) : (
-            <label>
+            <label className={css.label_photo_icon}>
               <svg className={css.icon_camera}>
                 <use href={`${icons}#icon-camera`}></use>
               </svg>
+              <span className={css.text_photo_add}>Upload a photo</span>
               <input
                 className={css.input_file}
                 {...register('thumb', {
@@ -253,37 +231,46 @@ const AddRecipeForm = () => {
               width="100"
             />
           )}
+          {errors.thumb && (
+            <span className={css.error_file}>{errors.thumb.message}</span>
+          )}
         </div>
-        {errors.photo && (
-          <span className={css.error_message}>{errors.photo.message}</span>
-        )}
-        <div>
+
+        <div className={css.boxInputsForm}>
           <div className={css.box_name_cate_ingr}>
             <div className={css.box_input_name}>
-              <input
-                placeholder="The name of the recipe"
-                className={css.input_name}
-                type="text"
-                {...register('title')}
-              />
-              {errors.name && (
-                <span className={css.error_message}>{errors.name.message}</span>
-              )}
+              <div className={css.boxError}>
+                <input
+                  placeholder={
+                    errors.title
+                      ? 'Name is required enter name your recipe'
+                      : 'The name of the recipe'
+                  }
+                  className={`${css.input_name} ${
+                    errors.title ? css.input_error : ''
+                  }`}
+                  type="text"
+                  {...register('title')}
+                />
+              </div>
+
               <div className={css.box_description}>
                 <input
                   maxLength={200}
-                  className={css.input_description}
+                  className={`${css.input_description} ${
+                    errors.description && css.input_error
+                  }`}
                   {...register('description', {
                     onChange: handleDescription,
                   })}
-                  placeholder="Enter a description of the dish"
+                  placeholder={
+                    errors.description
+                      ? 'Description is required,enter your description'
+                      : 'Enter a description of the dish'
+                  }
                   type="text"
                 />
-                {errors.description && (
-                  <span className={css.error_message}>
-                    {errors.description.message}
-                  </span>
-                )}
+
                 <span className={css.text_length}>{`${countLength}/200`}</span>
               </div>
             </div>
@@ -295,18 +282,17 @@ const AddRecipeForm = () => {
                   control={control}
                   render={({ field }) => (
                     <Select
-                      placeholder="Select a category"
+                      placeholder={
+                        errors.category
+                          ? 'Category is required,pick category'
+                          : 'Select a category'
+                      }
                       styles={customStyles}
                       {...field}
                       options={categories}
                     />
                   )}
                 />
-                {errors.category && (
-                  <span className={css.error_message}>
-                    {errors.category.message}
-                  </span>
-                )}
               </div>
               <div>
                 <label className={css.title_description}>COOKING TIME</label>
@@ -320,7 +306,13 @@ const AddRecipeForm = () => {
                       <use href={`${icons}#icon-minus`}></use>
                     </svg>
                   </button>
-                  <span className={css.counter_time}>{time} min</span>
+                  <span
+                    className={`${css.counter_time} ${
+                      errors.time && css.error_message
+                    }`}
+                  >
+                    {getValues('time')} min
+                  </span>
                   <button
                     className={css.btn_time}
                     onClick={handleAddTime}
@@ -331,6 +323,9 @@ const AddRecipeForm = () => {
                     </svg>
                   </button>
                 </div>
+                {errors.time && (
+                  <span className={css.error_message}>Time is required</span>
+                )}
               </div>
             </div>
             <div className={css.box_area}>
@@ -351,7 +346,7 @@ const AddRecipeForm = () => {
             <div className={css.box_ingredients}>
               <label className={css.title_description}>Ingredients</label>
               <div className={css.boxIngredQuan}>
-                <div>
+                <div className={css.box_input_ingredients}>
                   {' '}
                   <Controller
                     name="ingredients"
@@ -366,7 +361,7 @@ const AddRecipeForm = () => {
                     )}
                   />
                 </div>
-                <div>
+                <div className={css.box_input_quantity}>
                   {' '}
                   <input
                     className={css.input_quantity}
@@ -376,11 +371,6 @@ const AddRecipeForm = () => {
                   />
                 </div>
               </div>
-              {errors.ingredients && errors.quantity && (
-                <span className={css.error_message}>
-                  {errors.ingredients.message}
-                </span>
-              )}
             </div>
           </div>
           <ButtonLink
@@ -407,18 +397,19 @@ const AddRecipeForm = () => {
                 />
               ))}
           </ul>
-          <div>
+          <div className={css.box_preparation}>
             <label className={css.title_description}>Recipe Preparation</label>
             <textarea
-              className={css.input_preparation}
+              className={`${css.input_preparation} ${
+                errors.instructions ? css.input_error : ''
+              }`}
               {...register('instructions')}
-              placeholder="Enter recipe"
+              placeholder={
+                errors.instructions
+                  ? 'Preparation is required,enter preparation'
+                  : 'Enter recipe'
+              }
             ></textarea>
-            {errors.preparation && (
-              <span className={css.error_message}>
-                {errors.preparation.message}
-              </span>
-            )}
           </div>
           <div className={css.box_btn_del_pub}>
             <button onClick={handleDelete} className={css.delete_btn}>

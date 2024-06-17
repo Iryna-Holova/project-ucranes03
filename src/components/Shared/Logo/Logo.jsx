@@ -10,7 +10,11 @@ const Logo = ({ inFooter = false }) => {
     : pagesArray.some(page => page === location);
 
   return (
-    <Link to="/" className={isBlackTheme ? css.logo_black : css.logo_white}>
+    <Link
+      to="/"
+      className={isBlackTheme ? css.logo_black : css.logo_white}
+      aria-label="Foodies - Home page"
+    >
       Foodies
     </Link>
   );
