@@ -3,11 +3,13 @@
   bottom: -20px;
   color: var(--color-error);
   font-size: 14px;
+  z-index: 5;
 }
 
 .error ~ .input {
   border-color: var(--color-error);
 }
+
 .btn_another_photo {
   position: absolute;
   z-index: 10;
@@ -402,6 +404,7 @@
     font-size: 16px;
   }
   .boxIngredQuan {
+    position: relative;
     display: flex;
     gap: 19px;
     align-items: center;
