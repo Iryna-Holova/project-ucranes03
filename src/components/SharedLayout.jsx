@@ -19,11 +19,9 @@ const SharedLayout = () => {
         </Suspense>
       </main>
       <Footer />
-      {isAuthOpen && (
-        <Modal onClose={onAuthClose}>
-          <AuthModal />
-        </Modal>
-      )}
+      <Modal showModal={isAuthOpen} onClose={onAuthClose}>
+        <AuthModal />
+      </Modal>
     </>
   );
 };

@@ -2,9 +2,8 @@ import { NavLink } from 'react-router-dom';
 import css from './Nav.module.css';
 
 const Nav = () => {
- 
   return (
-    <nav className={css.header_nav}>
+    <nav className={css.header_nav} aria-label="Main navigation">
       <ul className={css.header_navlist}>
         <li className={css.header_navitem}>
           <NavLink

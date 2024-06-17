@@ -1,33 +1,33 @@
-import "@theme-toggles/react/css/Expand.css";
-import { Expand } from "@theme-toggles/react";
-import { useEffect, useState } from "react";
-import { themeStorageKey } from "constants/themes";
-import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { toggleTheme } from "helpers/themes-toggler";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { Expand } from '@theme-toggles/react';
+import '@theme-toggles/react/css/Expand.css';
 import {
   selectIsLoggedIn,
   selectIsRefreshing,
-} from "store/authSlice/selectors";
-import Loader from "components/Shared/Loader/Loader";
-import Logo from "components/Shared/Logo/Logo";
-import Nav from "./Nav/Nav";
-import AuthBar from "./AuthBar/AuthBar";
-import UserBar from "./UserBar/UserBar";
-import css from "./Header.module.css";
+} from 'store/authSlice/selectors';
+import { themeStorageKey } from 'constants/themes';
+import { toggleTheme } from 'helpers/themes-toggler';
+import Loader from 'components/Shared/Loader/Loader';
+import Logo from 'components/Shared/Logo/Logo';
+import Nav from './Nav/Nav';
+import AuthBar from './AuthBar/AuthBar';
+import UserBar from './UserBar/UserBar';
+import css from './Header.module.css';
 
 const Header = () => {
   const [isToggled, setToggle] = useState(false);
 
   useEffect(() => {
-    localStorage.getItem(themeStorageKey) === "LIGHT"
+    localStorage.getItem(themeStorageKey) === 'LIGHT'
       ? setToggle(false)
       : setToggle(true);
   }, []);
 
-  const pagesArray = ["/", `/recipes`];
+  const pagesArray = ['/', `/recipes`];
   const location = useLocation().pathname;
-  const isBlackTheme = !pagesArray.some((page) => page === location);
+  const isBlackTheme = !pagesArray.some(page => page === location);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
