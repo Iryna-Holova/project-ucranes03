@@ -17,6 +17,7 @@ const Followers = () => {
   const [users, setUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const following = useSelector(selectFollowing);
+
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
@@ -40,10 +41,10 @@ const Followers = () => {
     };
     fetchUsers();
   }, [params, user, isCurrent]);
+
   return (
     <div>
       <h3 className="visually-hidden">Followers</h3>
-
       {users.length === 0 ? (
         <Empty>
           There are currently no followers on your account. Please engage our
@@ -60,6 +61,7 @@ const Followers = () => {
             ))}
         </ListItems>
       )}
+
       {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </div>
   );

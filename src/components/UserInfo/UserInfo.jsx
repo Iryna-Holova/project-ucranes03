@@ -78,6 +78,7 @@ const UserInfo = () => {
       showError(error);
     } finally {
       setIsFollowPending(false);
+      window.location.reload();
     }
   };
 
@@ -94,6 +95,7 @@ const UserInfo = () => {
       showError(error);
     } finally {
       setIsFollowPending(false);
+      window.location.reload();
     }
   };
 
