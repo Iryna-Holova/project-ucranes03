@@ -31,6 +31,7 @@ const Testimonials = () => {
       modules={[Pagination, Autoplay]}
       className="mySwiper"
       autoplay={autoplayConfig}
+      loop={true}
     >
       {testimonials.map(it => (
         <SwiperSlide key={it._id}>
