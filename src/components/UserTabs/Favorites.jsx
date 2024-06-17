@@ -6,7 +6,7 @@ import ListItems from 'components/UserTabs/ListItems/ListItems';
 import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
 import Empty from 'components/Shared/Empty/Empty';
 import Pagination from 'components/Shared/Pagination/Pagination';
-import RecipePreviewSkeleton from './RecipePreview/RecipePreviewSkeleton';
+// import RecipePreviewSkeleton from './RecipePreview/RecipePreviewSkeleton';
 
 const Favorites = () => {
   const [params] = useSearchParams();
