@@ -1,5 +1,5 @@
 import MainTitle from 'components/Shared/MainTitle/MainTitle';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectTestimonials } from 'store/testimonialsSlice/selectors';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -9,10 +9,18 @@ import css from './Testimonials.module.css';
 import 'swiper/css';
 import TestimonialItem from './TestimonialItem/TestimonialItem';
 import Loader from 'components/Shared/Loader/Loader';
+import { useEffect } from 'react';
+import { fetchTestimonials } from 'store/testimonialsSlice/thunk';
 
 const Testimonials = () => {
   const testimonials = useSelector(selectTestimonials);
   const isLoading = useSelector(selectAreTestimonialsLoading);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!testimonials.length) {
+      dispatch(fetchTestimonials());
+    }
+  }, [dispatch, testimonials.length]);
 
   const paginationConfig = {
     clickable: true,
@@ -22,7 +30,7 @@ const Testimonials = () => {
   };
 
   const autoplayConfig = {
-    delay: 5000
+    delay: 5000,
   };
 
   const testimonialsList = testimonials.length ? (
@@ -31,6 +39,7 @@ const Testimonials = () => {
       modules={[Pagination, Autoplay]}
       className="mySwiper"
       autoplay={autoplayConfig}
+      loop={true}
     >
       {testimonials.map(it => (
         <SwiperSlide key={it._id}>

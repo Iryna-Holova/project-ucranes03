@@ -154,6 +154,10 @@
     height: 42px;
   }
 
+  .user_name_container {
+    width: 144 px;
+  }
+
   .user_name {
     font-size: 20px;
     line-height: 1.2;

@@ -11,61 +11,18 @@ import {
   selectIngredientsOptions,
 } from 'store/ingredientsSlice/selectors';
 import { selectAreasOptions } from 'store/areasSlice/selectors';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+
 import Ingredient from 'components/Shared/Ingredient/Ingredients';
 import { addRecipe } from 'services/recipes';
 import { showError } from 'helpers/notification';
 import { useNavigate } from 'react-router-dom';
 import { fetchCategories } from 'store/categoriesSlice/thunks';
 import { customStyles } from 'components/Shared/SelectFilter/customStyles';
+import { fetchIngredients } from 'store/ingredientsSlice/thunks';
+import { fetchAreas } from 'store/areasSlice/thunks';
+import { resolver } from './validation';
 
-const schema = yup.object().shape({
-  thumb: yup
-    .mixed()
-    .required('Photo is required')
-    .test('fileType', 'Unsupported File Format', value => {
-      return (
-        value &&
-        value[0] &&
-        ['image/jpeg', 'image/png', 'image/gif'].includes(value[0].type)
-      );
-    }),
-  title: yup.string().required('Title is required'),
-  description: yup
-    .string()
-    .required('Description is required')
-    .max(200, 'Description should not exceed 200 characters'),
-  category: yup
-    .object()
-    .shape({
-      value: yup.string().required('Category is required'),
-    })
-    .required('Category is required'),
-  area: yup
-    .object()
-    .shape({
-      value: yup.string().required('Area is required'),
-    })
-    .required('Area is required'),
-  ingredientsList: yup
-    .array()
-    .of(
-      yup.object().shape({
-        id: yup.string().required('Ingredient is required'),
-        measure: yup.string().required('Measure is required'),
-      })
-    )
-    .min(1, 'At least one ingredient is required'),
-  instructions: yup
-    .string()
-    .required('Instructions are required')
-    .max(2500, 'Instructions should not exceed 2500 characters'),
-  time: yup
-    .number()
-    .required('Time is required')
-    .min(1, 'Time should be at least 1 minute'),
-});
+const TIME_STEP = 5;
 
 const AddRecipeForm = () => {
   const [previewImage, setPreviewImage] = useState(null);
@@ -78,12 +35,21 @@ const AddRecipeForm = () => {
   const [ingregientsForList, setIngregientsForList] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (!categories.length) {
       dispatch(fetchCategories());
     }
   }, [categories.length, dispatch]);
+  useEffect(() => {
+    if (!ingredients.length) {
+      dispatch(fetchIngredients());
+    }
+  }, [dispatch, ingredients.length]);
+  useEffect(() => {
+    if (!areas.length) {
+      dispatch(fetchAreas());
+    }
+  }, [dispatch, areas.length]);
 
   const {
     register,
@@ -96,12 +62,11 @@ const AddRecipeForm = () => {
     trigger,
     clearErrors,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver,
     defaultValues: {
       time: 0,
     },
   });
-
   const onSubmit = async data => {
     if (ingredientsList.length === 0) {
       alert('Please add at least one ingredient');
@@ -131,11 +96,6 @@ const AddRecipeForm = () => {
     }
   };
 
-  const handleAddTime = () => {
-    setValue('time', getValues('time') + 10);
-    trigger('time');
-  };
-
   const handleCloseIngredient = _id => {
     setIngredientsList(prev =>
       prev.filter(ingredient => ingredient.id !== _id)
@@ -145,17 +105,26 @@ const AddRecipeForm = () => {
     );
   };
 
+  const handleAddTime = () => {
+    setValue('time', getValues('time') + TIME_STEP);
+    trigger('time');
+  };
+
   const handleMinusTime = () => {
-    const newTime = getValues('time') > 10 ? getValues('time') - 10 : 0;
+    const newTime =
+      getValues('time') > TIME_STEP ? getValues('time') - TIME_STEP : 0;
     setValue('time', newTime);
     trigger('time');
   };
 
   const handleFileChange = evt => {
     const file = evt.target.files[0];
-    if (file) {
-      setPreviewImage(URL.createObjectURL(file));
+    if (file.type.split('/')[0] !== 'image') {
+      showError(new Error('Unsupported file format'));
+      evt.target.value = '';
+      return;
     }
+    setPreviewImage(URL.createObjectURL(file));
   };
 
   const handleDescription = evt => {
@@ -191,14 +160,12 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <div className={css.box_form}>
         <div className={`${css.box_file} ${errors.thumb && css.input_error}`}>
           {previewImage ? (
-            <label style={{ display: 'none' }}>
-              <svg className={css.icon_camera}>
-                <use href={`${icons}#icon-camera`}></use>
-              </svg>
+            <label className={css.btn_another_photo}>
+              Upload another photo
               <input
                 className={css.input_file}
                 {...register('thumb', {
@@ -222,14 +189,8 @@ const AddRecipeForm = () => {
               />
             </label>
           )}
-
           {previewImage && (
-            <img
-              className={css.photo_file}
-              src={previewImage}
-              alt="Preview"
-              width="100"
-            />
+            <img className={css.photo_file} src={previewImage} alt="Preview" />
           )}
           {errors.thumb && (
             <span className={css.error_file}>{errors.thumb.message}</span>
@@ -239,35 +200,33 @@ const AddRecipeForm = () => {
         <div className={css.boxInputsForm}>
           <div className={css.box_name_cate_ingr}>
             <div className={css.box_input_name}>
-              <div className={css.boxError}>
+              <div className={css.input_wrapper}>
+                {errors.title && (
+                  <span className={css.error}>{errors.title.message}</span>
+                )}
                 <input
-                  placeholder={
-                    errors.title
-                      ? 'Name is required enter name your recipe'
-                      : 'The name of the recipe'
-                  }
-                  className={`${css.input_name} ${
-                    errors.title ? css.input_error : ''
-                  }`}
+                  name="title"
+                  placeholder={'The name of the recipe'}
+                  className={`${css.input_name}`}
                   type="text"
                   {...register('title')}
                 />
               </div>
 
               <div className={css.box_description}>
-                <input
+                {errors.description && (
+                  <span className={css.error}>
+                    {errors.description.message}
+                  </span>
+                )}
+                <textarea
+                  name="description"
                   maxLength={200}
-                  className={`${css.input_description} ${
-                    errors.description && css.input_error
-                  }`}
+                  className={`${css.input_description}`}
                   {...register('description', {
                     onChange: handleDescription,
                   })}
-                  placeholder={
-                    errors.description
-                      ? 'Description is required,enter your description'
-                      : 'Enter a description of the dish'
-                  }
+                  placeholder="Enter a description of the dish"
                   type="text"
                 />
 
@@ -282,11 +241,8 @@ const AddRecipeForm = () => {
                   control={control}
                   render={({ field }) => (
                     <Select
-                      placeholder={
-                        errors.category
-                          ? 'Category is required,pick category'
-                          : 'Select a category'
-                      }
+                      isClearable
+                      placeholder="Select a category"
                       styles={customStyles}
                       {...field}
                       options={categories}
@@ -335,6 +291,7 @@ const AddRecipeForm = () => {
                 control={control}
                 render={({ field }) => (
                   <Select
+                    isClearable
                     placeholder="Pick area"
                     styles={customStyles}
                     {...field}
@@ -353,6 +310,7 @@ const AddRecipeForm = () => {
                     control={control}
                     render={({ field }) => (
                       <Select
+                        isClearable
                         placeholder="Add the ingredient"
                         styles={customStyles}
                         {...field}
@@ -362,8 +320,8 @@ const AddRecipeForm = () => {
                   />
                 </div>
                 <div className={css.box_input_quantity}>
-                  {' '}
                   <input
+                    name="ingredients"
                     className={css.input_quantity}
                     {...register('measure')}
                     type="text"

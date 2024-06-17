@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getRecipe } from 'services/recipes';
@@ -15,12 +15,16 @@ const RecipePage = () => {
   const isDesktop = useDesktopMediaQuery();
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
-  const recipeRef = useRef(null);
 
   useEffect(() => {
-    if (recipeRef) {
-      recipeRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    };
+
+    scrollToTop();
   });
 
   useEffect(() => {
@@ -39,7 +43,7 @@ const RecipePage = () => {
 
   return (
     <PageContainer page="recipe">
-      <section className="section " ref={recipeRef}>
+      <section className="section ">
         <PathInfo current={recipe?.title} />
         <div className="section_row">
           {recipe && (

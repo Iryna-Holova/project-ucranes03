@@ -44,7 +44,7 @@
 }
 .file_input_label:hover {
   color: var(--color-main);
-  background-color: var(--color-white);
+  background-color: var(--color-secondary);
 }
 .name_items_list_wrapper {
   border: solid 1px var(--color-main-20);
@@ -67,20 +67,46 @@
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
-.list_item {
-  display: flex;
-  flex-direction: row;
-  column-gap: 8px;
-  align-items: baseline;
+.loader {
+  position: absolute;
+  width: 10px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
+}
+@keyframes l5 {
+  0% {
+    box-shadow: 16px 0 var(--color-main), -16px 0 var(--color-main-20);
+    background: var(--color-main);
+  }
+  33% {
+    box-shadow: 16px 0 var(--color-main), -16px 0 var(--color-main-20);
+    background: var(--color-main-20);
+  }
+  66% {
+    box-shadow: 16px 0 #0002, -16px 0 var(--color-main);
+    background: var(--color-main-20);
+  }
+  100% {
+    box-shadow: 16px 0 var(--color-main-20), -16px 0 var(--color-main);
+    background: var(--color-main);
+  }
 }
 .list_items {
+  width: 205px;
   display: flex;
   flex-direction: column;
   row-gap: 8px;
 }
+.list_item {
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+  align-items: center;
+}
 .item_name {
   color: var(--color-main-60, rgba(5, 5, 5, 0.6));
-  font-family: Mulish;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -89,12 +115,13 @@
 }
 .item_value {
   color: var(--color-main-90, rgba(5, 5, 5, 0.9));
-  font-family: Mulish;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 143%;
+  line-height: 1.43;
   letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media screen and (min-width: 768px) and (max-width: 1440px) {
   .user_info_container {
@@ -121,6 +148,12 @@
   }
   .name_items_list_wrapper {
     row-gap: 20px;
+  }
+  .list_items {
+    width: 234px;
+  }
+  .list_item {
+    height: 24px;
   }
   .item_name {
     font-size: 14px;
