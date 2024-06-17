@@ -25,10 +25,33 @@
 	align-items: center;
 }
 
+.toggle_wrap {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	gap: 10px;
+}
+
+.toggle_btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.toggle_btn svg {
+	width: 20px;
+	height: 20px;
+}
+
 
 @media screen and (min-width: 768px) {
 	.header_section {
 		margin-top: 36px;
+	}
+
+	.toggle_btn svg {
+		width: 25px;
+		height: 25px;
 	}
 }
 

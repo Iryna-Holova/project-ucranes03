@@ -62,10 +62,10 @@ const UserBar = () => {
             isUserMenu
               ? css.userbar_dropdown_menu
               : css.userbar_dropdown_menu_none
-          }
+          } 
           style={
             isBlackTheme
-              ? { borderColor: `rgba(5, 5, 5, 0.2)` }
+              ? { borderColor: `var(--color-main-20)` }
               : { borderColor: `rgba(255, 255, 255, 0.20)` }
           }
         >
@@ -101,8 +101,8 @@ const UserBar = () => {
          {[...Array(6)].map((_, index) => (
         <span key={index} style={
           isBlackTheme
-            ? { backgroundColor: `#050505` }
-            : { backgroundColor: `#ffffff` }
+            ? { backgroundColor: `var(--color-main)` }
+            : { backgroundColor: `var(--color-white)` }
         }></span>
       ))}
       </button>
