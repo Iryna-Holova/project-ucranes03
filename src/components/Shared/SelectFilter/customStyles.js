@@ -14,7 +14,7 @@ export const customStyles = {
     padding: '16px 18px',
     backgroundColor: 'var(--color-bg)',
     '&:hover': {
-      borderColor: 'var(--color-main)',
+      borderColor: 'var(--color-main-60, rgba(5, 5, 5, 0.60))',
     },
     cursor: 'pointer',
   }),
@@ -33,6 +33,25 @@ export const customStyles = {
     color: 'var(--color-main, #050505)',
     margin: '0',
     padding: '0',
+  }),
+  multiValue: base => ({
+    ...base,
+    backgroundColor: 'transparent',
+    color: 'var(--color-main, #050505)',
+    padding: '0',
+    margin: '0',
+  }),
+  multiValueLabel: base => ({
+    ...base,
+    color: 'var(--color-main, #050505)',
+    fontFamily: 'Mulish',
+    fontSize: '16px',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    lineHeight: '24px',
+    letterSpacing: '-0.02em',
+    padding: '0',
+    margin: '0',
   }),
   placeholder: provided => ({
     ...provided,
@@ -61,13 +80,15 @@ export const customStyles = {
     ...provided,
     padding: 4,
     color: 'var(--color-main, #050505)',
+    '&:hover': {
+      color: 'var(--color-main, #050505)',
+    },
   }),
   menu: provided => ({
     ...provided,
     backgroundColor: 'var(--color-bg)',
     borderRadius: '15px',
-
-    borderColor: 'var(--color-main-20, rgba(5, 5, 5, 0.20))',
+    border: '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
     padding: '16px 0',
   }),
   menuList: provided => ({
@@ -85,7 +106,7 @@ export const customStyles = {
     '::-webkit-scrollbar-thumb:hover': {
       background: 'var(--color-main)',
     },
-    padding: '0 13px 0 18px',
+    padding: '0 9px 0 14px',
   }),
 
   option: (provided, state) => ({

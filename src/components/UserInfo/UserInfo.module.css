@@ -44,7 +44,7 @@
 }
 .file_input_label:hover {
   color: var(--color-main);
-  background-color: var(--color-white);
+  background-color: var(--color-secondary);
 }
 .name_items_list_wrapper {
   border: solid 1px var(--color-main-20);
