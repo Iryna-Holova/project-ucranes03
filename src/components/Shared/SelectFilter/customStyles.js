@@ -1,10 +1,8 @@
-export const customStyles = hasError => ({
+export const customStyles = {
   control: provided => ({
     ...provided,
     borderRadius: '30px',
-    border: hasError
-      ? '1px solid red'
-      : '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
+    border: '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
     fontFamily: 'Mulish',
     fontSize: '16px',
     fontStyle: 'normal',
@@ -16,7 +14,7 @@ export const customStyles = hasError => ({
     padding: '16px 18px',
     backgroundColor: 'var(--color-bg)',
     '&:hover': {
-      borderColor: hasError ? 'red' : 'var(--color-main)',
+      borderColor: 'var(--color-main-60)',
     },
     cursor: 'pointer',
   }),
@@ -135,4 +133,4 @@ export const customStyles = hasError => ({
       backgroundColor: 'var(--color-main-10)',
     },
   }),
-});
+};
