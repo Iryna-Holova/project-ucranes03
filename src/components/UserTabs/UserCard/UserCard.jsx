@@ -43,7 +43,7 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
           />
           {/* <div className={css.selected_user}></div> */}
         </div>
-        <div>
+        <div className={css.user_name_container}>
           <p className={css.user_name}>{name}</p>
           <p className={css.user_recepies}>Own recipes: {recipes.length}</p>
           {currentUser.id !== id &&

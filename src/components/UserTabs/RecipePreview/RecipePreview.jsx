@@ -47,7 +47,7 @@ const RecipePreview = ({ recipe, update }) => {
           aspectRatio={1}
           className={css.thumb}
         />
-        <div>
+        <div className={css.description_wrapper}>
           <h4 className={css.title}>{title}</h4>
           <p className={css.description}>{description}</p>
         </div>

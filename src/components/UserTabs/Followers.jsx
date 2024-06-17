@@ -5,6 +5,7 @@ import { selectFollowing } from 'store/authSlice/selectors';
 import { getFollowers, getOwnFollowers } from 'services/followers';
 import Pagination from 'components/Shared/Pagination/Pagination';
 import ListItems from 'components/UserTabs/ListItems/ListItems';
+import Empty from 'components/Shared/Empty/Empty';
 import UserCard from './UserCard/UserCard';
 import UserCardSkeleton from './UserCard/UserCardSkeleton';
 
@@ -42,12 +43,23 @@ const Followers = () => {
   return (
     <div>
       <h3 className="visually-hidden">Followers</h3>
-      <ListItems>
-        {isLoading && [...Array(5)].map((item, idx) => <UserCardSkeleton key ={idx} />)}
-        {!isLoading&&users.map(user => (
-          <UserCard key={user.id} user={user} following={following} />
-        ))}
-      </ListItems>
+
+      {users.length === 0 ? (
+        <Empty>
+          There are currently no followers on your account. Please engage our
+          visitors with interesting content and draw their attention to your
+          profile.
+        </Empty>
+      ) : (
+        <ListItems>
+          {isLoading &&
+            [...Array(5)].map((item, idx) => <UserCardSkeleton key={idx} />)}
+          {!isLoading &&
+            users.map(user => (
+              <UserCard key={user.id} user={user} following={following} />
+            ))}
+        </ListItems>
+      )}
       {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </div>
   );
