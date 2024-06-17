@@ -1,11 +1,11 @@
 .preview_item {
   display: flex;
+  justify-content: space-between;
   gap: 16px;
 }
 
 .info_wrapper {
-  display: flex;
-  flex-grow: 1;
+  display: flex;      
   gap: 10px;
 }
 
@@ -13,6 +13,10 @@
   width: 75px;
   height: 75px;
   border-radius: 15px;
+}
+
+.description_wrapper{
+  width: 166px;
 }
 
 .title {
@@ -76,6 +80,10 @@
     height: 100px;
   }
 
+  .description_wrapper{
+    width: 468px;
+  }
+
   .title {
     max-width: 468px;
     font-size: 20px;
@@ -110,6 +118,11 @@
 }
 
 @media screen and (min-width: 1440px) {
+  
+  .description_wrapper{
+    width: 610px;
+  }
+
   .title {
     max-width: 610px;
   }

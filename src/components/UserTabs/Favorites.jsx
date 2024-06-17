@@ -6,6 +6,7 @@ import ListItems from 'components/UserTabs/ListItems/ListItems';
 import RecipePreview from 'components/UserTabs/RecipePreview/RecipePreview';
 import Empty from 'components/Shared/Empty/Empty';
 import Pagination from 'components/Shared/Pagination/Pagination';
+// import RecipePreviewSkeleton from './RecipePreview/RecipePreviewSkeleton';
 
 const Favorites = () => {
   const [params] = useSearchParams();
@@ -30,14 +31,14 @@ const Favorites = () => {
 
   return (
     <div>
-      <h3 className="visually-hidden">Favorite recipes</h3>
+      <h3 className="visually-hidden">Favorite recipes</h3>      
       {favoriteRecipes.length === 0 ? (
         <Empty>
           Nothing has been added to your favorite recipes list yet. Please
           browse our recipes and add your favorites for easy access in the
           future.
         </Empty>
-      ) : (
+      ) : (        
         <ListItems>
           {favoriteRecipes.map(recipe => (
             <RecipePreview
