@@ -282,6 +282,7 @@ const AddRecipeForm = () => {
                   control={control}
                   render={({ field }) => (
                     <Select
+                      isClearable
                       placeholder={
                         errors.category
                           ? 'Category is required,pick category'
@@ -335,6 +336,7 @@ const AddRecipeForm = () => {
                 control={control}
                 render={({ field }) => (
                   <Select
+                    isClearable
                     placeholder="Pick area"
                     styles={customStyles}
                     {...field}
@@ -353,6 +355,7 @@ const AddRecipeForm = () => {
                     control={control}
                     render={({ field }) => (
                       <Select
+                        isClearable
                         placeholder="Add the ingredient"
                         styles={customStyles}
                         {...field}
