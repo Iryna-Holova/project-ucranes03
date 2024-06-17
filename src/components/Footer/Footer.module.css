@@ -1,11 +1,12 @@
 .footerWide {
   position: relative;
+  padding-bottom: 16px;
 }
 .footerContent {
   display: flex;
   margin-bottom: 80px;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: baseline; 
 }
 
 .line {
@@ -19,5 +20,14 @@
 @media screen and (min-width: 768px) {
   .line {
     top: 80px;
+  }
+  .footerWide {    
+    padding-bottom: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px){
+  .footerWide {    
+    padding-bottom: 40px;
   }
 }
