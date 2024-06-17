@@ -25,16 +25,15 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
-  
 }
 
 .text_photo_add {
   color: var(--color-main, #050505);
-font-size: 16px;
-font-weight: 500;
-line-height: 1.5; 
-letter-spacing: -0.02em;
-text-decoration-line: underline;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-decoration-line: underline;
 }
 
 .icon_camera {
@@ -61,7 +60,6 @@ text-decoration-line: underline;
   overflow: hidden;
   margin-bottom: 32px;
   position: relative;
- 
 }
 
 .photo_file {
@@ -95,6 +93,7 @@ text-decoration-line: underline;
   font-size: 14px;
   line-height: 1.4;
   letter-spacing: -0.02em;
+  transition: background-color var(--transition), color var(--transition);
 }
 
 .input_quantity:focus {
@@ -120,6 +119,7 @@ text-decoration-line: underline;
 
 .input_name {
   color: var(--color-main-60);
+  background-color: transparent;
   font-size: 18px;
   font-weight: 800;
   line-height: 1.33;
@@ -127,6 +127,7 @@ text-decoration-line: underline;
   text-transform: uppercase;
   border: none;
   width: 100%;
+  transition: color var(--transition);
 }
 
 .input_name:focus {
@@ -136,10 +137,13 @@ text-decoration-line: underline;
 }
 
 .input_description {
+  color: var(--color-main-60);
   border: none;
   width: 100%;
+  background-color: transparent;
   border-bottom: 1px solid var(--color-main-12);
   padding-bottom: 16px;
+  transition: color var(--transition);
 }
 
 .box_select_cat {
@@ -183,8 +187,8 @@ text-decoration-line: underline;
   line-height: 24px;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  white-space: nowrap;     
-  overflow: hidden;          
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -224,6 +228,7 @@ text-decoration-line: underline;
   gap: 109px;
   border-radius: 30px;
   border: 1px solid var(--color-main-12);
+  transition: background-color var(--transition), color var(--transition);
 }
 
 .btn_time:focus {
@@ -254,6 +259,7 @@ text-decoration-line: underline;
   line-height: 1.4;
   letter-spacing: -0.02em;
   margin-bottom: 32px;
+  transition: color var(--transition);
 }
 
 .input_preparation:focus {
@@ -281,31 +287,32 @@ text-decoration-line: underline;
   gap: 8px;
   border-radius: 30px;
   border: 1px solid var(--color-main-12);
+  transition: background-color var(--transition), color var(--transition);
 }
 
 .delete_btn:focus {
-  background: var(--color-main);
+  background-color: var(--color-main);
   color: var(--color-secondary);
 }
 .delete_btn:hover {
-  background: var(--color-main);
+  background-color: var(--color-main);
   color: var(--color-secondary);
 }
 .input_error {
-  border-color: red;
-  color: red;
+  border-color: var(--color-error);
+  color: var(--color-error);
 }
 .error_message {
-  color: red;
+  color: var(--color-error);
   font-size: 14px;
 }
 .error_file {
   position: absolute;
-  bottom: 8px; 
-  left: 0; 
-  width: 100%; 
-  text-align: center; 
-  color: red;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: var(--color-error);
 }
 .boxError {
   position: relative;
@@ -313,7 +320,7 @@ text-decoration-line: underline;
 }
 @media screen and (min-width: 768px) {
   .list_ingredients {
-    gap:28px;
+    gap: 28px;
   }
 
   .box_file {
@@ -332,7 +339,7 @@ text-decoration-line: underline;
   .box_time_categories {
     flex-direction: row;
     margin-bottom: 60px;
-    gap:19px;
+    gap: 19px;
   }
   .icon_time {
     width: 24px;
@@ -351,10 +358,11 @@ text-decoration-line: underline;
   }
   .boxIngredQuan {
     display: flex;
-    gap:19px;
+    gap: 19px;
     align-items: center;
   }
   .input_quantity {
+    background-color: transparent;
     margin: 0;
     font-size: 16px;
   }
@@ -368,6 +376,7 @@ text-decoration-line: underline;
     margin-top: 24px;
     margin-bottom: 80px;
     font-size: 16px;
+    background-color: transparent;
   }
   .box_select_cat {
     width: 315px;
@@ -381,13 +390,15 @@ text-decoration-line: underline;
   .boxIngredQuan {
     align-items: flex-end;
   }
+  .delete_btn {
+    padding: 18px;
+  }
 }
 @media screen and (min-width: 1440px) {
   .box_form {
     flex-direction: row;
     gap: 80px;
     justify-content: space-between;
-  
   }
   .box_file {
     width: 551px;
@@ -398,13 +409,12 @@ text-decoration-line: underline;
   }
   .boxInputsForm {
     display: flex;
-flex-direction: column;
-align-items: flex-start;
-flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
   }
 
   .box_select_cat {
     width: 315px;
   }
- 
 }
