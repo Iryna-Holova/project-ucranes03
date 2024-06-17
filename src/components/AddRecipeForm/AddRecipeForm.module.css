@@ -25,16 +25,15 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
-  
 }
 
 .text_photo_add {
   color: var(--color-main, #050505);
-font-size: 16px;
-font-weight: 500;
-line-height: 1.5; 
-letter-spacing: -0.02em;
-text-decoration-line: underline;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-decoration-line: underline;
 }
 
 .icon_camera {
@@ -61,7 +60,6 @@ text-decoration-line: underline;
   overflow: hidden;
   margin-bottom: 32px;
   position: relative;
- 
 }
 
 .photo_file {
@@ -183,8 +181,8 @@ text-decoration-line: underline;
   line-height: 24px;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  white-space: nowrap;     
-  overflow: hidden;          
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -301,10 +299,10 @@ text-decoration-line: underline;
 }
 .error_file {
   position: absolute;
-  bottom: 8px; 
-  left: 0; 
-  width: 100%; 
-  text-align: center; 
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  text-align: center;
   color: red;
 }
 .boxError {
@@ -313,7 +311,7 @@ text-decoration-line: underline;
 }
 @media screen and (min-width: 768px) {
   .list_ingredients {
-    gap:28px;
+    gap: 20px;
   }
 
   .box_file {
@@ -332,7 +330,7 @@ text-decoration-line: underline;
   .box_time_categories {
     flex-direction: row;
     margin-bottom: 60px;
-    gap:19px;
+    gap: 19px;
   }
   .icon_time {
     width: 24px;
@@ -351,7 +349,7 @@ text-decoration-line: underline;
   }
   .boxIngredQuan {
     display: flex;
-    gap:19px;
+    gap: 19px;
     align-items: center;
   }
   .input_quantity {
@@ -387,7 +385,6 @@ text-decoration-line: underline;
     flex-direction: row;
     gap: 80px;
     justify-content: space-between;
-  
   }
   .box_file {
     width: 551px;
@@ -398,13 +395,12 @@ text-decoration-line: underline;
   }
   .boxInputsForm {
     display: flex;
-flex-direction: column;
-align-items: flex-start;
-flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
   }
 
   .box_select_cat {
     width: 315px;
   }
- 
 }
