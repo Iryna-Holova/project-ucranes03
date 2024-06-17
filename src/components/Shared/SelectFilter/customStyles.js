@@ -1,4 +1,4 @@
-export const customStyles = {
+export const customStyles = hasError => ({
   control: provided => ({
     ...provided,
     borderRadius: '30px',
@@ -14,7 +14,7 @@ export const customStyles = {
     padding: '16px 18px',
     backgroundColor: 'var(--color-bg)',
     '&:hover': {
-      borderColor: 'var(--color-main-60)',
+      borderColor: 'var(--color-main-60, rgba(5, 5, 5, 0.60))',
     },
     cursor: 'pointer',
   }),
@@ -133,4 +133,4 @@ export const customStyles = {
       backgroundColor: 'var(--color-main-10)',
     },
   }),
-};
+});
