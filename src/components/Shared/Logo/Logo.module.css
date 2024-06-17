@@ -1,5 +1,5 @@
 .logo_white {
-    color: white;
+    color: var(--color-white);
     font-size: 20px;
     font-weight: 800;
     line-height: 1.2;
@@ -8,7 +8,7 @@
 }
 
 .logo_black {
-    color: black;
+    color: var(--color-main);
     font-size: 24px;
     font-weight: 800;
     line-height: 1.17;
