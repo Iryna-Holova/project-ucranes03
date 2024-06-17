@@ -1,4 +1,4 @@
-export const customStyles = hasError => ({
+export const customStyles = {
   control: provided => ({
     ...provided,
     borderRadius: '30px',
@@ -133,4 +133,4 @@ export const customStyles = hasError => ({
       backgroundColor: 'var(--color-main-10)',
     },
   }),
-});
+};
