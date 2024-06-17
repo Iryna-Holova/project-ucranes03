@@ -34,6 +34,19 @@ export const customStyles = {
     margin: '0',
     padding: '0',
   }),
+  multiValue: base => ({
+    ...base,
+    backgroundColor: 'transparent',
+    color: 'var(--color-main, #050505)',
+    padding: '0',
+    margin: '0',
+  }),
+  multiValueLabel: base => ({
+    ...base,
+    color: 'var(--color-main, #050505)',
+    padding: '0',
+    margin: '0',
+  }),
   placeholder: provided => ({
     ...provided,
     color: 'var(--color-main-60, rgba(5, 5, 5, 0.60))',
