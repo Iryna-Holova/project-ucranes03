@@ -6,6 +6,7 @@ import { AuthModalProvider } from 'components/AuthModalContext';
 import { selectIsRefreshing } from 'store/authSlice/selectors';
 import SharedLayout from './SharedLayout';
 import PrivateRoute from './PrivateRoute';
+import Loader from './Shared/Loader/Loader';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Categories = lazy(() => import('./Categories/Categories'));
@@ -26,7 +27,7 @@ const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <Loader />
   ) : (
     <AuthModalProvider>
       <Routes>

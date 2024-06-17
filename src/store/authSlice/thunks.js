@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getCurrent, register, login, logout } from 'services/user';
 import { setToken, clearToken } from 'services/api';
 import { showError } from 'helpers/notification';
+import { getOwnInfo } from 'services/userInfo';
 
 export const fetchCurrentUser = createAsyncThunk(
   'auth/fetchCurrentUser',
@@ -56,6 +57,19 @@ export const logoutUser = createAsyncThunk(
       const response = await logout();
       clearToken();
       return response;
+    } catch (error) {
+      showError(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getUserInfo = createAsyncThunk(
+  'auth/info',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getOwnInfo();
+      return response.data;
     } catch (error) {
       showError(error.response.data);
       return rejectWithValue(error.response.data);
