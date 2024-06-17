@@ -52,7 +52,6 @@
   gap: 16px;
   transition: text-decoration-color var(--transition);
   color: var(--color-main, #050505);
-  color: var(--color-main, #050505);
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: -0.02em;
@@ -363,7 +362,7 @@
   }
 
   .list_ingredients {
-    gap: 28px;
+    gap: 20px;
   }
 
   .box_file {

@@ -1,6 +1,6 @@
 .ingredient_container {
   position: relative;
-  flex-basis: calc((100% - 16px) / 2);
+  width: 152px;
   display: flex;
   gap: 10px;
   align-items: center;
@@ -15,6 +15,10 @@
   border: 1px solid var(--color-main-10, rgba(5, 5, 5, 0.1));
 }
 
+.info_wrapper {
+  flex-grow: 0;
+  width: 67px;
+}
 .name_style {
   color: var(--color-main, #050505);
   line-height: 1.42;
@@ -25,6 +29,9 @@
   color: var(--color-main-60, rgba(5, 5, 5, 0.6));
   line-height: 1.42;
   letter-spacing: -0.02em;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn {
@@ -45,7 +52,12 @@
 
 @media screen and (min-width: 768px) {
   .ingredient_container {
-    flex-basis: calc((100% - 40px) / 3);
+    width: 178px;
+    gap: 14px;
+  }
+
+  .info_wrapper {
+    width: 74px;
   }
 
   .img_wrapper {

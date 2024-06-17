@@ -18,7 +18,7 @@ const Ingredient = ({ img, name, measure, _id, callback = null }) => {
         className={css.img_wrapper}
         onError={handlerSetDefault}
       />
-      <div>
+      <div className={css.info_wrapper}>
         <p className={css.name_style}>{name}</p>
         <p className={css.measure_style}>{measure}</p>
       </div>
