@@ -14,6 +14,7 @@ import Image from 'components/Shared/Image/Image';
 import defaultAvatar from 'images/placeholder-avatar.svg';
 import icons from 'images/icons.svg';
 import css from './UserInfo.module.css';
+import { fetchFollowers } from 'store/followersSlice/thunk';
 
 const UserInfo = () => {
   const followingArray = useSelector(selectFollowing);
@@ -78,7 +79,11 @@ const UserInfo = () => {
       showError(error);
     } finally {
       setIsFollowPending(false);
-      window.location.reload();
+      // window.location.reload();
+      dispatch(fetchFollowers({user: userId, pagination: {
+        page: 1,
+        limit: 5
+      }}))
     }
   };
 
@@ -95,7 +100,11 @@ const UserInfo = () => {
       showError(error);
     } finally {
       setIsFollowPending(false);
-      window.location.reload();
+      // window.location.reload();
+      dispatch(fetchFollowers({user: userId, pagination: {
+        page: 1,
+        limit: 5
+      }}))
     }
   };
 

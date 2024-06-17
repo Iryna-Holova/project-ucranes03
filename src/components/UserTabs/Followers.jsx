@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { selectFollowing } from 'store/authSlice/selectors';
 import { getFollowers, getOwnFollowers } from 'services/followers';
@@ -8,6 +8,8 @@ import ListItems from 'components/UserTabs/ListItems/ListItems';
 import Empty from 'components/Shared/Empty/Empty';
 import UserCard from './UserCard/UserCard';
 import UserCardSkeleton from './UserCard/UserCardSkeleton';
+import { selectFollowers } from 'store/followersSlice/selectors';
+import { fetchFollowers } from 'store/followersSlice/thunk';
 
 const Followers = () => {
   const [params] = useSearchParams();
@@ -17,6 +19,9 @@ const Followers = () => {
   const [users, setUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const following = useSelector(selectFollowing);
+
+  const dispatch = useDispatch();
+  const followers = useSelector(selectFollowers);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -34,6 +39,10 @@ const Followers = () => {
             });
         setUsers(data.results);
         setTotalPages(data.totalPages);
+        dispatch(fetchFollowers({user, pagination: {
+          page,
+          limit: 5,
+        }}));
       } catch (error) {
       } finally {
         setLoading(false);
@@ -56,7 +65,7 @@ const Followers = () => {
           {isLoading &&
             [...Array(5)].map((item, idx) => <UserCardSkeleton key={idx} />)}
           {!isLoading &&
-            users.map(user => (
+            followers.map(user => (
               <UserCard key={user.id} user={user} following={following} />
             ))}
         </ListItems>

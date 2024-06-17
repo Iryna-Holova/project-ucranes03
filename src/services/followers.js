@@ -17,8 +17,7 @@ export const getFollowers = (id, { page, limit } = {}) =>
     params: { page, limit },
   });
 
-
-  export const getOwnFollowers = ({ page, limit} = {}) =>
+export const getOwnFollowers = ({ page, limit} = {}) =>
   api.get('/api/users/followers', {
     params: { page, limit },
   });
