@@ -4,6 +4,7 @@ import {
   fetchCurrentUser,
   loginUser,
   logoutUser,
+  getUserInfo,
 } from './thunks';
 
 export const userSlice = createSlice({
@@ -75,6 +76,9 @@ export const userSlice = createSlice({
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
+      })
+      .addCase(getUserInfo.fulfilled, (state, action) => {
+        state.user = { ...state.user, ...action.payload };
       });
   },
 });

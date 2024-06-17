@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOwnInfo, getInfo, updateAvatar } from 'services/userInfo';
-import { addToFollowing, removeFromFollowing } from 'services/followers';
-import { selectFollowing } from 'store/authSlice/selectors';
-import { showError } from 'helpers/notification';
 import { setFollowing, setAvatar } from 'store/authSlice/slice';
+import { getUserInfo } from 'store/authSlice/thunks';
+import { selectFollowing, selectUser } from 'store/authSlice/selectors';
+import { getInfo, updateAvatar } from 'services/userInfo';
+import { addToFollowing, removeFromFollowing } from 'services/followers';
+import { showError } from 'helpers/notification';
 import Modal from 'components/Modal/Modal';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
 import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
@@ -16,36 +17,42 @@ import css from './UserInfo.module.css';
 
 const UserInfo = () => {
   const followingArray = useSelector(selectFollowing);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  const user = useParams().id;
-  const isCurrent = user === 'current';
+  const userId = useParams().id;
+  const isCurrent = userId === 'current';
   const [userData, setUserData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isPending, setIsPending] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAvatarPending, setIsAvatarPending] = useState(false);
+  const [isFollowPending, setIsFollowPending] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setUserData(null);
+      setIsLoading(true);
       try {
         if (isCurrent) {
-          const { data } = await getOwnInfo();
-          setUserData(data);
+          await dispatch(getUserInfo()).unwrap();
         } else {
-          const { data } = await getInfo(user);
+          const { data } = await getInfo(userId);
           setUserData(data);
         }
       } catch (error) {
         showError(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
-  }, [isCurrent, user]);
+  }, [dispatch, isCurrent, userId]);
 
   const handleFileChange = async event => {
     const file = event.target.files[0];
     if (file) {
       const formData = new FormData();
       formData.append('avatar', file);
-      setIsPending(true);
+      setIsAvatarPending(true);
       try {
         const { data } = await updateAvatar(formData);
         setUserData(prevData => ({ ...prevData, avatar: data.avatar }));
@@ -53,33 +60,51 @@ const UserInfo = () => {
       } catch (error) {
         showError(error);
       } finally {
-        setIsPending(false);
+        setIsAvatarPending(false);
       }
     }
   };
+
   const handleRemoveFollowing = async id => {
+    setIsFollowPending(true);
     try {
       const { data } = await removeFromFollowing(id);
+      setUserData(prevData => ({
+        ...prevData,
+        followers: prevData.followers - 1,
+      }));
       dispatch(setFollowing(data.following));
-    } catch (error) {}
+    } catch (error) {
+      showError(error);
+    } finally {
+      setIsFollowPending(false);
+    }
   };
 
   const handleAddFollowing = async id => {
+    setIsFollowPending(true);
     try {
       const { data } = await addToFollowing(id);
+      setUserData(prevData => ({
+        ...prevData,
+        followers: prevData.followers + 1,
+      }));
       dispatch(setFollowing(data.following));
-    } catch (error) {}
+    } catch (error) {
+      showError(error);
+    } finally {
+      setIsFollowPending(false);
+    }
   };
 
-  const { email, recipes, favorites, followers, following, name, avatar } =
-    userData || {};
+  const { email, recipes, followers, name, avatar } = userData || {};
 
   return (
     <div className={css.user_info_container}>
       <div className={css.name_items_list_wrapper}>
         <div className={css.image_input_wrapper}>
           <Image
-            publicId={avatar}
+            publicId={isCurrent ? user.avatar : avatar}
             alt="avatar"
             defaultImage={defaultAvatar}
             className={css.avatar}
@@ -88,7 +113,7 @@ const UserInfo = () => {
             <label htmlFor="avatar" className={css.file_input_label}>
               <input
                 id="avatar"
-                disabled={isPending}
+                disabled={isAvatarPending}
                 className="visually-hidden"
                 type="file"
                 onChange={handleFileChange}
@@ -99,36 +124,45 @@ const UserInfo = () => {
             </label>
           )}
         </div>
-
-        <p className={css.name}>{name}</p>
+        {isLoading && <span className={css.loader}></span>}
+        <p className={css.name}>{isCurrent ? user?.name : name}</p>
         <ul className={css.list_items}>
           <li className={css.list_item}>
             <span className={css.item_name}>Email:</span>
-            <span className={css.item_value}>{email}</span>
+            <span className={css.item_value}>
+              {isCurrent ? user?.email : email}
+            </span>
           </li>
           <li className={css.list_item}>
             <span className={css.item_name}>Added recipes:</span>
-            <span className={css.item_value}>{recipes}</span>
+            <span className={css.item_value}>
+              {!isLoading && (isCurrent ? user?.recipes : recipes)}
+            </span>
           </li>
           {isCurrent && (
             <li className={css.list_item}>
               <span className={css.item_name}>Favorites:</span>
-              <span className={css.item_value}>{favorites}</span>
+              <span className={css.item_value}>
+                {!isLoading && user?.favorites}
+              </span>
             </li>
           )}
           <li className={css.list_item}>
             <span className={css.item_name}>Followers:</span>
-            <span className={css.item_value}>{followers}</span>
+            <span className={css.item_value}>
+              {!isLoading && (isCurrent ? user?.followers : followers)}
+            </span>
           </li>
           {isCurrent && (
             <li className={css.list_item}>
               <span className={css.item_name}>Following:</span>
-              <span className={css.item_value}>{following}</span>
+              <span className={css.item_value}>
+                {!isLoading && user?.following?.length}
+              </span>
             </li>
           )}
         </ul>
       </div>
-
       {isCurrent && (
         <ButtonLink
           type="button"
@@ -141,12 +175,20 @@ const UserInfo = () => {
         </ButtonLink>
       )}
       {!isCurrent &&
-        (followingArray?.includes(user) ? (
-          <ButtonLink type="button" onClick={() => handleRemoveFollowing(user)}>
+        (followingArray?.includes(userId) ? (
+          <ButtonLink
+            type="button"
+            onClick={() => handleRemoveFollowing(userId)}
+            disabled={isFollowPending}
+          >
             Following
           </ButtonLink>
         ) : (
-          <ButtonLink type="button" onClick={() => handleAddFollowing(user)}>
+          <ButtonLink
+            type="button"
+            onClick={() => handleAddFollowing(userId)}
+            disabled={isFollowPending}
+          >
             Follow
           </ButtonLink>
         ))}
