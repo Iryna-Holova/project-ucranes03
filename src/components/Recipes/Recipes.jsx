@@ -43,7 +43,6 @@ const Recipes = () => {
         const page = params.get('page') || 1;
         const category = params.get('category');
         const ingredients = params.get('ingredients')?.split(',');
-        console.log(ingredients);
         const area = params.get('area');
         const { data } = await getRecipes({
           page,
