@@ -8,12 +8,11 @@ const Footer = () => {
     <footer className={css.footerWide}>
       <div className={css.line}></div>
       <div className="container">
-      
-      <div className={css.footerContent}>        
-        <Logo inFooter={true} />
-        <NetworkLinks />
-      </div>
-      <Copyright />
+        <div className={css.footerContent}>
+          <Logo inFooter={true} />
+          <NetworkLinks />
+        </div>
+        <Copyright />
       </div>
     </footer>
   );
