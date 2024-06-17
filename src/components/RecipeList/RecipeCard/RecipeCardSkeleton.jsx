@@ -18,11 +18,18 @@ const RecipeCardSkeleton = () => {
       <img src={defaultImage} alt="placeholder" className={css.thumb} />
       <div className={css.card_details}>
         <div
-          style={{ backgroundColor: 'var(--color-main-10)', height: '24px' }}
+          style={{
+            backgroundColor: 'var(--color-main-10)',
+            height: '24px',
+            borderRadius: '8px',
+          }}
         ></div>
 
         <div
-          style={{ backgroundColor: 'var(--color-main-10)' }}
+          style={{
+            backgroundColor: 'var(--color-main-10)',
+            borderRadius: '8px',
+          }}
           className={css.description}
         ></div>
         <div className={css.owner_info}>
@@ -32,8 +39,18 @@ const RecipeCardSkeleton = () => {
             alt="avatar placeholder"
           />
           <div className={css.icons_wrapper}>
-            <div className={css.heart_icon}></div>
-            <div className={css.arrow_icon}></div>
+            <div
+              style={{
+                backgroundColor: 'var(--color-main-10)',
+              }}
+              className={css.heart_icon}
+            ></div>
+            <div
+              style={{
+                backgroundColor: 'var(--color-main-10)',
+              }}
+              className={css.arrow_icon}
+            ></div>
           </div>
         </div>
       </div>

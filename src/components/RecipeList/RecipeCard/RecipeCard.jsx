@@ -69,10 +69,14 @@ const RecipeCard = ({ recipe }) => {
         className={css.thumb}
       />
       <div className={css.card_details}>
-        <h4 className={css.title}>{title}</h4>
+        <h3 className={css.title}>{title}</h3>
         <p className={css.description}>{description}</p>
         <div className={css.owner_info}>
-          <button className={css.owner_btn} onClick={handleOwnerBtnClick}>
+          <button
+            type="button"
+            className={css.owner_btn}
+            onClick={handleOwnerBtnClick}
+          >
             <Image
               publicId={owner.avatar}
               className={css.avatar}
@@ -83,9 +87,15 @@ const RecipeCard = ({ recipe }) => {
           </button>
           <div className={css.icons_wrapper}>
             <button
+              type="button"
               className={css.heart_icon}
               onClick={handleHeartIconClick}
               disabled={isPending}
+              aria-label={
+                isFavorite ? 'Remove from favorites' : 'Add to favorites'
+              }
+              aria-pressed={isFavorite}
+              title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
             >
               <svg className={css.icon}>
                 <use
@@ -96,8 +106,11 @@ const RecipeCard = ({ recipe }) => {
               </svg>
             </button>
             <button
+              type="button"
               className={css.arrow_icon}
               onClick={() => navigate(`/recipe/${_id}`)}
+              title="View recipe"
+              aria-label="View recipe"
             >
               <svg className={css.icon}>
                 <use href={`${icons}#icon-arrow-up-right`} />
