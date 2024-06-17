@@ -16,6 +16,7 @@ const Followers = () => {
   const [users, setUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const following = useSelector(selectFollowing);
+
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
@@ -39,14 +40,17 @@ const Followers = () => {
     };
     fetchUsers();
   }, [params, user, isCurrent]);
+
   return (
     <div>
       <h3 className="visually-hidden">Followers</h3>
       <ListItems>
-        {isLoading && [...Array(5)].map((item, idx) => <UserCardSkeleton key ={idx} />)}
-        {!isLoading&&users.map(user => (
-          <UserCard key={user.id} user={user} following={following} />
-        ))}
+        {isLoading &&
+          [...Array(5)].map((_, idx) => <UserCardSkeleton key={idx} />)}
+        {!isLoading &&
+          users.map(user => (
+            <UserCard key={user.id} user={user} following={following} />
+          ))}
       </ListItems>
       {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </div>
