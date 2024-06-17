@@ -1,26 +1,30 @@
-import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
-import icons from '../../images/icons.svg';
-import css from './AddRecipeForm.module.css';
-import { Controller, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+// import { ErrorMessage } from '@hookform/error-message';
+
+import { fetchIngredients } from 'store/ingredientsSlice/thunks';
+import { fetchAreas } from 'store/areasSlice/thunks';
+import { fetchCategories } from 'store/categoriesSlice/thunks';
+import { selectAreasOptions } from 'store/areasSlice/selectors';
 import { selectCategoriesOptions } from 'store/categoriesSlice/selectors';
 import {
   selectIngredients,
   selectIngredientsOptions,
 } from 'store/ingredientsSlice/selectors';
-import { selectAreasOptions } from 'store/areasSlice/selectors';
 
-import Ingredient from 'components/Shared/Ingredient/Ingredients';
 import { addRecipe } from 'services/recipes';
 import { showError } from 'helpers/notification';
-import { useNavigate } from 'react-router-dom';
-import { fetchCategories } from 'store/categoriesSlice/thunks';
-import { customStyles } from 'components/Shared/SelectFilter/customStyles';
-import { fetchIngredients } from 'store/ingredientsSlice/thunks';
-import { fetchAreas } from 'store/areasSlice/thunks';
 import { resolver } from './validation';
+
+import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
+import Ingredient from 'components/Shared/Ingredient/Ingredients';
+import { customStyles } from 'components/Shared/SelectFilter/customStyles';
+
+import icons from 'images/icons.svg';
+import css from './AddRecipeForm.module.css';
 
 const TIME_STEP = 5;
 
@@ -28,23 +32,28 @@ const AddRecipeForm = () => {
   const [previewImage, setPreviewImage] = useState(null);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [countLength, setCountLength] = useState(0);
+  const [ingregientsForList, setIngregientsForList] = useState([]);
+
   const categories = useSelector(selectCategoriesOptions);
   const ingredients = useSelector(selectIngredientsOptions);
   const areas = useSelector(selectAreasOptions);
   const ingredientAddList = useSelector(selectIngredients);
-  const [ingregientsForList, setIngregientsForList] = useState([]);
+  // const [ingregientsForList, setIngregientsForList] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (!categories.length) {
       dispatch(fetchCategories());
     }
   }, [categories.length, dispatch]);
+
   useEffect(() => {
     if (!ingredients.length) {
       dispatch(fetchIngredients());
     }
   }, [dispatch, ingredients.length]);
+
   useEffect(() => {
     if (!areas.length) {
       dispatch(fetchAreas());
@@ -52,6 +61,7 @@ const AddRecipeForm = () => {
   }, [dispatch, areas.length]);
 
   const {
+    watch,
     register,
     handleSubmit,
     control,
@@ -67,11 +77,15 @@ const AddRecipeForm = () => {
       time: 0,
     },
   });
+  // console.log(watch('ingredientsList.id'));
+  // console.log(watch('ingredientsList'));
+
   const onSubmit = async data => {
     if (ingredientsList.length === 0) {
       alert('Please add at least one ingredient');
       return;
     }
+
     data.ingredients = ingredientsList;
     data.category = data.category.value;
     data.area = data.area.value;
@@ -88,6 +102,7 @@ const AddRecipeForm = () => {
       formData.append(`ingredients[${index}][id]`, ingredient.id);
       formData.append(`ingredients[${index}][measure]`, ingredient.measure);
     });
+
     try {
       await addRecipe(formData);
       navigate('/user/current');
@@ -135,26 +150,30 @@ const AddRecipeForm = () => {
   const handleAddIngredients = async () => {
     const ingredient = getValues('ingredients');
     const measure = getValues('measure');
+
     if (ingredient && measure) {
       setIngredientsList(prev => [...prev, { id: ingredient.value, measure }]);
       const result = ingredientAddList.find(
         ing => ing._id === ingredient.value
       );
+
       if (result) {
         const newIngredient = { ...result, measure: measure };
         setIngregientsForList(prev => [...prev, newIngredient]);
       }
+
       setValue('measure', '');
       setValue('ingredients', null);
+
       await trigger('ingredientsList');
     } else {
       alert('Please select an ingredient and enter a measure');
     }
   };
 
-  const handleDelete = () => {
-    clearErrors();
+  const handleDelete = evt => {
     reset();
+    clearErrors();
     setPreviewImage(null);
     setIngredientsList([]);
   };
@@ -250,6 +269,7 @@ const AddRecipeForm = () => {
                   )}
                 />
               </div>
+
               <div>
                 <label className={css.title_description}>COOKING TIME</label>
                 <div className={css.box_time_btn}>
@@ -284,6 +304,7 @@ const AddRecipeForm = () => {
                 )}
               </div>
             </div>
+
             <div className={css.box_area}>
               <label className={css.title_description}>Area</label>
               <Controller
@@ -300,9 +321,15 @@ const AddRecipeForm = () => {
                 )}
               />
             </div>
+
             <div className={css.box_ingredients}>
               <label className={css.title_description}>Ingredients</label>
               <div className={css.boxIngredQuan}>
+                {errors.ingredientsList && (
+                  <span className={css.error}>
+                    {errors.ingredientsList.message}
+                  </span>
+                )}
                 <div className={css.box_input_ingredients}>
                   {' '}
                   <Controller
@@ -319,18 +346,21 @@ const AddRecipeForm = () => {
                     )}
                   />
                 </div>
+
                 <div className={css.box_input_quantity}>
                   <input
                     name="ingredients"
                     className={css.input_quantity}
-                    {...register('measure')}
+                    {...register('measure', { required: 'Input measure' })}
                     type="text"
                     placeholder="Enter quantity"
                   />
+                  <p>{console.log(errors)}</p>
                 </div>
               </div>
             </div>
           </div>
+
           <ButtonLink
             type="button"
             color="secondary"
@@ -342,6 +372,7 @@ const AddRecipeForm = () => {
               <use href={`${icons}#icon-plus`} />
             </svg>
           </ButtonLink>
+
           <ul className={css.list_ingredients}>
             {ingregientsForList.length > 0 &&
               ingregientsForList.map(({ img, name, measure, _id }) => (
@@ -355,6 +386,7 @@ const AddRecipeForm = () => {
                 />
               ))}
           </ul>
+
           <div className={css.box_preparation}>
             <label className={css.title_description}>Recipe Preparation</label>
             <textarea
@@ -369,6 +401,7 @@ const AddRecipeForm = () => {
               }
             ></textarea>
           </div>
+
           <div className={css.box_btn_del_pub}>
             <button onClick={handleDelete} className={css.delete_btn}>
               <svg className={css.btn_delete}>
