@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { selectFollowing, selectUser } from 'store/authSlice/selectors';
@@ -14,21 +15,30 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
   const isTablet = useTabletMediaQuery();
   const isDesktop = useDesktopMediaQuery();
   const following = useSelector(selectFollowing);
-  const currentUser = useSelector(selectUser);  
+  const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
+  const [isLoading, setLoading] = useState(false);
 
   const handleRemoveFollowing = async id => {
     try {
+      setLoading(true);
       const { data } = await removeFromFollowing(id);
       dispatch(setFollowing(data.following));
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleAddFollowing = async id => {
     try {
+      setLoading(true);
       const { data } = await addToFollowing(id);
       dispatch(setFollowing(data.following));
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -52,6 +62,7 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
                 type="button"
                 color="light"
                 size="small"
+                disabled={isLoading}
                 onClick={() => handleRemoveFollowing(id)}
               >
                 Following
@@ -61,6 +72,7 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
                 type="button"
                 color="light"
                 size="small"
+                disabled={isLoading}
                 onClick={() => handleAddFollowing(id)}
               >
                 Follow
