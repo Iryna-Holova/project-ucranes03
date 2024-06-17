@@ -14,13 +14,13 @@
     display: block;
     width: 14px;
     height: 14px;
-    background-color: rgba(217, 217, 217, 1);
+    background-color: var(--color-main-15);
     border-radius: 50%;
     cursor: pointer;
 }
 
 :global(.swiper-pagination-bullet-active) {
-    background-color: rgba(0, 0, 0, 1);
+    background-color: var(--color-main);
 }
 
 .info_title {
