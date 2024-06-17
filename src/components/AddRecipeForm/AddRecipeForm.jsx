@@ -19,6 +19,8 @@ import { showError } from 'helpers/notification';
 import { useNavigate } from 'react-router-dom';
 import { fetchCategories } from 'store/categoriesSlice/thunks';
 import { customStyles } from 'components/Shared/SelectFilter/customStyles';
+import { fetchIngredients } from 'store/ingredientsSlice/thunks';
+import { fetchAreas } from 'store/areasSlice/thunks';
 
 const schema = yup.object().shape({
   thumb: yup
@@ -78,12 +80,21 @@ const AddRecipeForm = () => {
   const [ingregientsForList, setIngregientsForList] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (!categories.length) {
       dispatch(fetchCategories());
     }
   }, [categories.length, dispatch]);
+  useEffect(() => {
+    if (!ingredients.length) {
+      dispatch(fetchIngredients());
+    }
+  }, [dispatch, ingredients.length]);
+  useEffect(() => {
+    if (!areas.length) {
+      dispatch(fetchAreas());
+    }
+  }, [dispatch, areas.length]);
 
   const {
     register,
