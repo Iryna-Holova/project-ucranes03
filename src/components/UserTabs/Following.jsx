@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { selectFollowing } from 'store/authSlice/selectors';
 import { getFollowings } from 'services/followers';
+import { showError } from 'helpers/notification';
 import Pagination from 'components/Shared/Pagination/Pagination';
 import ListItems from 'components/UserTabs/ListItems/ListItems';
 import Empty from 'components/Shared/Empty/Empty';
@@ -27,7 +28,7 @@ const Following = () => {
         });
         setUsers(data.results);
         setTotalPages(data.totalPages);
-      } catch (error) {
+      } catch (error) {showError(error);
       } finally {
         setLoading(false);
       }
@@ -38,7 +39,7 @@ const Following = () => {
     <div>
       <h3 className="visually-hidden">Following</h3>
 
-      {users.length === 0 ? (
+      {!isLoading &&users.length === 0 ? (
         <Empty>
           Your account currently has no subscriptions to other users. Learn more
           about our users and select those whose content interests you.

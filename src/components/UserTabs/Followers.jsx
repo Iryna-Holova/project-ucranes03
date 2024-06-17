@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { selectFollowing } from 'store/authSlice/selectors';
 import { getFollowers, getOwnFollowers } from 'services/followers';
+import { showError } from 'helpers/notification';
 import Pagination from 'components/Shared/Pagination/Pagination';
 import ListItems from 'components/UserTabs/ListItems/ListItems';
 import Empty from 'components/Shared/Empty/Empty';
 import UserCard from './UserCard/UserCard';
 import UserCardSkeleton from './UserCard/UserCardSkeleton';
+
 
 const Followers = () => {
   const [params] = useSearchParams();
@@ -34,7 +36,7 @@ const Followers = () => {
             });
         setUsers(data.results);
         setTotalPages(data.totalPages);
-      } catch (error) {
+      } catch (error) {showError(error);
       } finally {
         setLoading(false);
       }
@@ -45,7 +47,7 @@ const Followers = () => {
   return (
     <div>
       <h3 className="visually-hidden">Followers</h3>
-      {users.length === 0 ? (
+      {!isLoading &&users.length === 0 ? (
         <Empty>
           There are currently no followers on your account. Please engage our
           visitors with interesting content and draw their attention to your
