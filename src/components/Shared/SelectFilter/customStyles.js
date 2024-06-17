@@ -1,8 +1,10 @@
-export const customStyles = {
+export const customStyles = hasError => ({
   control: provided => ({
     ...provided,
     borderRadius: '30px',
-    border: '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
+    border: hasError
+      ? '1px solid red'
+      : '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
     fontFamily: 'Mulish',
     fontSize: '16px',
     fontStyle: 'normal',
@@ -133,4 +135,4 @@ export const customStyles = {
       backgroundColor: 'var(--color-main-10)',
     },
   }),
-};
+});
