@@ -1,8 +1,10 @@
-export const customStyles = {
+export const customStyles = hasError => ({
   control: provided => ({
     ...provided,
     borderRadius: '30px',
-    border: '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
+    border: hasError
+      ? '1px solid red'
+      : '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
     fontFamily: 'Mulish',
     fontSize: '16px',
     fontStyle: 'normal',
@@ -14,7 +16,7 @@ export const customStyles = {
     padding: '16px 18px',
     backgroundColor: 'var(--color-bg)',
     '&:hover': {
-      borderColor: 'var(--color-main)',
+      borderColor: hasError ? 'red' : 'var(--color-main)',
     },
     cursor: 'pointer',
   }),
@@ -44,6 +46,12 @@ export const customStyles = {
   multiValueLabel: base => ({
     ...base,
     color: 'var(--color-main, #050505)',
+    fontFamily: 'Mulish',
+    fontSize: '16px',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    lineHeight: '24px',
+    letterSpacing: '-0.02em',
     padding: '0',
     margin: '0',
   }),
@@ -74,13 +82,15 @@ export const customStyles = {
     ...provided,
     padding: 4,
     color: 'var(--color-main, #050505)',
+    '&:hover': {
+      color: 'var(--color-main, #050505)',
+    },
   }),
   menu: provided => ({
     ...provided,
     backgroundColor: 'var(--color-bg)',
     borderRadius: '15px',
-
-    borderColor: 'var(--color-main-20, rgba(5, 5, 5, 0.20))',
+    border: '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
     padding: '16px 0',
   }),
   menuList: provided => ({
@@ -98,7 +108,7 @@ export const customStyles = {
     '::-webkit-scrollbar-thumb:hover': {
       background: 'var(--color-main)',
     },
-    padding: '0 13px 0 18px',
+    padding: '0 9px 0 14px',
   }),
 
   option: (provided, state) => ({
@@ -125,4 +135,4 @@ export const customStyles = {
       backgroundColor: 'var(--color-main-10)',
     },
   }),
-};
+});
