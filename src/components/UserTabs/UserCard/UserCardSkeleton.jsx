@@ -2,7 +2,6 @@ import { useDesktopMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
 import css from './UserCard.module.css';
 
 const UserCardSkeleton = () => {
-  const style = { backgroundColor: '#05050570' };
   const isTablet = useTabletMediaQuery();
   const isDesktop = useDesktopMediaQuery();
   return (
