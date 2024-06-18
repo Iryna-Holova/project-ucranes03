@@ -59,7 +59,6 @@ const AddRecipeForm = () => {
   }, [dispatch, areas.length]);
 
   const {
-    watch,
     register,
     handleSubmit,
     control,
@@ -83,8 +82,6 @@ const AddRecipeForm = () => {
     },
   });
 
-  // console.log(watch('ingredients'));
-
   const onSubmit = async data => {
     const formData = new FormData();
     formData.append('title', data.title);
@@ -99,10 +96,6 @@ const AddRecipeForm = () => {
       formData.append(`ingredients[${index}][measure]`, ingredient.measure);
     });
 
-    // for (const [key, value] of formData.entries()) {
-    //   console.log(`${key}: ${value}`);
-    // }
-
     try {
       await addRecipe(formData);
       navigate('/user/current');
@@ -113,7 +106,7 @@ const AddRecipeForm = () => {
 
   const handleCloseIngredient = _id => {
     const arrIngedients = getValues('ingredients');
-    console.log(arrIngedients.filter(({ id }) => id !== _id));
+
     setValue(
       'ingredients',
       arrIngedients.filter(({ id }) => id !== _id)
@@ -244,7 +237,7 @@ const AddRecipeForm = () => {
                   </span>
                 )}
                 <textarea
-                  rows={7}
+                  rows={2}
                   name="description"
                   maxLength={200}
                   className={`${css.input_description}`}
@@ -262,9 +255,14 @@ const AddRecipeForm = () => {
               <div className={css.box_select_cat}>
                 <label className={css.title_description}>Category</label>
                 {errors.category && (
-                  <span className={css.error}>{errors.category.message}</span>
+                  <span className={css.error}>
+                    {errors.category.value
+                      ? errors.category.value.message
+                      : errors.category.message}
+                  </span>
                 )}
                 <Controller
+                  className={css.select}
                   name="category"
                   control={control}
                   render={({ field }) => (
@@ -316,14 +314,18 @@ const AddRecipeForm = () => {
 
             <div className={css.box_area}>
               <label className={css.title_description}>Area</label>
+              {errors.area && (
+                <span className={css.error}>{errors.area.message}</span>
+              )}
               <Controller
+                className={css.select}
                 name="area"
                 control={control}
                 render={({ field }) => (
                   <Select
                     isClearable
                     placeholder="Pick area"
-                    styles={customStyles}
+                    styles={customStyles(errors.area)}
                     {...field}
                     options={areas}
                   />
@@ -347,7 +349,7 @@ const AddRecipeForm = () => {
                       <Select
                         isClearable
                         placeholder="Add the ingredient"
-                        styles={customStyles}
+                        styles={customStyles(false)}
                         {...field}
                         options={ingredients}
                       />
@@ -363,7 +365,6 @@ const AddRecipeForm = () => {
                     type="text"
                     placeholder="Enter quantity"
                   />
-                  <p>{console.log(errors)}</p>
                 </div>
               </div>
             </div>
