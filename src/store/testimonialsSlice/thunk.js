@@ -7,11 +7,11 @@ export const fetchTestimonials = createAsyncThunk(
   'ingredients/fetchTestimonials',
   async (_, { rejectWithValue }) => {
     try {
-      const data = await getTestimonials();
+      const { data } = await getTestimonials();
       return data;
     } catch (error) {
-      showError(error);
-      return rejectWithValue(error);
+      showError(error.response.data);
+      return rejectWithValue(error.response.data);
     }
   }
 );

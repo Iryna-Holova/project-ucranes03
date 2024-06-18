@@ -139,6 +139,14 @@
     height: 18px;
   }
 
+  .trash_icon:disabled {
+    cursor: auto;
+  }
+
+  .trash_icon:disabled .icon {
+    animation: var(--animation-rotate);
+  }
+
   .arrow_icon:hover,
   .trash_icon:hover,
   .arrow_icon:focus,

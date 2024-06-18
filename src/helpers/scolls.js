@@ -12,6 +12,19 @@ export const scrollToElement = element => {
   }
 };
 
+export const scrollToTabs = element => {
+  if (!element) return;
+
+  const rect = element.getBoundingClientRect();
+  const isAboveViewport = rect.top < 0;
+  if (isAboveViewport) {
+    window.scrollTo({
+      top: element.offsetTop - 100,
+      behavior: 'smooth',
+    });
+  }
+};
+
 export const scrollToElementHorizontally = (container, element) => {
   if (!container || !element) return;
 

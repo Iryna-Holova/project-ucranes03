@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFollowing, setAvatar } from 'store/authSlice/slice';
 import { getUserInfo } from 'store/authSlice/thunks';
@@ -19,6 +19,7 @@ const UserInfo = () => {
   const followingArray = useSelector(selectFollowing);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userId = useParams().id;
   const isCurrent = userId === 'current';
   const [userData, setUserData] = useState(null);
@@ -39,7 +40,7 @@ const UserInfo = () => {
           setUserData(data);
         }
       } catch (error) {
-        showError(error);
+        showError(error.response.data);
       } finally {
         setIsLoading(false);
       }
@@ -58,7 +59,7 @@ const UserInfo = () => {
         setUserData(prevData => ({ ...prevData, avatar: data.avatar }));
         dispatch(setAvatar(data.avatar));
       } catch (error) {
-        showError(error);
+        showError(error.response.data);
       } finally {
         setIsAvatarPending(false);
       }
@@ -75,10 +76,10 @@ const UserInfo = () => {
       }));
       dispatch(setFollowing(data.following));
     } catch (error) {
-      showError(error);
+      showError(error.response.data);
     } finally {
       setIsFollowPending(false);
-      window.location.reload();
+      navigate('followers');
     }
   };
 
@@ -92,10 +93,10 @@ const UserInfo = () => {
       }));
       dispatch(setFollowing(data.following));
     } catch (error) {
-      showError(error);
+      showError(error.response.data);
     } finally {
       setIsFollowPending(false);
-      window.location.reload();
+      navigate('followers');
     }
   };
 

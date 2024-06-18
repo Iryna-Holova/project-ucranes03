@@ -9,7 +9,7 @@ export const fetchIngredients = createAsyncThunk(
       const { data } = await getIngredients();
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );

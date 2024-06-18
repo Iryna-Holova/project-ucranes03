@@ -2,7 +2,10 @@ import css from './RecipePreview.module.css';
 
 const RecipePreviewSkeleton = () => {
   return (
-    <li className={`${css.preview_item} ${css.preview_item_skeleton}`}>
+    <li
+      style={{ pointerEvents: 'none' }}
+      className={`${css.preview_item} ${css.preview_item_skeleton}`}
+    >
       <div className={css.info_wrapper}>
         <div className={`${css.thumb} ${css.thumb_skeleton}`}></div>
         <div className={css.description_wrapper}>
