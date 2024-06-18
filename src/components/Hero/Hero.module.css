@@ -21,7 +21,7 @@
   background-image: url('images/hero/mobile-small.webp');
   background-size: contain;
   transform: rotate(11deg);
-  animation: fadeLeft 3s ease-in-out;
+  /* animation: fadeLeft 3s ease-in-out; */
 }
 
 .hero::after {
@@ -35,7 +35,7 @@
   background-image: url('images/hero/mobile.webp');
   background-size: contain;
   transform: rotate(-12deg);
-  animation: fadeRight 3s ease-in-out;
+  /* animation: fadeRight 3s ease-in-out; */
 }
 
 @media only screen and (min--moz-device-pixel-ratio: 2),
@@ -214,7 +214,7 @@
   }
 }
 
-@keyframes fadeLeft {
+/* @keyframes fadeLeft {
   from {
     opacity: 0;
     transform: translateX(-100%);
@@ -226,4 +226,4 @@
     opacity: 0;
     transform: translateX(100%);
   }
-}
+} */
