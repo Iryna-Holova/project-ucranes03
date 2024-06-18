@@ -12,7 +12,9 @@ const Logo = ({ inFooter = false }) => {
   return (
     <Link
       to="/"
-      className={isBlackTheme ? css.logo_black : css.logo_white}
+      className={`${isBlackTheme ? css.logo_black : css.logo_white} ${
+        inFooter ? css.footer : ''
+      }`}
       aria-label="Foodies - Home page"
     >
       Foodies

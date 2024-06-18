@@ -1,6 +1,9 @@
 # Project Ucranes03 - foodies
 
-Project Ucranes03 is a web application for searching and viewing recipes. It allows users to filter recipes by categories, cuisines, and ingredients. Additionally, users can register, add recipes to favorites, follow other users, and create their own recipes.
+Project Ucranes03 is a web application for searching and viewing recipes. It
+allows users to filter recipes by categories, cuisines, and ingredients.
+Additionally, users can register, add recipes to favorites, follow other users,
+and create their own recipes.
 
 ## Table of Contents
 
@@ -13,7 +16,8 @@ Project Ucranes03 is a web application for searching and viewing recipes. It all
 
 ## Features
 
-- **Search and View Recipes**: Browse recipes by categories, filter by cuisine and ingredients.
+- **Search and View Recipes**: Browse recipes by categories, filter by cuisine
+  and ingredients.
 - **User Registration**: Sign up and manage your profile.
 - **Favorites**: Add recipes to your favorites list.
 - **Follow Users**: Follow other users to see their recipes.
@@ -67,7 +71,8 @@ Open the auth modal to create an account or log in to an existing account.
 
 ### Browse Recipes:
 
-Use the search functionality to find recipes by categories, cuisines, or ingredients.
+Use the search functionality to find recipes by categories, cuisines, or
+ingredients.
 
 ### Manage Favorites:
 
@@ -94,7 +99,8 @@ Use the recipe creation form to add your own recipes and share them with others.
 
 ## License
 
-This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the ISC License. See the [LICENSE](./LICENSE.md)
+file for details.
 
 ## Contact
 
