@@ -80,7 +80,7 @@ const UserBar = () => {
         >
           <ul className={css.userbar_dropdown_menu_list}>
             <li className={isBlackTheme ? css.color_black : css.color_white}>
-              <Link to="user/current" onClick={() => setIsUserMenu(false)}>
+              <Link to={`user/${user.id}`} onClick={() => setIsUserMenu(false)}>
                 profile
               </Link>
             </li>

@@ -27,7 +27,7 @@ const Favorites = () => {
       setTotalPages(data.totalPages);
       setFavoriteRecipes(data.results);
     } catch (error) {
-      showError(error.response.data);
+      showError({message: 'Something went wrong. Please try again later.'});
     } finally {
       setLoading(false);
     }

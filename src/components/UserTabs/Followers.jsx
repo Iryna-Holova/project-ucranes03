@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { selectFollowing } from 'store/authSlice/selectors';
+import { selectFollowing, selectUser } from 'store/authSlice/selectors';
 import { getFollowers, getOwnFollowers } from 'services/followers';
 import { showError } from 'helpers/notification';
 import { scrollToTabs } from 'helpers/scolls';
@@ -12,9 +12,10 @@ import UserCard from './UserCard/UserCard';
 import UserCardSkeleton from './UserCard/UserCardSkeleton';
 
 const Followers = () => {
-  const user = useParams().id;
+  const { id: user } = useParams();
+  const { id: currentUserId } = useSelector(selectUser)
   const topElementRef = useRef(null);
-  const isCurrent = user === 'current';
+  const isCurrent = user === currentUserId;
   const following = useSelector(selectFollowing);
   const [params, setParams] = useSearchParams();
   const [users, setUsers] = useState([]);
@@ -39,7 +40,7 @@ const Followers = () => {
         setUsers(data.results);
         setTotalPages(data.totalPages);
       } catch (error) {
-        showError(error.response.data);
+        showError({message: 'Something went wrong. Please try again later.'});
       } finally {
         setLoading(false);
       }

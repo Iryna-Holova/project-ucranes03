@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateCounterRecipes } from 'store/authSlice/slice';
+import { selectUser } from 'store/authSlice/selectors';
 import {
   getOwnRecipes,
   getUserRecipes,
@@ -19,6 +20,7 @@ const UserRecipes = () => {
   const dispatch = useDispatch();
   const [params, setParams] = useSearchParams();
   const { id } = useParams();
+  const {id: currentUserId} = useSelector(selectUser)
   const topElementRef = useRef(null);
   const [totalPages, setTotalPages] = useState(0);
   const [recipes, setRecipes] = useState([]);
@@ -28,7 +30,7 @@ const UserRecipes = () => {
     setLoading(true);
     try {
       const page = params.get('page') || 1;
-      if (id !== 'current') {
+      if (id !== currentUserId) {
         const { data } = await getUserRecipes({ page }, id);
         setRecipes(data.results);
         setTotalPages(data.totalPages);
@@ -38,11 +40,11 @@ const UserRecipes = () => {
         setTotalPages(data.totalPages);
       }
     } catch (error) {
-      showError(error.response.data);
+      showError({message: 'Something went wrong. Please try again later.'});
     } finally {
       setLoading(false);
     }
-  }, [id, params]);
+  }, [currentUserId, id, params]);
 
   useEffect(() => {
     scrollToTabs(topElementRef.current);

@@ -1,5 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser } from 'store/authSlice/selectors';
 import { scrollToElementHorizontally } from 'helpers/scolls';
 import { useMobileMediaQuery, useTabletMediaQuery } from 'hooks/device-type';
 import css from './TabsList.module.css';
@@ -18,6 +20,8 @@ const TABS = {
 };
 
 const TabsList = () => {
+  const { id: currentUserId } = useSelector(selectUser);
+  const { id } = useParams();
   const location = useLocation();
   const isMobile = useMobileMediaQuery();
   const isTablet = useTabletMediaQuery();
@@ -28,7 +32,7 @@ const TabsList = () => {
   const tabsWrapperRef = useRef(null);
   const tabsListRef = useRef(null);
   const activeTabRef = useRef(null);
-  const user = useParams().id === 'current' ? 'current' : 'other';
+  const user = currentUserId === id ? 'current' : 'other';
 
   const updateActiveTabPosition = () => {
     const tabElement = activeTabRef.current;
