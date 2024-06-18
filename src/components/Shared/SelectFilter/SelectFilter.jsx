@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { customStyles } from './customStyles';
 
 const SelectFilter = ({
+  error,
   options,
   onChange,
   value,
@@ -15,7 +16,7 @@ const SelectFilter = ({
       options={options}
       isSearchable
       isClearable
-      styles={customStyles}
+      styles={customStyles(error)}
       onChange={option => onChange(option, { name })}
       value={value}
       isMulti={isMulti}
