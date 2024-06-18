@@ -94,7 +94,7 @@ Use the recipe creation form to add your own recipes and share them with others.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
