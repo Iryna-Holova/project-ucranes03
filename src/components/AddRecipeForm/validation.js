@@ -29,7 +29,7 @@ const schema = yup.object().shape({
       value: yup.string().required('Area is required'),
     })
     .required('Area is required'),
-  ingredientsList: yup
+  ingredients: yup
     .array()
     .of(
       yup.object().shape({
@@ -37,12 +37,11 @@ const schema = yup.object().shape({
         measure: yup.string().required('Measure is required'),
       })
     )
-    .test('length', 'Recipe must have minimum 1 igredient', arr => {
-      console.log('arr --- ', arr);
-      console.log(arr?.length);
-      return arr?.length === 1;
-    }),
-  // .min(1, 'At least one ingredient is required'),
+    .test(
+      'length',
+      'Recipe must have minimum 1 igredient',
+      arr => arr.length > 0
+    ),
   instructions: yup
     .string()
     .required('Instructions are required')
