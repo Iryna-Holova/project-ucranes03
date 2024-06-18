@@ -1,7 +1,7 @@
 import css from './Loader.module.css';
 
-const Loader = () => {
-  return <div className={css.loader}></div>;
+const Loader = ({ type = 'section' }) => {
+  return <div className={`${css.loader} ${css[type]}`}></div>;
 };
 
 export default Loader;

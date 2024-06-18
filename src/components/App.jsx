@@ -27,7 +27,7 @@ const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <Loader />
+    <Loader type="page" />
   ) : (
     <AuthModalProvider>
       <Routes>
