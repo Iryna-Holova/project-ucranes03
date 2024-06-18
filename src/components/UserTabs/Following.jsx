@@ -30,7 +30,7 @@ const Following = () => {
       setUsers(data.results);
       setTotalPages(data.totalPages);
     } catch (error) {
-      showError(error.response.data);
+      showError({message: 'Something went wrong. Please try again later.'});
     } finally {
       setLoading(false);
     }

@@ -71,7 +71,6 @@ export const getUserInfo = createAsyncThunk(
       const response = await getOwnInfo();
       return response.data;
     } catch (error) {
-      showError(error.response.data);
       return rejectWithValue(error.response.data);
     }
   }

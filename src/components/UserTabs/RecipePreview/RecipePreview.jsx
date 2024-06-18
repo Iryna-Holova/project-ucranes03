@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser } from 'store/authSlice/selectors';
 import Image from 'components/Shared/Image/Image';
 import icons from 'images/icons.svg';
 import css from './RecipePreview.module.css';
@@ -8,6 +10,7 @@ const RecipePreview = ({ recipe, onRemove }) => {
   const [isRemoving, setIsRemoving] = useState(false);
   const { _id, title, description, thumb } = recipe;
   const { id } = useParams();
+  const currentUser = useSelector(selectUser)
   const navigate = useNavigate();
 
   const handleTrashIconClick = async () => {
@@ -39,7 +42,7 @@ const RecipePreview = ({ recipe, onRemove }) => {
             <use href={`${icons}#icon-arrow-up-right`} />
           </svg>
         </button>
-        {id === 'current' && (
+        {(id === currentUser?.id) && (
           <button
             className={css.trash_icon}
             onClick={handleTrashIconClick}

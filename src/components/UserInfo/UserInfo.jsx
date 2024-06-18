@@ -21,7 +21,7 @@ const UserInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = useParams().id;
-  const isCurrent = userId === 'current';
+  const isCurrent = userId === user?.id;
   const [userData, setUserData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +40,7 @@ const UserInfo = () => {
           setUserData(data);
         }
       } catch (error) {
-        showError(error.response.data);
+        showError({message: 'User not found.'});
       } finally {
         setIsLoading(false);
       }

@@ -92,7 +92,7 @@ const UserCard = ({ user: { id, name, avatar, recipes }, onRemove = null }) => {
         </ul>
       )}
       <Link
-        to={currentUser.id !== id ? `/user/${id}` : '/user/current'}
+        to={`/user/${id}`}
         className={css.user_link_arrow}
       >
         <svg width="16" height="16">
