@@ -10,6 +10,7 @@ import UserCard from './UserCard/UserCard';
 import UserCardSkeleton from './UserCard/UserCardSkeleton';
 import { selectFollowers } from 'store/followersSlice/selectors';
 import { fetchFollowers } from 'store/followersSlice/thunk';
+import { showError } from 'helpers/notification';
 
 const Followers = () => {
   const [params] = useSearchParams();
@@ -28,28 +29,32 @@ const Followers = () => {
       setLoading(true);
       try {
         const page = params.get('page') || 1;
-        const { data } = isCurrent
-          ? await getOwnFollowers({
+
+        if (isCurrent) {
+          const { data } = await getOwnFollowers({
+            page,
+            limit: 5,
+          });
+          setUsers(data.results);
+          setTotalPages(data.totalPages);
+        } else {
+          dispatch(fetchFollowers({
+            user, pagination: {
               page,
               limit: 5,
-            })
-          : await getFollowers(user, {
-              page,
-              limit: 5,
-            });
-        setUsers(data.results);
-        setTotalPages(data.totalPages);
-        dispatch(fetchFollowers({user, pagination: {
-          page,
-          limit: 5,
-        }}));
+            }
+          }));
+        }
       } catch (error) {
+        showError(error)
       } finally {
         setLoading(false);
       }
     };
     fetchUsers();
-  }, [params, user, isCurrent]);
+  }, [params, user, isCurrent, dispatch]);
+
+  const followersArray = isCurrent ? users : followers;
 
   return (
     <div>
@@ -65,7 +70,7 @@ const Followers = () => {
           {isLoading &&
             [...Array(5)].map((item, idx) => <UserCardSkeleton key={idx} />)}
           {!isLoading &&
-            followers.map(user => (
+            followersArray.map(user => (
               <UserCard key={user.id} user={user} following={following} />
             ))}
         </ListItems>

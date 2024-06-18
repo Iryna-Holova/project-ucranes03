@@ -8,7 +8,6 @@ export const fetchFollowers = createAsyncThunk(
   async (arg, { rejectWithValue }) => {
     try {
       const {data} = await getFollowers(arg.user, arg.pagination);
-      debugger
       return data.results;
     } catch (error) {
       showError(error);

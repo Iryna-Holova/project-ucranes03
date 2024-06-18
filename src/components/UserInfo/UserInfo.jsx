@@ -28,6 +28,16 @@ const UserInfo = () => {
   const [isAvatarPending, setIsAvatarPending] = useState(false);
   const [isFollowPending, setIsFollowPending] = useState(false);
 
+
+  const updateFollowers = () => {
+    dispatch(fetchFollowers({
+      user: userId, pagination: {
+        page: 1,
+        limit: 5
+      }
+    }))
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       setUserData(null);
@@ -79,11 +89,7 @@ const UserInfo = () => {
       showError(error);
     } finally {
       setIsFollowPending(false);
-      // window.location.reload();
-      dispatch(fetchFollowers({user: userId, pagination: {
-        page: 1,
-        limit: 5
-      }}))
+      updateFollowers();
     }
   };
 
@@ -100,11 +106,7 @@ const UserInfo = () => {
       showError(error);
     } finally {
       setIsFollowPending(false);
-      // window.location.reload();
-      dispatch(fetchFollowers({user: userId, pagination: {
-        page: 1,
-        limit: 5
-      }}))
+      updateFollowers();
     }
   };
 

@@ -1,4 +1,2 @@
-export const selectFollowers = (state) => {
-    // debugger
-    return state.followers.items
-}
+export const selectFollowers = (state) => state.followers.items;
+export const selectFollowersAreLoading = (state) => state.followers.isLoading;

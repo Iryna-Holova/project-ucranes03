@@ -16,7 +16,6 @@ export const followersSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchFollowers.fulfilled, (state, action) => {
-        debugger
         state.isLoading = false;
         state.items = action.payload;
       })
