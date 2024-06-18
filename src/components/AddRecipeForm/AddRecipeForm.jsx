@@ -1,50 +1,57 @@
-import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
-import icons from '../../images/icons.svg';
-import css from './AddRecipeForm.module.css';
-import { Controller, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { fetchIngredients } from 'store/ingredientsSlice/thunks';
+import { fetchAreas } from 'store/areasSlice/thunks';
+import { fetchCategories } from 'store/categoriesSlice/thunks';
+import { selectAreasOptions } from 'store/areasSlice/selectors';
 import { selectCategoriesOptions } from 'store/categoriesSlice/selectors';
 import {
   selectIngredients,
   selectIngredientsOptions,
 } from 'store/ingredientsSlice/selectors';
-import { selectAreasOptions } from 'store/areasSlice/selectors';
 
-import Ingredient from 'components/Shared/Ingredient/Ingredients';
 import { addRecipe } from 'services/recipes';
 import { showError } from 'helpers/notification';
-import { useNavigate } from 'react-router-dom';
-import { fetchCategories } from 'store/categoriesSlice/thunks';
-import { customStyles } from 'components/Shared/SelectFilter/customStyles';
-import { fetchIngredients } from 'store/ingredientsSlice/thunks';
-import { fetchAreas } from 'store/areasSlice/thunks';
 import { resolver } from './validation';
+
+import ButtonLink from 'components/Shared/ButtonLink/ButtonLink';
+import Ingredient from 'components/Shared/Ingredient/Ingredients';
+import { customStyles } from 'components/Shared/SelectFilter/customStyles';
+
+import icons from 'images/icons.svg';
+import css from './AddRecipeForm.module.css';
 
 const TIME_STEP = 5;
 
 const AddRecipeForm = () => {
   const [previewImage, setPreviewImage] = useState(null);
-  const [ingredientsList, setIngredientsList] = useState([]);
   const [countLength, setCountLength] = useState(0);
+  const [ingregientsForList, setIngregientsForList] = useState([]);
+
   const categories = useSelector(selectCategoriesOptions);
   const ingredients = useSelector(selectIngredientsOptions);
   const areas = useSelector(selectAreasOptions);
   const ingredientAddList = useSelector(selectIngredients);
-  const [ingregientsForList, setIngregientsForList] = useState([]);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (!categories.length) {
       dispatch(fetchCategories());
     }
   }, [categories.length, dispatch]);
+
   useEffect(() => {
     if (!ingredients.length) {
       dispatch(fetchIngredients());
     }
   }, [dispatch, ingredients.length]);
+
   useEffect(() => {
     if (!areas.length) {
       dispatch(fetchAreas());
@@ -60,34 +67,35 @@ const AddRecipeForm = () => {
     getValues,
     reset,
     trigger,
-    clearErrors,
   } = useForm({
     resolver,
     defaultValues: {
+      thumb: null,
+      title: '',
+      description: '',
+      instructions: '',
+      area: null,
       time: 0,
+      ingredients: [],
+      ingredient: null,
+      measure: '',
     },
   });
+
   const onSubmit = async data => {
-    if (ingredientsList.length === 0) {
-      alert('Please add at least one ingredient');
-      return;
-    }
-    data.ingredients = ingredientsList;
-    data.category = data.category.value;
-    data.area = data.area.value;
-    delete data.measure;
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('description', data.description);
-    formData.append('category', data.category);
-    formData.append('area', data.area);
+    formData.append('category', data.category.value);
+    formData.append('area', data.area.value);
     formData.append('instructions', data.instructions);
     formData.append('thumb', data.thumb[0]);
     formData.append('time', data.time);
-    ingredientsList.forEach((ingredient, index) => {
+    data.ingredients.forEach((ingredient, index) => {
       formData.append(`ingredients[${index}][id]`, ingredient.id);
       formData.append(`ingredients[${index}][measure]`, ingredient.measure);
     });
+
     try {
       await addRecipe(formData);
       navigate('/user/current');
@@ -97,8 +105,11 @@ const AddRecipeForm = () => {
   };
 
   const handleCloseIngredient = _id => {
-    setIngredientsList(prev =>
-      prev.filter(ingredient => ingredient.id !== _id)
+    const arrIngedients = getValues('ingredients');
+
+    setValue(
+      'ingredients',
+      arrIngedients.filter(({ id }) => id !== _id)
     );
     setIngregientsForList(prev =>
       prev.filter(ingredient => ingredient._id !== _id)
@@ -133,30 +144,36 @@ const AddRecipeForm = () => {
   };
 
   const handleAddIngredients = async () => {
-    const ingredient = getValues('ingredients');
+    const ingredient = getValues('ingredient');
     const measure = getValues('measure');
+
     if (ingredient && measure) {
-      setIngredientsList(prev => [...prev, { id: ingredient.value, measure }]);
+      const arrIngedients = getValues('ingredients');
+      setValue('ingredients', [
+        ...arrIngedients,
+        { id: ingredient.value, measure },
+      ]);
+
       const result = ingredientAddList.find(
         ing => ing._id === ingredient.value
       );
-      if (result) {
-        const newIngredient = { ...result, measure: measure };
-        setIngregientsForList(prev => [...prev, newIngredient]);
-      }
+      setIngregientsForList(prev => [...prev, { ...result, measure }]);
+
       setValue('measure', '');
-      setValue('ingredients', null);
-      await trigger('ingredientsList');
+      setValue('ingredient', null);
+
+      await trigger('ingredients');
     } else {
-      alert('Please select an ingredient and enter a measure');
+      showError({
+        message: 'Please select an ingredient and enter a measure',
+      });
     }
   };
 
-  const handleDelete = () => {
-    clearErrors();
+  const handleDelete = evt => {
     reset();
     setPreviewImage(null);
-    setIngredientsList([]);
+    setIngregientsForList([]);
   };
 
   return (
@@ -220,6 +237,7 @@ const AddRecipeForm = () => {
                   </span>
                 )}
                 <textarea
+                  rows={2}
                   name="description"
                   maxLength={200}
                   className={`${css.input_description}`}
@@ -236,20 +254,29 @@ const AddRecipeForm = () => {
             <div className={css.box_time_categories}>
               <div className={css.box_select_cat}>
                 <label className={css.title_description}>Category</label>
+                {errors.category && (
+                  <span className={css.error}>
+                    {errors.category.value
+                      ? errors.category.value.message
+                      : errors.category.message}
+                  </span>
+                )}
                 <Controller
+                  className={css.select}
                   name="category"
                   control={control}
                   render={({ field }) => (
                     <Select
                       isClearable
                       placeholder="Select a category"
-                      styles={customStyles}
+                      styles={customStyles(errors.category)}
                       {...field}
                       options={categories}
                     />
                   )}
                 />
               </div>
+
               <div>
                 <label className={css.title_description}>COOKING TIME</label>
                 <div className={css.box_time_btn}>
@@ -284,46 +311,57 @@ const AddRecipeForm = () => {
                 )}
               </div>
             </div>
+
             <div className={css.box_area}>
               <label className={css.title_description}>Area</label>
+              {errors.area && (
+                <span className={css.error}>{errors.area.message}</span>
+              )}
               <Controller
+                className={css.select}
                 name="area"
                 control={control}
                 render={({ field }) => (
                   <Select
                     isClearable
                     placeholder="Pick area"
-                    styles={customStyles}
+                    styles={customStyles(errors.area)}
                     {...field}
                     options={areas}
                   />
                 )}
               />
             </div>
+
             <div className={css.box_ingredients}>
               <label className={css.title_description}>Ingredients</label>
               <div className={css.boxIngredQuan}>
+                {errors.ingredients && (
+                  <span className={css.error}>
+                    {errors.ingredients.message}
+                  </span>
+                )}
                 <div className={css.box_input_ingredients}>
-                  {' '}
                   <Controller
-                    name="ingredients"
+                    name="ingredient"
                     control={control}
                     render={({ field }) => (
                       <Select
                         isClearable
                         placeholder="Add the ingredient"
-                        styles={customStyles}
+                        styles={customStyles(false)}
                         {...field}
                         options={ingredients}
                       />
                     )}
                   />
                 </div>
+
                 <div className={css.box_input_quantity}>
                   <input
-                    name="ingredients"
+                    name="measure"
                     className={css.input_quantity}
-                    {...register('measure')}
+                    {...register('measure', { required: 'Input measure' })}
                     type="text"
                     placeholder="Enter quantity"
                   />
@@ -331,6 +369,7 @@ const AddRecipeForm = () => {
               </div>
             </div>
           </div>
+
           <ButtonLink
             type="button"
             color="secondary"
@@ -342,6 +381,7 @@ const AddRecipeForm = () => {
               <use href={`${icons}#icon-plus`} />
             </svg>
           </ButtonLink>
+
           <ul className={css.list_ingredients}>
             {ingregientsForList.length > 0 &&
               ingregientsForList.map(({ img, name, measure, _id }) => (
@@ -355,6 +395,7 @@ const AddRecipeForm = () => {
                 />
               ))}
           </ul>
+
           <div className={css.box_preparation}>
             <label className={css.title_description}>Recipe Preparation</label>
             <textarea
@@ -369,8 +410,13 @@ const AddRecipeForm = () => {
               }
             ></textarea>
           </div>
+
           <div className={css.box_btn_del_pub}>
-            <button onClick={handleDelete} className={css.delete_btn}>
+            <button
+              type="button"
+              onClick={handleDelete}
+              className={css.delete_btn}
+            >
               <svg className={css.btn_delete}>
                 <use href={`${icons}#icon-trash`}></use>
               </svg>

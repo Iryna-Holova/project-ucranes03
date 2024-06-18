@@ -8,6 +8,11 @@
 .error ~ .input {
   border-color: var(--color-error);
 }
+
+.error ~ .select {
+  border-color: var(--color-error);
+}
+
 .btn_another_photo {
   position: absolute;
   z-index: 10;
@@ -170,17 +175,16 @@
   color: var(--color-main-60);
   border: none;
   width: 100%;
-  height: 24px;
-  max-height: 96px;
-  resize: none;
+  height: auto;
   background-color: transparent;
   border-bottom: 1px solid var(--color-main-12);
-  padding-bottom: 16px;
+  resize: none;
   transition: color var(--transition);
   overflow: hidden;
 }
 
 .box_select_cat {
+  position: relative;
   margin-bottom: 20px;
 }
 
@@ -211,6 +215,7 @@
 }
 
 .box_description {
+  height: fit-content;
   position: relative;
 }
 
@@ -253,6 +258,7 @@
 }
 
 .box_area {
+  position: relative;
   margin-bottom: 32px;
 }
 .btn_time {
@@ -295,6 +301,7 @@
   letter-spacing: -0.02em;
   margin-bottom: 32px;
   transition: color var(--transition);
+  resize: none;
 }
 
 .input_preparation:focus {
@@ -366,16 +373,15 @@
   }
 
   .box_file {
+    flex-shrink: 0;
     height: 400px;
   }
   .input_name {
     font-size: 24px;
   }
   .input_description {
-    min-height: 40px;
     padding: 0 100px 16px 0;
     font-size: 16px;
-    max-height: 96px;
   }
   .box_input_name {
     margin-bottom: 60px;
@@ -402,6 +408,7 @@
     font-size: 16px;
   }
   .boxIngredQuan {
+    position: relative;
     display: flex;
     gap: 19px;
     align-items: center;
