@@ -24,6 +24,7 @@ import { customStyles } from 'components/Shared/SelectFilter/customStyles';
 
 import icons from 'images/icons.svg';
 import css from './AddRecipeForm.module.css';
+import { selectUser } from 'store/authSlice/selectors';
 
 const TIME_STEP = 5;
 
@@ -31,6 +32,7 @@ const AddRecipeForm = () => {
   const [previewImage, setPreviewImage] = useState(null);
   const [countLength, setCountLength] = useState(0);
   const [ingregientsForList, setIngregientsForList] = useState([]);
+  const { id: currentUserId } = useSelector(selectUser);
 
   const categories = useSelector(selectCategoriesOptions);
   const ingredients = useSelector(selectIngredientsOptions);
@@ -98,7 +100,7 @@ const AddRecipeForm = () => {
 
     try {
       await addRecipe(formData);
-      navigate('/user/current');
+      navigate(`/user/${currentUserId}`);
     } catch (error) {
       showError(error);
     }
