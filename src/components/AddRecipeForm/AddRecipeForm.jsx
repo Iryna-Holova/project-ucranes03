@@ -104,7 +104,7 @@ const AddRecipeForm = () => {
     }
   };
 
-  const handleCloseIngredient = _id => {
+  const handleCloseIngredient = async _id => {
     const arrIngedients = getValues('ingredients');
 
     setValue(
@@ -114,6 +114,7 @@ const AddRecipeForm = () => {
     setIngregientsForList(prev =>
       prev.filter(ingredient => ingredient._id !== _id)
     );
+    await trigger('ingredients');
   };
 
   const handleAddTime = () => {
@@ -149,6 +150,10 @@ const AddRecipeForm = () => {
 
     if (ingredient && measure) {
       const arrIngedients = getValues('ingredients');
+      if (arrIngedients.find(({ id }) => ingredient.value === id)) {
+        return showError({ message: 'This ingredien is already added' });
+      }
+
       setValue('ingredients', [
         ...arrIngedients,
         { id: ingredient.value, measure },
@@ -240,7 +245,9 @@ const AddRecipeForm = () => {
                   rows={2}
                   name="description"
                   maxLength={200}
-                  className={`${css.input_description}`}
+                  className={`${css.input_description} ${
+                    errors.description ? css.error_message : ''
+                  }`}
                   {...register('description', {
                     onChange: handleDescription,
                   })}
@@ -349,7 +356,7 @@ const AddRecipeForm = () => {
                       <Select
                         isClearable
                         placeholder="Add the ingredient"
-                        styles={customStyles(false)}
+                        styles={customStyles(errors.ingredients)}
                         {...field}
                         options={ingredients}
                       />
@@ -360,7 +367,9 @@ const AddRecipeForm = () => {
                 <div className={css.box_input_quantity}>
                   <input
                     name="measure"
-                    className={css.input_quantity}
+                    className={`${css.input_quantity}  ${
+                      errors.ingredients ? css.input_error : ''
+                    }`}
                     {...register('measure', { required: 'Input measure' })}
                     type="text"
                     placeholder="Enter quantity"
@@ -398,16 +407,14 @@ const AddRecipeForm = () => {
 
           <div className={css.box_preparation}>
             <label className={css.title_description}>Recipe Preparation</label>
+            {errors.instructions && (
+              <span className={css.error}>{errors.instructions.message}</span>
+            )}
             <textarea
-              className={`${css.input_preparation} ${
-                errors.instructions ? css.input_error : ''
-              }`}
+              name="instructions"
+              className={`${css.input_preparation}`}
               {...register('instructions')}
-              placeholder={
-                errors.instructions
-                  ? 'Preparation is required,enter preparation'
-                  : 'Enter recipe'
-              }
+              placeholder="Enter recipe"
             ></textarea>
           </div>
 

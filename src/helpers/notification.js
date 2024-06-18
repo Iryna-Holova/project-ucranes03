@@ -4,11 +4,12 @@ const DEFAULT_ERROR = 'Something went wrong!';
 iziToast.settings({
   timeout: 5000,
   resetOnHover: true,
-  position: 'topRight',
+  position: 'topCenter',
   transitionIn: 'flipInX',
   transitionOut: 'flipOutX',
   backgroundColor: 'var(--color-bg)',
   maxWidth: 600,
+  messageSize: '20',
 });
 
 function showError({ message = DEFAULT_ERROR } = {}) {
