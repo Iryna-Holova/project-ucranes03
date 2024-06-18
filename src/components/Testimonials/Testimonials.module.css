@@ -44,3 +44,9 @@
         height: 16px;
     }
 }
+
+@media screen and (min-width: 1440px) {
+    :global(.swiper) {
+      width: 822px;
+    }
+  }
