@@ -11,7 +11,7 @@ import defaultAvatar from 'images/placeholder-avatar.svg';
 import Image from 'components/Shared/Image/Image';
 import css from './UserCard.module.css';
 
-const UserCard = ({ user: { id, name, avatar, recipes } }) => {
+const UserCard = ({ user: { id, name, avatar, recipes }, onRemove = null }) => {
   const isTablet = useTabletMediaQuery();
   const isDesktop = useDesktopMediaQuery();
   const following = useSelector(selectFollowing);
@@ -24,6 +24,7 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
       setLoading(true);
       const { data } = await removeFromFollowing(id);
       dispatch(setFollowing(data.following));
+      onRemove && onRemove();
     } catch (error) {
     } finally {
       setLoading(false);

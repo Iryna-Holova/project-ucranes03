@@ -9,7 +9,7 @@ export const fetchAreas = createAsyncThunk(
       const { data } = await getAreas();
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );

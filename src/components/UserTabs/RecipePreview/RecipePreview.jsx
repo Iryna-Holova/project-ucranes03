@@ -1,49 +1,19 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import {
-  updateCounterFavorites,
-  updateCounterRecipes,
-} from 'store/authSlice/slice';
-import { removeFavorite, removeOwnRecipe } from 'services/recipes';
-import { showError } from 'helpers/notification';
+import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Image from 'components/Shared/Image/Image';
 import icons from 'images/icons.svg';
 import css from './RecipePreview.module.css';
 
-const RecipePreview = ({ recipe, update }) => {
-  const dispatch = useDispatch();
+const RecipePreview = ({ recipe, onRemove }) => {
+  const [isRemoving, setIsRemoving] = useState(false);
   const { _id, title, description, thumb } = recipe;
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const isFavorite = location.pathname.includes('favorites');
 
-  const handleTrashIconClick = id => {
-    if (isFavorite) {
-      handleFavoriteRemove(id);
-    } else {
-      handleOwnRemove(id);
-    }
-  };
-
-  const handleFavoriteRemove = async id => {
-    try {
-      await removeFavorite(id);
-      dispatch(updateCounterFavorites(-1));
-      if (update) update();
-    } catch (error) {
-      showError(error);
-    }
-  };
-
-  const handleOwnRemove = async id => {
-    try {
-      await removeOwnRecipe(id);
-      dispatch(updateCounterRecipes(-1));
-      if (update) update();
-    } catch (error) {
-      showError(error);
-    }
+  const handleTrashIconClick = async () => {
+    setIsRemoving(true);
+    await onRemove(_id);
+    setIsRemoving(false);
   };
 
   return (
@@ -72,7 +42,8 @@ const RecipePreview = ({ recipe, update }) => {
         {id === 'current' && (
           <button
             className={css.trash_icon}
-            onClick={() => handleTrashIconClick(_id)}
+            onClick={handleTrashIconClick}
+            disabled={isRemoving}
           >
             <svg className={css.icon}>
               <use href={`${icons}#icon-trash`} />
