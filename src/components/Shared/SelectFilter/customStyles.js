@@ -1,8 +1,12 @@
-export const customStyles = {
-  control: provided => ({
+export const customStyles = error => ({
+  control: (provided, state) => ({
     ...provided,
     borderRadius: '30px',
-    border: '1px solid var(--color-main-20, rgba(5, 5, 5, 0.20))',
+    border: `1px solid ${
+      error
+        ? 'var(--color-error, #d00000)'
+        : 'var(--color-main-20, rgba(5, 5, 5, 0.20))'
+    }`,
     fontFamily: 'Mulish',
     fontSize: '16px',
     fontStyle: 'normal',
@@ -14,7 +18,9 @@ export const customStyles = {
     padding: '16px 18px',
     backgroundColor: 'var(--color-bg)',
     '&:hover': {
-      borderColor: 'var(--color-main-60, rgba(5, 5, 5, 0.60))',
+      borderColor: error
+        ? 'var(--color-error, #d00000)'
+        : 'var(--color-main-60, rgba(5, 5, 5, 0.60))',
     },
     cursor: 'pointer',
   }),
@@ -108,7 +114,6 @@ export const customStyles = {
     },
     padding: '0 9px 0 14px',
   }),
-
   option: (provided, state) => ({
     ...provided,
     fontFamily: 'Mulish',
@@ -133,4 +138,4 @@ export const customStyles = {
       backgroundColor: 'var(--color-main-10)',
     },
   }),
-};
+});
