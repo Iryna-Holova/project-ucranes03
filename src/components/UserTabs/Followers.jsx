@@ -16,15 +16,16 @@ const Followers = () => {
   const topElementRef = useRef(null);
   const isCurrent = user === 'current';
   const following = useSelector(selectFollowing);
-  const [params] = useSearchParams();
+  const [params, setParams] = useSearchParams();
   const [users, setUsers] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchUsers = async () => {
+      const page = params.get('page')
+      if(!page) return;
       setLoading(true);
-      const page = params.get('page') || 1;
       try {
         const { data } = isCurrent
           ? await getOwnFollowers({
@@ -46,6 +47,11 @@ const Followers = () => {
     scrollToTabs(topElementRef.current);
     fetchUsers();
   }, [isCurrent, params, user]);
+
+  useEffect(() => {
+    setParams({ page: 1 }, { replace: true });
+  }, [setParams])
+  
 
   return (
     <div>
