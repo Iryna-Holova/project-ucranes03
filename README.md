@@ -84,7 +84,7 @@ Use the recipe creation form to add your own recipes and share them with others.
 ## Contributors
 
 - [Iryna Holova - Team Lead, developer](https://github.com/Iryna-Holova)
-- [Vladyslav Mazurkevych - Scram Master, developer](https://github.com/mazurkevych30)
+- [Vladyslav Mazurkevych - Scrum Master, developer](https://github.com/mazurkevych30)
 - [Yurii Filimonchuk - developer](https://github.com/filimon4uck)
 - [Maxim Krygin - developer](https://github.com/Maxus94)
 - [Yulia Cherina - developer](https://github.com/dianatima)
