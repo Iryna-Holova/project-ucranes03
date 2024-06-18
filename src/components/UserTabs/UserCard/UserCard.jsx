@@ -51,7 +51,6 @@ const UserCard = ({ user: { id, name, avatar, recipes } }) => {
             alt={name + "'s photo"}
             defaultImage={defaultAvatar}
           />
-          {/* <div className={css.selected_user}></div> */}
         </div>
         <div className={css.user_name_container}>
           <h4 className={css.user_name}>{name}</h4>
