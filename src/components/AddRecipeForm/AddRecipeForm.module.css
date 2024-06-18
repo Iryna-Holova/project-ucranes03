@@ -3,7 +3,6 @@
   bottom: -20px;
   color: var(--color-error);
   font-size: 14px;
-  z-index: 5;
 }
 
 .error ~ .input {
@@ -172,17 +171,16 @@
   color: var(--color-main-60);
   border: none;
   width: 100%;
-  height: 24px;
-  max-height: 96px;
-  resize: none;
+  height: auto;
   background-color: transparent;
   border-bottom: 1px solid var(--color-main-12);
-  padding-bottom: 16px;
+  resize: vertical;
   transition: color var(--transition);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .box_select_cat {
+  position: relative;
   margin-bottom: 20px;
 }
 
@@ -213,6 +211,7 @@
 }
 
 .box_description {
+  height: fit-content;
   position: relative;
 }
 
@@ -374,10 +373,10 @@
     font-size: 24px;
   }
   .input_description {
-    min-height: 40px;
+    /* min-height: 40px; */
     padding: 0 100px 16px 0;
     font-size: 16px;
-    max-height: 96px;
+    /* max-height: 96px; */
   }
   .box_input_name {
     margin-bottom: 60px;
