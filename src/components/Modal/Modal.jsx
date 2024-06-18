@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import icons from '../../images/icons.svg';
 import css from './Modal.module.css';
 
 const Modal = ({ showModal, onClose, children }) => {
+  const nodeRef = useRef(null);
+
   useEffect(() => {
     const handleEscape = event => {
       if (event.key === 'Escape') {
@@ -33,8 +35,10 @@ const Modal = ({ showModal, onClose, children }) => {
         exitActive: css['modal-exit-active'],
       }}
       unmountOnExit
+      nodeRef={nodeRef}
     >
       <div
+        ref={nodeRef}
         className={css.modalWrapper}
         role="dialog"
         aria-modal="true"
