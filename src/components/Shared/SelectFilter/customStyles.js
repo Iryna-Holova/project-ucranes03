@@ -38,14 +38,14 @@ export const customStyles = error => ({
     ...provided,
     color: 'var(--color-main, #050505)',
     margin: '0',
-    padding: '0',
+    padding: '0 4px',
   }),
   multiValue: base => ({
     ...base,
     backgroundColor: 'transparent',
     color: 'var(--color-main, #050505)',
-    padding: '0',
-    margin: '0',
+    padding: 0,
+    margin: 0,
   }),
   multiValueLabel: base => ({
     ...base,
@@ -56,8 +56,9 @@ export const customStyles = error => ({
     fontWeight: 500,
     lineHeight: '24px',
     letterSpacing: '-0.02em',
-    padding: '0',
-    margin: '0',
+    padding: 0,
+    paddingLeft: '4px',
+    margin: 0,
   }),
   placeholder: provided => ({
     ...provided,
@@ -67,6 +68,8 @@ export const customStyles = error => ({
     fontStyle: 'normal',
     fontWeight: 500,
     lineHeight: '24px',
+    margin: 0,
+    paddingLeft: 2,
     letterSpacing: '-0.02em',
   }),
   indicatorSeparator: () => ({

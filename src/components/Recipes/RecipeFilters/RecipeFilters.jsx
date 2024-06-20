@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import SelectFilter from 'components/Shared/SelectFilter/SelectFilter';
+import { selectCategoriesOptions } from 'store/categoriesSlice/selectors';
 import { selectIngredientsOptions } from 'store/ingredientsSlice/selectors';
 import { selectAreasOptions } from 'store/areasSlice/selectors';
 import { fetchIngredients } from 'store/ingredientsSlice/thunks';
@@ -9,10 +10,11 @@ import { fetchAreas } from 'store/areasSlice/thunks';
 import css from './RecipeFilter.module.css';
 
 const RecipeFilters = () => {
+  const dispatch = useDispatch();
+  const categoriesOptions = useSelector(selectCategoriesOptions);
   const [searchParams, setSearchParams] = useSearchParams();
   const ingredientsOptions = useSelector(selectIngredientsOptions);
   const areasOptions = useSelector(selectAreasOptions);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!ingredientsOptions.length) {
@@ -53,6 +55,10 @@ const RecipeFilters = () => {
     return options.filter(option => valuesArray.includes(option.value));
   };
 
+  const selectedCategory = getOptionFromValue(
+    categoriesOptions,
+    searchParams.get('category')
+  );
   const selectedIngredient = getOptionFromValue(
     ingredientsOptions,
     searchParams.get('ingredients')
@@ -64,6 +70,13 @@ const RecipeFilters = () => {
 
   return (
     <div className={css.filters_container}>
+      <SelectFilter
+        name="category"
+        options={categoriesOptions}
+        onChange={handleChange}
+        value={selectedCategory}
+        placeholder="Category"
+      />
       <SelectFilter
         name="ingredients"
         options={ingredientsOptions}
